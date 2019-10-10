@@ -36,10 +36,11 @@ ln -s ../dhd rpm/
 mv rpm dhd-rpm
 ```
 
-Until we get tama branch or unify it all under one with ganges, proceed as follows:
+In contrast to official instructions, we use generic Sony AOSP repo and associate it with the device 
+via local manifest:
 
 ```
-repo init -u git://github.com/mer-hybris/android.git -b sony-ganges-aosp-pie -m tagged-manifest.xml
+repo init -u git://github.com/sailfishos-sony-tama/android.git -b sony-aosp-pie -m tagged-manifest.xml
 mkdir $ANDROID_ROOT/.repo/local_manifests
 ```
 
@@ -53,22 +54,27 @@ Add the following content to $ANDROID_ROOT/.repo/local_manifests/$DEVICE.xml
 </manifest>
 ```
 
-Comment out a line below in $ANDROID_ROOT/.repo/manifest.xml
-```
-<project name="droid-src-sony-ganges-pie" path="rpm" 
-```
-using `<!-- ... !-->` notation.
-
 Continue with syncing repo and build
 
 ```
 repo sync -j8 --fetch-submodules
 mv rpm droid-src
-ln -s droid-src/patches .
-droid-src/apply-patches.sh --mb
+```
+
+For patches, use https://github.com/sonyxperiadev/repo_update with the same branch as 
+for Android manifest (android-9.0.0_r46 at the moment of writing). (TODO: Explain)
+
+```
+#ln -s droid-src/patches .
+#droid-src/apply-patches.sh --mb
+SKIP_SYNC=TRUE ../repo_update/repo_update.sh
 mv dhd-rpm rpm
 ./setup-sources.sh --mb
+```
 
+Start the build
+
+```
 source build/envsetup.sh
 export USE_CCACHE=1
 lunch aosp_$DEVICE-user
