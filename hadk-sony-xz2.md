@@ -61,22 +61,24 @@ repo sync -j8 --fetch-submodules
 mv rpm droid-src
 ```
 
-For patches, use https://github.com/sonyxperiadev/repo_update with the same branch as 
-for Android manifest (android-9.0.0_r46 at the moment of writing). (TODO: Explain)
+For patches, we use a mix of Sony's repo_update and hybris patches. This allows to simplify changes
+in Android's base by keeping Sony's patches in sync with Android tree and apply all patches developed 
+for Hybris.
 
 ```
-#ln -s droid-src/patches .
-#droid-src/apply-patches.sh --mb
-SKIP_SYNC=TRUE ../repo_update/repo_update.sh
+ln -s droid-src/patches .
+droid-src/apply-patches.sh --mb
+SKIP_SYNC=TRUE droid-src/repo_update/repo_update.sh
 mv dhd-rpm rpm
 ./setup-sources.sh --mb
 ```
 
-Start the build
+Start the build. As two targets are missed, we make them separately before main build
 
 ```
 source build/envsetup.sh
 export USE_CCACHE=1
 lunch aosp_$DEVICE-user
+make fec append2simg
 make -j$(nproc --all) hybris-hal
 ```
