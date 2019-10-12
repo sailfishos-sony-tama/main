@@ -73,6 +73,8 @@ mv dhd-rpm rpm
 ./setup-sources.sh --mb
 ```
 
+# Build hybris-hal
+
 Start the build. As two targets are missed, we make them separately before main build
 
 ```
@@ -81,4 +83,42 @@ export USE_CCACHE=1
 lunch aosp_$DEVICE-user
 make fec append2simg
 make -j$(nproc --all) hybris-hal
+```
+
+
+# Build systemimage vendorimage
+
+On your Linux host:
+
+```
+mkdir -p $ANDROID_ROOT-syspart
+cd $ANDROID_ROOT-syspart
+repo init -u git://github.com/sailfishos-sony-tama/android.git -b sony-aosp-pie -m tagged-manifest.xml --depth=1
+mkdir .repo/local_manifests
+```
+
+Add the following content to $ANDROID_ROOT/.repo/local_manifests/$DEVICE.xml
+
+```XML
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <remote fetch="https://github.com/sailfishos-sony-tama" name="hybris-tama"/>
+  <project name="droid-src-sony-tama-pie" path="rpm" remote="hybris-tama" revision="master"/>
+</manifest>
+```
+
+Setup the sources
+
+```
+repo sync -j8 --fetch-submodules -c
+SKIP_SYNC=TRUE rpm/repo_update/repo_update.sh
+```
+
+Start the build (reduce `-j` as it is heavy on RAM if needed)
+
+```
+source build/envsetup.sh
+export USE_CCACHE=1
+lunch aosp_$DEVICE-user
+make -j$(nproc --all) systemimage vendorimage
 ```
