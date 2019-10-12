@@ -168,7 +168,7 @@ simg2img out/target/product/$HABUILD_DEVICE/system.img /tmp/system.img.raw
 sudo mount /tmp/system.img.raw $ANDROID_ROOT-mnt
 cd $ANDROID_ROOT/hybris/mw
 D=droid-system-$VENDOR-$ANDROID_FLAVOUR-template
-git clone --recursive https://github.com/mer-hybris/$D
+git clone --recursive https://github.com/sailfishos-sony-tama/$D
 cd $D
 sudo droid-system-device/helpers/copy_system.sh $ANDROID_ROOT-mnt/system rpm/droid-system-$HABUILD_DEVICE.spec
 # please do not commit the binaries nor push them to github repo,
@@ -182,7 +182,7 @@ simg2img out/target/product/$HABUILD_DEVICE/vendor.img /tmp/vendor.img.raw
 sudo mount /tmp/vendor.img.raw $ANDROID_ROOT-mnt
 cd $ANDROID_ROOT/hybris/mw
 D=droid-vendor-$VENDOR-$ANDROID_FLAVOUR-template
-git clone --recursive https://github.com/mer-hybris/$D
+git clone --recursive https://github.com/sailfishos-sony-tama/$D
 cd $D
 sudo droid-system-device/helpers/copy_vendor.sh $ANDROID_ROOT-mnt rpm/droid-system-vendor-$HABUILD_DEVICE.spec
 sudo chown -R $USER .
