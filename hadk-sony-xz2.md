@@ -230,6 +230,9 @@ sed -ie "s/0.0.0/$AUDIOFLINGERGLUE_VERSION/" hybris/mw/audioflingerglue-localbui
 mv hybris/mw/audioflingerglue-$AUDIOFLINGERGLUE_VERSION.tgz hybris/mw/audioflingerglue-localbuild
 rpm/dhd/helpers/build_packages.sh --build=hybris/mw/audioflingerglue-localbuild
 rpm/dhd/helpers/build_packages.sh --mw=https://github.com/mer-hybris/pulseaudio-modules-droid-glue.git
+
+rpm/dhd/helpers/build_packages.sh --mw=https://github.com/mer-hybris/pulseaudio-modules-droid-hidl.git
+
 ```
 
 # Boot packages
@@ -237,6 +240,7 @@ rpm/dhd/helpers/build_packages.sh --mw=https://github.com/mer-hybris/pulseaudio-
 In PLATFORM_SDK
 
 ```
+cd $ANDROID_ROOT
 rpm/dhd/helpers/build_bootimg_packages.sh
 sb2 -t $VENDOR-$DEVICE-$PORT_ARCH -m sdk-install -R zypper in --force-resolution droid-hal-$HABUILD_DEVICE-kernel-modules
 git clone --recursive https://github.com/sailfishos-sony-tama/droid-hal-img-boot-sony-$FAMILY-$ANDROID_FLAVOUR hybris/mw/droid-hal-img-boot-sony-$FAMILY-$ANDROID_FLAVOUR
@@ -247,4 +251,28 @@ rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos-sony-tama/d
 
 git clone --recursive https://github.com/sailfishos-sony-tama/droid-hal-version-sony-$FAMILY hybris/droid-hal-version-$DEVICE
 rpm/dhd/helpers/build_packages.sh --version
+```
+
+# Root filesystem
+
+In PLATFORM_SDK, start as in Chapter 8
+
+```
+cd $ANDROID_ROOT
+HA_REPO="repo --name=adaptation-community-common-$DEVICE-@RELEASE@"
+HA_DEV="repo --name=adaptation-community-$DEVICE-@RELEASE@"
+KS="Jolla-@RELEASE@-$DEVICE-@ARCH@.ks"
+sed \
+"/$HA_REPO/i$HA_DEV --baseurl=file:\/\/$ANDROID_ROOT\/droid-local-repo\/$DEVICE" \
+$ANDROID_ROOT/hybris/droid-configs/installroot/usr/share/kickstarts/$KS \
+> $KS
+RELEASE=3.1.0.12
+sudo zypper in lvm2 atruncate pigz
+sudo zypper in android-tools
+cd $ANDROID_ROOT
+hybris/droid-configs/droid-configs-device/helpers/process_patterns.sh
+sudo mic create loop --arch=$PORT_ARCH \
+    --tokenmap=ARCH:$PORT_ARCH,RELEASE:$RELEASE,EXTRA_NAME:$EXTRA_NAME \
+    --record-pkgs=name,url     --outdir=sfe-$DEVICE-$RELEASE$EXTRA_NAME \
+    $KS
 ```
