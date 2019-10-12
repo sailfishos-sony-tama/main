@@ -83,35 +83,29 @@ export USE_CCACHE=1
 lunch aosp_$DEVICE-user
 make fec append2simg
 make -j$(nproc --all) hybris-hal
+make verity_key
 ```
 
 
 # Build systemimage vendorimage
 
-On your Linux host:
+This can be done in parallel to the previous or the next sections. On your Linux host:
+
+Follow Sony's instructions for AOSP9 builds to set up sources. Note that the same branch as used 
+for tagged manifest in hybris AOSP has to be used:
 
 ```
 mkdir -p $ANDROID_ROOT-syspart
 cd $ANDROID_ROOT-syspart
-repo init -u git://github.com/sailfishos-sony-tama/android.git -b sony-aosp-pie -m tagged-manifest.xml --depth=1
-mkdir .repo/local_manifests
-```
-
-Add the following content to $ANDROID_ROOT/.repo/local_manifests/$DEVICE.xml
-
-```XML
-<?xml version="1.0" encoding="UTF-8"?>
-<manifest>
-  <remote fetch="https://github.com/sailfishos-sony-tama" name="hybris-tama"/>
-  <project name="droid-src-sony-tama-pie" path="rpm" remote="hybris-tama" revision="master"/>
-</manifest>
-```
-
-Setup the sources
-
-```
-repo sync -j8 --fetch-submodules -c
-SKIP_SYNC=TRUE rpm/repo_update/repo_update.sh
+BRANCH=android-9.0.0_r46
+repo init -u https://android.googlesource.com/platform/manifest -b $BRANCH
+cd .repo
+git clone https://github.com/sonyxperiadev/local_manifests
+cd local_manifests
+git checkout $BRANCH
+cd ../..
+repo sync -j32
+./repo_update.sh
 ```
 
 On Gentoo (probably not needed on other systems):
@@ -131,7 +125,7 @@ mv flex flex-2.5.39
 cd ../../../../
 ```
 
-Start the build (reduce `-j` as it is heavy on RAM if needed)
+Build images (reduce `-j` as it is heavy on RAM if needed)
 
 ```
 source build/envsetup.sh
@@ -139,3 +133,12 @@ export USE_CCACHE=1
 lunch aosp_$DEVICE-user
 make -j$(nproc --all) systemimage vendorimage
 ```
+
+
+# Setup SB2
+
+Go through chapter 6 of the HADK document.
+
+
+# Build packages
+
