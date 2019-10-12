@@ -230,7 +230,13 @@ sed -ie "s/0.0.0/$AUDIOFLINGERGLUE_VERSION/" hybris/mw/audioflingerglue-localbui
 mv hybris/mw/audioflingerglue-$AUDIOFLINGERGLUE_VERSION.tgz hybris/mw/audioflingerglue-localbuild
 rpm/dhd/helpers/build_packages.sh --build=hybris/mw/audioflingerglue-localbuild
 rpm/dhd/helpers/build_packages.sh --mw=https://github.com/mer-hybris/pulseaudio-modules-droid-glue.git
+```
 
+# Boot packages
+
+In PLATFORM_SDK
+
+```
 rpm/dhd/helpers/build_bootimg_packages.sh
 sb2 -t $VENDOR-$DEVICE-$PORT_ARCH -m sdk-install -R zypper in --force-resolution droid-hal-$HABUILD_DEVICE-kernel-modules
 git clone --recursive https://github.com/sailfishos-sony-tama/droid-hal-img-boot-sony-$FAMILY-$ANDROID_FLAVOUR hybris/mw/droid-hal-img-boot-sony-$FAMILY-$ANDROID_FLAVOUR
