@@ -114,6 +114,23 @@ repo sync -j8 --fetch-submodules -c
 SKIP_SYNC=TRUE rpm/repo_update/repo_update.sh
 ```
 
+On Gentoo (probably not needed on other systems):
+```
+unset JAVAC
+# due to https://github.com/sonyxperiadev/bug_tracker/issues/136
+cd prebuilts/misc/linux-x86/flex
+rm flex-2.5.39
+tar zxf flex-2.5.39.tar.gz
+cd flex-2.5.39
+./configure
+make
+mv flex ../
+cd ../
+rm -rf flex-2.5.39
+mv flex flex-2.5.39
+cd ../../../../
+```
+
 Start the build (reduce `-j` as it is heavy on RAM if needed)
 
 ```
