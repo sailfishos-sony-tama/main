@@ -142,3 +142,17 @@ Go through chapter 6 of the HADK document.
 
 # Build packages
 
+In PLATFORM_SDK
+
+```
+cd $ANDROID_ROOT
+sudo zypper ref
+rpm/dhd/helpers/build_packages.sh --droid-hal
+git clone --recursive https://github.com/sailfishos-sony-tama/droid-config-sony-$FAMILY-$ANDROID_FLAVOUR hybris/droid-configs -b master
+rpm/dhd/helpers/build_packages.sh --configs
+cd hybris/mw/libhybris
+git checkout master
+cd -
+rpm/dhd/helpers/build_packages.sh --mw=https://github.com/mer-hybris/sailfish-connman-plugin-suspend.git
+rpm/dhd/helpers/build_packages.sh --mw # select "all" option when asked
+```
