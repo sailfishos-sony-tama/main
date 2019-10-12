@@ -156,3 +156,36 @@ cd -
 rpm/dhd/helpers/build_packages.sh --mw=https://github.com/mer-hybris/sailfish-connman-plugin-suspend.git
 rpm/dhd/helpers/build_packages.sh --mw # select "all" option when asked
 ```
+
+# syspart
+
+After systemimage vendorimage have finished, in HABUILD_SDK
+```
+cd $ANDROID_ROOT-syspart
+sudo mkdir -p $ANDROID_ROOT-mnt
+export PATH=$ANDROID_ROOT-syspart/out/host/linux-x86/bin:$PATH
+simg2img out/target/product/$HABUILD_DEVICE/system.img /tmp/system.img.raw
+sudo mount /tmp/system.img.raw $ANDROID_ROOT-mnt
+cd $ANDROID_ROOT/hybris/mw
+D=droid-system-$VENDOR-$ANDROID_FLAVOUR-template
+git clone --recursive https://github.com/mer-hybris/$D
+cd $D
+sudo droid-system-device/helpers/copy_system.sh $ANDROID_ROOT-mnt/system rpm/droid-system-$HABUILD_DEVICE.spec
+# please do not commit the binaries nor push them to github repo,
+# because the licence has not been determined,
+# thus they have to be built manually
+sudo chown -R $USER .
+sudo umount $ANDROID_ROOT-mnt
+rm /tmp/system.img.raw
+cd $ANDROID_ROOT-syspart
+simg2img out/target/product/$HABUILD_DEVICE/vendor.img /tmp/vendor.img.raw
+sudo mount /tmp/vendor.img.raw $ANDROID_ROOT-mnt
+cd $ANDROID_ROOT/hybris/mw
+D=droid-vendor-$VENDOR-$ANDROID_FLAVOUR-template
+git clone --recursive https://github.com/mer-hybris/$D
+cd $D
+sudo droid-system-device/helpers/copy_vendor.sh $ANDROID_ROOT-mnt rpm/droid-system-vendor-$HABUILD_DEVICE.spec
+sudo chown -R $USER .
+sudo umount $ANDROID_ROOT-mnt
+rm /tmp/vendor.img.raw
+```
