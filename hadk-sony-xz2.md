@@ -209,7 +209,8 @@ make -j$(nproc --all) $(external/droidmedia/detect_build_targets.sh $PORT_ARCH $
 
 In PLATFORM_SDK
 
-``cd $ANDROID_ROOT
+```
+cd $ANDROID_ROOT
 DROIDMEDIA_VERSION=$(git --git-dir external/droidmedia/.git describe --tags | sed -r "s/\-/\+/g")
 rpm/dhd/helpers/pack_source_droidmedia-localbuild.sh $DROIDMEDIA_VERSION
 mkdir -p hybris/mw/droidmedia-localbuild/rpm
