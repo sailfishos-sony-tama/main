@@ -189,3 +189,56 @@ sudo chown -R $USER .
 sudo umount $ANDROID_ROOT-mnt
 rm /tmp/vendor.img.raw
 ```
+
+# audioflingerglue and droidmedia
+
+In HABUILD_SDK
+
+```
+HABUILD_SDK $
+ 
+cd $ANDROID_ROOT
+git clone https://github.com/mer-hybris/audioflingerglue external/audioflingerglue
+git clone https://github.com/sailfishos/droidmedia external/droidmedia
+
+source build/envsetup.sh
+export USE_CCACHE=1
+lunch aosp_$DEVICE-user
+make -j$(nproc --all) $(external/droidmedia/detect_build_targets.sh $PORT_ARCH $(gettargetarch)) $(external/audioflingerglue/detect_build_targets.sh $PORT_ARCH $(gettargetarch))
+```
+
+In PLATFORM_SDK
+
+``cd $ANDROID_ROOT
+DROIDMEDIA_VERSION=$(git --git-dir external/droidmedia/.git describe --tags | sed -r "s/\-/\+/g")
+rpm/dhd/helpers/pack_source_droidmedia-localbuild.sh $DROIDMEDIA_VERSION
+mkdir -p hybris/mw/droidmedia-localbuild/rpm
+(cd hybris/mw/droidmedia-localbuild; git init; git commit --allow-empty -m "initial")
+cp rpm/dhd/helpers/droidmedia-localbuild.spec hybris/mw/droidmedia-localbuild/rpm/droidmedia.spec
+sed -ie "s/0.0.0/$DROIDMEDIA_VERSION/" hybris/mw/droidmedia-localbuild/rpm/droidmedia.spec
+mv hybris/mw/droidmedia-$DROIDMEDIA_VERSION.tgz hybris/mw/droidmedia-localbuild
+rpm/dhd/helpers/build_packages.sh --build=hybris/mw/droidmedia-localbuild
+rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos/gst-droid.git
+
+AUDIOFLINGERGLUE_VERSION=$(git --git-dir external/audioflingerglue/.git describe --tags | sed -r "s/\-/\+/g")
+rpm/dhd/helpers/pack_source_audioflingerglue-localbuild.sh $AUDIOFLINGERGLUE_VERSION
+mkdir -p hybris/mw/audioflingerglue-localbuild/rpm
+(cd hybris/mw/audioflingerglue-localbuild; git init; git commit --allow-empty -m "initial")
+cp rpm/dhd/helpers/audioflingerglue-localbuild.spec hybris/mw/audioflingerglue-localbuild/rpm/audioflingerglue.spec
+sed -ie "s/0.0.0/$AUDIOFLINGERGLUE_VERSION/" hybris/mw/audioflingerglue-localbuild/rpm/audioflingerglue.spec
+mv hybris/mw/audioflingerglue-$AUDIOFLINGERGLUE_VERSION.tgz hybris/mw/audioflingerglue-localbuild
+rpm/dhd/helpers/build_packages.sh --build=hybris/mw/audioflingerglue-localbuild
+rpm/dhd/helpers/build_packages.sh --mw=https://github.com/mer-hybris/pulseaudio-modules-droid-glue.git
+
+rpm/dhd/helpers/build_bootimg_packages.sh
+sb2 -t $VENDOR-$DEVICE-$PORT_ARCH -m sdk-install -R zypper in --force-resolution droid-hal-$HABUILD_DEVICE-kernel-modules
+git clone --recursive https://github.com/sailfishos-sony-tama/droid-hal-img-boot-sony-$FAMILY-$ANDROID_FLAVOUR hybris/mw/droid-hal-img-boot-sony-$FAMILY-$ANDROID_FLAVOUR
+rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos-sony-tama/droid-hal-img-boot-sony-$FAMILY-$ANDROID_FLAVOUR --do-not-install --spec=rpm/droid-hal-$HABUILD_DEVICE-img-boot.spec
+
+rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos-sony-tama/droid-system-sony-$ANDROID_FLAVOUR-template --do-not-install --spec=rpm/droid-system-$HABUILD_DEVICE.spec --spec=rpm/droid-system-$HABUILD_DEVICE-$DEVICE.spec
+rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos-sony-tama/droid-vendor-sony-$ANDROID_FLAVOUR-template --do-not-install --spec=rpm/droid-system-vendor-$HABUILD_DEVICE.spec --spec=rpm/droid-system-vendor-$HABUILD_DEVICE-$DEVICE.spec
+
+git clone --recursive https://github.com/sailfishos-sony-tama/droid-hal-version-sony-$FAMILY hybris/droid-hal-version-$DEVICE
+rpm/dhd/helpers/build_packages.sh --version`
+
+```
