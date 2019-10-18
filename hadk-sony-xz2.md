@@ -83,7 +83,9 @@ export USE_CCACHE=1
 lunch aosp_$DEVICE-user
 make fec append2simg
 make -j$(nproc --all) hybris-hal
-make verity_key
+make verity_key mkdtimg
+mkdir -p kernel/sony/msm-4.9/common-kernel
+out/host/linux-x86/bin/mkdtimg create kernel/sony/msm-4.9/common-kernel/dtbo-akari.img `find out/target/product/akari  -name "*.dtbo"`
 ```
 
 
