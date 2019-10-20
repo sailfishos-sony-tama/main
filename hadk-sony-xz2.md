@@ -86,6 +86,8 @@ make -j$(nproc --all) hybris-hal
 make verity_key mkdtimg
 mkdir -p kernel/sony/msm-4.9/common-kernel
 out/host/linux-x86/bin/mkdtimg create kernel/sony/msm-4.9/common-kernel/dtbo-akari.img `find out/target/product/akari  -name "*.dtbo"`
+cp kernel/sony/msm-4.9/common-kernel/dtbo-akari.img out/target/product/akari/dtbo.img
+avbtool add_hash_footer --image out/target/product/akari/dtbo.img --partition_size 8388608 --partition_name dtbo
 ```
 
 
