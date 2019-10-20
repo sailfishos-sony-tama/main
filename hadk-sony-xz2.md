@@ -135,7 +135,7 @@ Build images (reduce `-j` as it is heavy on RAM if needed)
 source build/envsetup.sh
 export USE_CCACHE=1
 lunch aosp_$DEVICE-user
-make -j$(nproc --all) systemimage vendorimage
+make -j$(nproc --all) systemimage vendorimage vbmetaimage
 ```
 
 
