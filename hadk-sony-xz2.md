@@ -233,7 +233,8 @@ cp rpm/dhd/helpers/audioflingerglue-localbuild.spec hybris/mw/audioflingerglue-l
 sed -ie "s/0.0.0/$AUDIOFLINGERGLUE_VERSION/" hybris/mw/audioflingerglue-localbuild/rpm/audioflingerglue.spec
 mv hybris/mw/audioflingerglue-$AUDIOFLINGERGLUE_VERSION.tgz hybris/mw/audioflingerglue-localbuild
 rpm/dhd/helpers/build_packages.sh --build=hybris/mw/audioflingerglue-localbuild
-rpm/dhd/helpers/build_packages.sh --mw=https://github.com/mer-hybris/pulseaudio-modules-droid-glue.git
+# is in conflict with current config
+# rpm/dhd/helpers/build_packages.sh --mw=https://github.com/mer-hybris/pulseaudio-modules-droid-glue.git
 
 rpm/dhd/helpers/build_packages.sh --mw=https://github.com/mer-hybris/pulseaudio-modules-droid-hidl.git
 
@@ -271,6 +272,7 @@ sed \
 $ANDROID_ROOT/hybris/droid-configs/installroot/usr/share/kickstarts/$KS \
 > $KS
 RELEASE=3.1.0.12
+EXTRA_NAME=-my1
 sudo zypper in lvm2 atruncate pigz
 sudo zypper in android-tools
 cd $ANDROID_ROOT
