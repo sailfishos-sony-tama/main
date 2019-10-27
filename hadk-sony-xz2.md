@@ -236,6 +236,7 @@ rpm/dhd/helpers/build_packages.sh --build=hybris/mw/audioflingerglue-localbuild
 # is in conflict with current config
 # rpm/dhd/helpers/build_packages.sh --mw=https://github.com/mer-hybris/pulseaudio-modules-droid-glue.git
 
+rpm/dhd/helpers/build_packages.sh --mw=https://github.com/mer-hybris/audiosystem-passthrough
 rpm/dhd/helpers/build_packages.sh --mw=https://github.com/mer-hybris/pulseaudio-modules-droid-hidl.git
 
 ```
