@@ -1,5 +1,11 @@
 # Sailfish OS port to Sony Xperia Tama devices
 
+This is a community port, meaning that there is no official support and extensions included in the payed version:
+
+* There is no Android app support
+* There is no MS exchange support
+* There is no payed predictive text support. Use Presage-based keyboards instead (see below)
+
 Currently, only Xperia XZ2 single sim variant (H8216) is in the works.
 
 **Current issues:** https://github.com/sailfishos-sony-tama/main/issues
@@ -32,3 +38,11 @@ For XZ2 H8216, working:
 ## Flashing
 
 Flashing guide is not ready. The images can be built using OBS repositories or compiled manually.
+
+## Predictive text support
+
+For predictive text support, install Presage-based predictive keyboards. These keyboards are available 
+at OpenRepos, under [sailfish_keyboard applications](https://openrepos.net/user/12231/programs). After enabling OpenRepos,
+you will need to enable that repository and install the keyboard layout(s) on your device. All the dependencies will be pulled 
+during installation. For example, for English, install 
+[English US Keyboard layout](https://openrepos.net/content/sailfishkeyboard/english-us-keyboard-layout-presage-based-text-prediction). 
