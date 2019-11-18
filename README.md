@@ -1,23 +1,32 @@
 # Sailfish OS port to Sony Xperia Tama devices
 
-This is a community port, meaning that there is no official support and extensions included in the payed version:
+This is a community port, meaning that there is no official support and extensions included in the paid version:
 
 * There is no Android app support
 * There is no MS exchange support
-* There is no payed predictive text support. Use Presage-based keyboards instead (see below)
+* There is no Jolla Store predictive text support. Use Presage-based keyboards instead (see below)
 
-Currently, only Xperia XZ2 single sim variant (H8216) is in the works.
+**Issues:** https://github.com/sailfishos-sony-tama/main/issues
 
-**Current issues:** https://github.com/sailfishos-sony-tama/main/issues
+## Supported devices
 
-Port is developed under https://github.com/sailfishos-sony-tama with the local and OBS builds supported. For setting
-up local build, see [HADK](hadk-sony-xz2.md).
+Out of Tama platform devices, the following are supported:
+
+* Xperia XZ2 single sim variant (H8216)
+
+Support for the other devices is expected in future.
 
 ## Current state
 
-The port is now on Sailfish 3.2.0.12. Its based on AOSP9 / Linux kernel 4.9.
+Port is based on AOSP9 / Linux kernel 4.9.
 
-For XZ2 H8216, working:
+Software stack state:
+
+* Sailfish 3.2.0.12
+* Jolla Store access
+* OTA not tested
+
+Working hardware:
 
 * Display
 * Touch, multitouch
@@ -34,6 +43,10 @@ For XZ2 H8216, working:
 * Sensors: light, proximity, gyroscope, acceloremeter
 * Vibrator
 
+
+
+Port is developed under https://github.com/sailfishos-sony-tama with the local and OBS builds supported. For setting
+up local build, see [HADK](hadk-sony-xz2.md).
 
 ## Flashing
 
