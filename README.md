@@ -12,6 +12,8 @@ As it requires unlocking bootloader on Sony Xperia, you will loose DRM keys and 
 AOSP9 threads at XDA for your device for details. In particular, camera functionality will be considerably worse
 than on stock Android by Sony, but should be similar to AOSP9.
 
+While the care has been taken during porting, please see [LICENSE](LICENSE) for legal details.
+
 ## Issues 
 
 Port issues are all reported within this repository: https://github.com/sailfishos-sony-tama/main/issues
@@ -56,7 +58,8 @@ Working hardware:
 ## Flashing
 
 Before flashing, please check the current [issues](https://github.com/sailfishos-sony-tama/main/issues) and 
-pay attention to the [critical ones](https://github.com/sailfishos-sony-tama/main/issues?q=is%3Aopen+is%3Aissue+label%3Acritical)
+pay attention to the [critical ones](https://github.com/sailfishos-sony-tama/main/issues?q=is%3Aopen+is%3Aissue+label%3Acritical). The critical issues may damage your hardware, so please
+be aware of them.
 
 Flashing guide is not ready. The images can be built using OBS repositories or compiled manually.
 
