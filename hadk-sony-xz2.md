@@ -259,7 +259,6 @@ rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos-sony-tama/d
 rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos-sony-tama/droid-vendor-sony-$ANDROID_FLAVOUR-template --do-not-install --spec=rpm/droid-system-vendor-$HABUILD_DEVICE.spec --spec=rpm/droid-system-vendor-$HABUILD_DEVICE-$DEVICE.spec
 
 git clone --recursive https://github.com/sailfishos-sony-tama/droid-hal-version-sony-$FAMILY hybris/droid-hal-version-$DEVICE
-rpm/dhd/helpers/build_packages.sh --version
 ```
 
 # Root filesystem
@@ -268,6 +267,8 @@ In PLATFORM_SDK, start as in Chapter 8
 
 ```
 cd $ANDROID_ROOT
+rpm/dhd/helpers/build_packages.sh -b hybris/droid-configs --do-not-install
+rpm/dhd/helpers/build_packages.sh --version
 HA_REPO="repo --name=adaptation-community-common-$DEVICE-@RELEASE@"
 HA_DEV="repo --name=adaptation-community-$DEVICE-@RELEASE@"
 KS="Jolla-@RELEASE@-$DEVICE-@ARCH@.ks"
@@ -280,7 +281,7 @@ EXTRA_NAME=-my1
 sudo zypper in lvm2 atruncate pigz
 sudo zypper in android-tools
 cd $ANDROID_ROOT
-hybris/droid-configs/droid-configs-device/helpers/process_patterns.sh
+# no need to process patterns
 sudo mic create loop --arch=$PORT_ARCH \
     --tokenmap=ARCH:$PORT_ARCH,RELEASE:$RELEASE,EXTRA_NAME:$EXTRA_NAME \
     --record-pkgs=name,url     --outdir=sfe-$DEVICE-$RELEASE$EXTRA_NAME \
