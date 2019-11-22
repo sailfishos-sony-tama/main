@@ -32,8 +32,8 @@ Software stack state:
 
 * Sailfish 3.2.0.12
 * Jolla Store access
-* Kernel OTA works
-* OTA not tested
+* Kernel OTA update works
+* OTA update for full OS not tested
 * Device reset not tested
 
 Working hardware:
