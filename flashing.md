@@ -35,7 +35,8 @@ it would contain `SW_binaries_for_Xperia_Android_9.0_2.3.2_v9_tama.img`, with sh
 
 Get `vbmeta.img` file from the first release assets at .
 
-Get the latest Sailfish release ZIP file, uncompress it and put the software binary image into the same folder.
+Get the latest Sailfish release ZIP file, uncompress it and put the software binary and vbmeta images
+into the same folder.
 
 Connect your device in fastboot mode. See Xperia 10 Sailfish X guide or guide for AOSP9 for your device, shortcuts are 
 the same for Tama devices as for Xperia 10.
@@ -49,11 +50,14 @@ fastboot reboot-bootloader
 and check whether the slot is set correctly.
 
 For flashing, use `flash.sh` or `flash-on-windows.bat`, accordingly. Again, follow Xperia 10 guide, but do not reboot
-into Sailfish.
+into Sailfish. **NB!** Flashing has been tested on Linux only. Please report on whether it worked on Windows under
+corresponding [issue](https://github.com/sailfishos-sony-tama/main/issues/36).
 
-When flashing the first time, please flash also vbmeta.img (adjust for your PC OS):
+When flashing the first time and unless you used `flash.sh` on Linux,
+please flash also vbmeta.img (adjust for your PC OS):
 ```
 fastboot --disable-verity --disable-verification flash vbmeta vbmeta.img
 ```
+This command is included into Linux flash script `flash.sh` already and executed as a part of flashing script.
 
 After that, unplug USB cable, and power on device after the led will turn itself off.
