@@ -61,7 +61,7 @@ Before flashing, please check the current [issues](https://github.com/sailfishos
 pay attention to the [critical ones](https://github.com/sailfishos-sony-tama/main/issues?q=is%3Aopen+is%3Aissue+label%3Acritical). The critical issues may damage your hardware, so please
 be aware of them.
 
-Flashing guide is not ready. The images can be built using OBS repositories or compiled manually.
+Flashing guide is at [flashing.md](flashing.md).
 
 ## Predictive text support
 
