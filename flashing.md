@@ -41,7 +41,7 @@ into the same folder.
 Connect your device in fastboot mode. See Xperia 10 Sailfish X guide or guide for AOSP9 for your device, shortcuts are 
 the same for Tama devices as for Xperia 10.
 
-Ensure that your device is set to boot from slot "A". Use `fastboot getvar` to verify that. If it is
+Ensure that your device is set to boot from slot "A". Use `fastboot getvar current-slot` to verify that. If it is
 not, set it to boot from slot A by
 ```
 fastboot --set-active=a
