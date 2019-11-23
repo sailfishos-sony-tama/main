@@ -36,7 +36,6 @@ Software stack state:
 * Jolla Store access
 * Kernel OTA update works
 * OTA update for full OS not tested
-* Device reset not tested
 
 Working hardware:
 
