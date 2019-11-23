@@ -7,7 +7,7 @@ platform and, when needed, XZ2 device (akari) of this platform.
 
 ```
 export VENDOR="sony"
-export DEVICE="h8216" 
+export DEVICE="h8216"
 export HABUILD_DEVICE=akari 
 export FAMILY=tama 
 export ANDROID_FLAVOUR=pie
@@ -283,7 +283,7 @@ sudo zypper in android-tools
 cd $ANDROID_ROOT
 # no need to process patterns
 sudo mic create loop --arch=$PORT_ARCH \
-    --tokenmap=ARCH:$PORT_ARCH,RELEASE:$RELEASE,EXTRA_NAME:$EXTRA_NAME \
+    --tokenmap=ARCH:$PORT_ARCH,RELEASE:$RELEASE,EXTRA_NAME:$EXTRA_NAME,DEVICEMODEL:$DEVICE \
     --record-pkgs=name,url     --outdir=sfe-$DEVICE-$RELEASE$EXTRA_NAME \
     $KS
 ```
