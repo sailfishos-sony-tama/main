@@ -28,6 +28,9 @@ bootloader.
 You will need **USB2** connection between the phone and PC. If your PC comes only with UBS3, get a hub with USB2 
 or flash on some other PC.
 
+You will need reasonably new `fastboot` - it has to support `--disable-verity --disable-verification` options. You
+could check that by running `fastboot --help`.
+
 For flashing, you will need software binaries (`SW_binaries_for_Xperia_Android_9.0_2.3.2_v9_tama.zip`). Get them from 
 https://developer.sony.com/file/download/software-binaries-for-aosp-pie-android-9-0-kernel-4-9-tama . Unzip the file, 
 it would contain `SW_binaries_for_Xperia_Android_9.0_2.3.2_v9_tama.img`, with sha256sum of image file equal to
