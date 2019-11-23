@@ -8,6 +8,9 @@ This is a community port, meaning that there is no official support and extensio
 * There is no MS exchange support
 * There is no Jolla Store predictive text support. Use Presage-based keyboards instead (see below)
 
+The port is based on official port for Xperia 10. As a result, it has similar tools available for flashing
+and the device userdata is partitioned using LVM.
+
 As it requires unlocking bootloader on Sony Xperia, you will loose DRM keys and associated functionality. See
 AOSP9 threads at XDA for your device for details. In particular, camera functionality will be considerably worse
 than on stock Android by Sony, but should be similar to AOSP9.
