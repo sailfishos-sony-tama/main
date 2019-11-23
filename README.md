@@ -27,7 +27,9 @@ Out of Tama platform devices, the following are supported:
 
 * Xperia XZ2 single sim variant (H8216)
 
-Support for the other devices is expected in future.
+Support for the other devices is expected in the future. For that, open an issue in issue tracker
+with the specific model in the title and be ready to help with some simpler hardware-related 
+questions and test the first builds.
 
 ## Current state
 
