@@ -56,6 +56,7 @@ Working hardware:
 * USB Charging
 * Sensors: light, proximity, gyroscope, acceloremeter
 * Vibrator
+* SD card
 
 ## Flashing
 
