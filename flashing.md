@@ -31,15 +31,30 @@ or flash on some other PC.
 You will need reasonably new `fastboot` - it has to support `--disable-verity --disable-verification` options. You
 could check that by running `fastboot --help`.
 
+Files that will be needed for flashing:
+
+- software binaries provided by Sony
+- vbmeta image
+- Sailfish release for your device
+
+### Software binaries
+
 For flashing, you will need software binaries (`SW_binaries_for_Xperia_Android_9.0_2.3.2_v9_tama.zip`). Get them from 
 https://developer.sony.com/file/download/software-binaries-for-aosp-pie-android-9-0-kernel-4-9-tama . Unzip the file, 
 it would contain `SW_binaries_for_Xperia_Android_9.0_2.3.2_v9_tama.img`, with sha256sum of image file equal to
 `43477947fa88a70030692684f36df033294cc6dcece9c610f2112c14099d9997`.
 
-Get `vbmeta.img` file from the first release assets at .
+### vbmeta image
 
-Get the latest Sailfish release ZIP file, uncompress it and put the software binary and vbmeta images
-into the same folder.
+Get `vbmeta.zip` file from the first release assets at 
+https://github.com/sailfishos-sony-tama/main/releases/tag/3.2.0.12-alpha1 . Uncompress the file, it will contain
+single `vbmeta.img`
+
+### Sailfish release
+
+Get the latest Sailfish release ZIP file for your device among the releases at https://github.com/sailfishos-sony-tama/main/releases. Uncompress Sailfish ZIP and put the software binary and vbmeta images into the same folder.
+
+### Flashing
 
 Connect your device in fastboot mode. See Xperia 10 Sailfish X guide or guide for AOSP9 for your device, shortcuts are 
 the same for Tama devices as for Xperia 10.
@@ -63,4 +78,6 @@ fastboot --disable-verity --disable-verification flash vbmeta vbmeta.img
 ```
 This command is included into Linux flash script `flash.sh` already and executed as a part of flashing script.
 
-After that, unplug USB cable, and power on device after the led will turn itself off.
+### Before booting into Sailfish
+
+Unplug USB cable, and power on device after the led will turn itself off.
