@@ -267,7 +267,7 @@ In PLATFORM_SDK, start as in Chapter 8
 
 ```
 cd $ANDROID_ROOT
-rpm/dhd/helpers/build_packages.sh -b hybris/droid-configs --do-not-install
+rpm/dhd/helpers/build_packages.sh -b hybris/droid-configs --do-not-install --spec=rpm/jolla-configuration-$DEVICE.spec
 rpm/dhd/helpers/build_packages.sh --version
 HA_REPO="repo --name=adaptation-community-common-$DEVICE-@RELEASE@"
 HA_DEV="repo --name=adaptation-community-$DEVICE-@RELEASE@"
