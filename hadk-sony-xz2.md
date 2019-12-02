@@ -78,6 +78,7 @@ mv dhd-rpm rpm
 Start the build. As two targets are missed, we make them separately before main build
 
 ```
+cd $ANDROID_ROOT
 source build/envsetup.sh
 export USE_CCACHE=1
 lunch aosp_$DEVICE-user
