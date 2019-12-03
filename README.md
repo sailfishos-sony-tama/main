@@ -55,8 +55,7 @@ Working hardware:
 * GSM (SMS, voice, data)
 * Keys (Vol +/-, camera, power)
 * Power management
-* USB Charging
-* USB Network
+* USB Charging, Network, MTP
 * Sensors: light, proximity, gyroscope, acceloremeter
 * Vibrator
 * SD card
