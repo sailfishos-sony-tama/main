@@ -56,6 +56,7 @@ Working hardware:
 * Keys (Vol +/-, camera, power)
 * Power management
 * USB Charging
+* USB Network
 * Sensors: light, proximity, gyroscope, acceloremeter
 * Vibrator
 * SD card
