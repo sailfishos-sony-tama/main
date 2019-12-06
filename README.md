@@ -59,6 +59,7 @@ Working hardware:
 * Sensors: light, proximity, gyroscope, acceloremeter
 * Vibrator
 * SD card
+* NFC
 
 ## Flashing
 
