@@ -26,8 +26,11 @@ Port issues are all reported within this repository: https://github.com/sailfish
 Out of Tama platform devices, the following are supported:
 
 * Xperia XZ2 single sim variant (H8216)
+* Xperia XZ2 dual sim variant (H8266)
+* Xperia XZ3 single sim variant (H8416)
+* Xperia XZ3 dual sim variant (H9436)
 
-Support for the other devices is expected in the future. For that, open an issue in issue tracker
+Support for XZ2 Compact is expected in the future. For that, open an issue in issue tracker
 with the specific model in the title and be ready to help with some simpler hardware-related 
 questions and test the first builds.
 
