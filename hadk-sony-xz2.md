@@ -126,7 +126,7 @@ Continue sync and apply required patches:
 cd ../..
 repo sync -j32
 ./repo_update.sh
-ln -s droid-src/patches .
+ln -s rpm/patches .
 rpm/apply-patches.sh --mb
 ```
 
