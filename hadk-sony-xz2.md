@@ -108,9 +108,26 @@ cd .repo
 git clone https://github.com/sonyxperiadev/local_manifests
 cd local_manifests
 git checkout $BRANCH
+```
+
+Add sfos.xml with the following content
+
+```XML
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <remote fetch="https://github.com/sailfishos-sony-tama" name="hybris-tama"/>
+  <project name="droid-src-sony-tama-pie" path="rpm" remote="hybris-tama" revision="master"/>
+</manifest>
+```
+
+Continue sync and apply required patches:
+
+```
 cd ../..
 repo sync -j32
 ./repo_update.sh
+ln -s droid-src/patches .
+rpm/apply-patches.sh --mb
 ```
 
 On Gentoo (probably not needed on other systems):
