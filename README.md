@@ -32,10 +32,6 @@ Out of Tama platform devices, the following are supported:
 * Xperia XZ3 single sim variant (H8416)
 * Xperia XZ3 dual sim variant (H9436)
 
-Support for XZ2 Compact is expected in the future. For that, open an issue in issue tracker
-with the specific model in the title and be ready to help with some simpler hardware-related 
-questions and test the first builds.
-
 ## Current state
 
 Port is based on AOSP9 / Linux kernel 4.9.
