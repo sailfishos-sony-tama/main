@@ -27,6 +27,8 @@ Out of Tama platform devices, the following are supported:
 
 * Xperia XZ2 single sim variant (H8216)
 * Xperia XZ2 dual sim variant (H8266)
+* Xperia XZ2 Compact single sim variant (H8314)
+* Xperia XZ2 Compact dual sim variant (H8324)
 * Xperia XZ3 single sim variant (H8416)
 * Xperia XZ3 dual sim variant (H9436)
 
