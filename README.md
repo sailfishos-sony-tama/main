@@ -32,6 +32,41 @@ The following devices are supported:
 * Xperia XZ3 single sim variant (H8416)
 * Xperia XZ3 dual sim variant (H9436)
 
+## Over-the-Air updates (OTA)
+
+OTA updates are supported. Currently supported OTA updates are to the following releases:
+- _none - placeholder_
+
+OTA updates are supported via command line, as described below.
+- Backup of Sailfish OS user files to a sdcard or to another device is strongly encouraged before updating Sailfish OS.
+- You can be on any Sailfish OS version you have installed before.
+- Enable ability to change to root in Settings/Developer tools:
+  - Enable 'Developer tools'
+  - Set the password
+  - Allow 'Remote connection' if you wish to update via ssh
+- Open shell with normal nemo user preferrably via ssh
+- Updating Sailfish OS via commandline:
+```bash
+# Replace with the release you are updating to
+ssu release 3.2.1.12
+
+ssu lr
+# Check the output that you have repos adaptation-community and adaptation-community-common
+
+# You may have many of OpenRepos enabled. It's recommended to disable them, even
+# though version --dup will do its best-effort to isolate repositories:
+ssu lr | grep openrepos
+
+devel-su zypper clean -a
+devel-su zypper ref -f
+
+version --dup
+# if above fails, try again
+# version --dup
+sync
+```
+- Reboot
+
 ## Current state
 
 Port is based on AOSP9 / Linux kernel 4.9.
