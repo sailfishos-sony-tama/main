@@ -305,3 +305,32 @@ sudo mic create loop --arch=$PORT_ARCH \
     --record-pkgs=name,url     --outdir=sfe-$DEVICE-$RELEASE$EXTRA_NAME \
     $KS
 ```
+
+
+# Kernel or hybris HAL update
+
+For the updates, in HABUILD_SDK
+```
+cd $ANDROID_ROOT
+source build/envsetup.sh
+export USE_CCACHE=1
+lunch aosp_$DEVICE-user
+make fec append2simg && make -j$(nproc --all) hybris-hal && make verity_key mkdtimg
+out/host/linux-x86/bin/mkdtimg create kernel/sony/msm-4.9/common-kernel/dtbo-$HABUILD_DEVICE.img `find out/target/product/$HABUILD_DEVICE  -name "*.dtbo"`
+cp kernel/sony/msm-4.9/common-kernel/dtbo-$HABUILD_DEVICE.img out/target/product/$HABUILD_DEVICE/dtbo.img
+avbtool add_hash_footer --image out/target/product/$HABUILD_DEVICE/dtbo.img --partition_size 8388608 --partition_name dtbo
+```
+
+In PLATFORM_SDK,
+```
+cd $ANDROID_ROOT
+rpm/dhd/helpers/build_packages.sh --droid-hal
+sb2 -t $VENDOR-$DEVICE-$PORT_ARCH -m sdk-install -R zypper in --force-resolution droid-hal-$HABUILD_DEVICE-kernel-modules
+cp out/target/product/$HABUILD_DEVICE/dtbo.img hybris/mw/droid-hal-img-dtbo-sony-tama-pie/dtbo-$HABUILD_DEVICE.img
+rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos-sony-tama/droid-hal-img-dtbo-sony-$FAMILY-$ANDROID_FLAVOUR --do-not-install --spec=rpm/droid-hal-$HABUILD_DEVICE-img-dtbo.spec
+```
+
+This will create packages in `droid-hal-DEVICE` and `droid-hal-img-dtbo-sony-tama-pie` at `droid-local-repo`.
+Copy these to `droid-hal-tama` of OBS.
+
+This has to be repeated for all representative devices: h8216, h8314, and h8416. When ready, push changes to OBS.
