@@ -35,7 +35,7 @@ The following devices are supported:
 ## Over-the-Air updates (OTA)
 
 OTA updates are supported. Currently supported OTA updates are to the following releases:
-- _none - placeholder_
+- 3.2.1.20
 
 OTA updates are supported via command line, as described below.
 - Backup of Sailfish OS user files to a sdcard or to another device is strongly encouraged before updating Sailfish OS.
@@ -48,7 +48,7 @@ OTA updates are supported via command line, as described below.
 - Updating Sailfish OS via commandline:
 ```bash
 # Replace with the release you are updating to
-ssu release 3.2.1.12
+ssu release 3.2.1.20
 
 ssu lr
 # Check the output that you have repos adaptation-community and adaptation-community-common
