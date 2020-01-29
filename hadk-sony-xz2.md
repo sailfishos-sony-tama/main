@@ -294,7 +294,7 @@ sed \
 "/$HA_REPO/i$HA_DEV --baseurl=file:\/\/$ANDROID_ROOT\/droid-local-repo\/$DEVICE" \
 $ANDROID_ROOT/hybris/droid-configs/installroot/usr/share/kickstarts/$KS \
 > $KS
-RELEASE=3.1.0.12
+RELEASE=3.2.1.20
 EXTRA_NAME=-my1
 sudo zypper in lvm2 atruncate pigz
 sudo zypper in android-tools
