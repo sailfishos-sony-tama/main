@@ -313,6 +313,11 @@ sudo mic create loop --arch=$PORT_ARCH \
     $KS
 ```
 
+**Troubleshooting missing package dependencies** 
+
+SailfishOS/Mer packages are often updated, this README is not. 
+
+If you are getting errors during the mic image build due to unsatisfied dependencies, try updating the RELEASE environment variable to the latest released version of SailfishOS.
 
 # Kernel or hybris HAL update
 
