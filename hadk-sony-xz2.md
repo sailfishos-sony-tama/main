@@ -285,7 +285,14 @@ In PLATFORM_SDK, start as in Chapter 8
 
 ```
 cd $ANDROID_ROOT
-rpm/dhd/helpers/build_packages.sh -b hybris/droid-configs --do-not-install --spec=rpm/jolla-configuration-$DEVICE.spec
+# "rpm/dhd/helpers/build_packages.sh --configs" does not build jolla-configuration-*, but we need it.
+# We cannot use just build jolla-configuration-$DEVICE.spec because that would cause the previously built
+# droid-config-* rpms to be deleted, as they belong to the same hybris/droid-configs folder
+# (this is an implementation choice in build_packages.sh and util.sh)
+# In order to ensure both --configs rpms and jolla-configuration-* rpm are available, we need to build
+# them using a single command.
+rpm/dhd/helpers/build_packages.sh -b hybris/droid-configs --do-not-install --spec=rpm/jolla-configuration-$DEVICE.spec --spec=rpm/droid-config-$DEVICE.spec
+
 rpm/dhd/helpers/build_packages.sh --version
 HA_REPO="repo --name=adaptation-community-common-$DEVICE-@RELEASE@"
 HA_DEV="repo --name=adaptation-community-$DEVICE-@RELEASE@"
@@ -306,6 +313,11 @@ sudo mic create loop --arch=$PORT_ARCH \
     $KS
 ```
 
+**Troubleshooting missing package dependencies** 
+
+SailfishOS/Mer packages are often updated, this README is not. 
+
+If you are getting errors during the mic image build due to unsatisfied dependencies, try updating the RELEASE environment variable to the latest released version of SailfishOS.
 
 # Kernel or hybris HAL update
 
