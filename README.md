@@ -67,13 +67,17 @@ sync
 ```
 - Reboot
 
+## Tips
+
+* on one of the updates, run `rm ~/.cache/gstreamer-1.0/registry.*` to add hardware-supported H.265 decoding.
+
+
 ## Current state
 
 Port is based on AOSP9 / Linux kernel 4.9.
 
 Software stack state:
 
-* Sailfish 3.2.0.12
 * Jolla Store access
 * Kernel OTA update works
 * OTA update for full OS not tested
