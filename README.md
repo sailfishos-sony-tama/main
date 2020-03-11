@@ -69,7 +69,21 @@ sync
 
 ## Tips
 
-* on one of the updates, run `rm ~/.cache/gstreamer-1.0/registry.*` to add hardware-supported H.265 decoding.
+### H.265 decoding
+
+H.265 hardware accelerated decoding should work. To enable it when coming from older versions, run 
+
+```
+rm ~/.cache/gstreamer-1.0/registry.*
+```
+
+### Tracker and SD Cards
+
+To allow tracker to index files on SD Card, run
+
+```
+gsettings set org.freedesktop.Tracker.Miner.Files index-recursive-directories "['&DESKTOP', '&DOCUMENTS', '&DOWNLOAD', '&MUSIC', '&PICTURES', '&VIDEOS',  '/run/media/nemo']"
+```
 
 
 ## Current state
