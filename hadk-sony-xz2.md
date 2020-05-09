@@ -1,6 +1,6 @@
 # HADK for Sony XZ2
 
-This is based on https://sailfishos.org/wiki/Sailfish_X_Xperia_Android_9_Build_and_Flash and adjusted for Tama 
+This is based on https://sailfishos.org/wiki/Sailfish_X_Xperia_Android_9_Build_and_Flash and adjusted for Tama
 platform and, when needed, XZ2 device (akari) of this platform.
 
 ## .hadk.env
@@ -8,8 +8,8 @@ platform and, when needed, XZ2 device (akari) of this platform.
 ```
 export VENDOR="sony"
 export DEVICE="h8216"
-export HABUILD_DEVICE=akari 
-export FAMILY=tama 
+export HABUILD_DEVICE=akari
+export FAMILY=tama
 export ANDROID_FLAVOUR=pie
 export HAVERSION="sony-"$FAMILY"-aosp-"$ANDROID_FLAVOUR
 # Set arch to armv7hl even if you are porting a 64bit device
@@ -36,7 +36,7 @@ ln -s ../dhd rpm/
 mv rpm dhd-rpm
 ```
 
-In contrast to official instructions, we use generic Sony AOSP repo and associate it with the device 
+In contrast to official instructions, we use generic Sony AOSP repo and associate it with the device
 via local manifest:
 
 ```
@@ -62,7 +62,7 @@ mv rpm droid-src
 ```
 
 For patches, we use a mix of Sony's repo_update and hybris patches. This allows to simplify changes
-in Android's base by keeping Sony's patches in sync with Android tree and apply all patches developed 
+in Android's base by keeping Sony's patches in sync with Android tree and apply all patches developed
 for Hybris.
 
 ```
@@ -96,7 +96,7 @@ avbtool add_hash_footer --image out/target/product/$HABUILD_DEVICE/dtbo.img --pa
 
 This can be done in parallel to the previous or the next sections. On your Linux host:
 
-Follow Sony's instructions for AOSP9 builds to set up sources. Note that the same branch as used 
+Follow Sony's instructions for AOSP9 builds to set up sources. Note that the same branch as used
 for tagged manifest in hybris AOSP has to be used:
 
 ```
@@ -218,7 +218,7 @@ In HABUILD_SDK
 
 ```
 HABUILD_SDK $
- 
+
 cd $ANDROID_ROOT
 git clone https://github.com/mer-hybris/audioflingerglue external/audioflingerglue
 git clone https://github.com/sailfishos/droidmedia external/droidmedia
@@ -313,9 +313,9 @@ sudo mic create loop --arch=$PORT_ARCH \
     $KS
 ```
 
-**Troubleshooting missing package dependencies** 
+**Troubleshooting missing package dependencies**
 
-SailfishOS/Mer packages are often updated, this README is not. 
+SailfishOS/Mer packages are often updated, this README is not.
 
 If you are getting errors during the mic image build due to unsatisfied dependencies, try updating the RELEASE environment variable to the latest released version of SailfishOS.
 
@@ -346,3 +346,36 @@ This will create packages in `droid-hal-DEVICE` and `droid-hal-img-dtbo-sony-tam
 Copy these to `droid-hal-tama` of OBS.
 
 This has to be repeated for all representative devices: h8216, h8314, and h8416. When ready, push changes to OBS.
+
+
+# Fastboot
+
+To work with fastboot, we have to take into account bootloader
+issues. So, to enter recovery or boot:
+
+* boot into fastboot mode by holding volume up while connecting
+  USB. LED should be blue when booted in fastboot mode.
+
+* check for availibility of device by `fastboot -l devices`. Its easy
+  to adjust permissions by making udev rules file allowing regular
+  users to flash using fastboot. File /etc/udev/rules.d/51-android.rules:
+  ```
+  # Android devices
+  SUBSYSTEM=="usb", ATTR{idVendor}=="0fce", MODE="0666", GROUP="plugdev"
+  ```
+  Here, `0fce` is obtained from `lsusb`.
+
+* in PC, after detection of fastboot device (),
+  reboot once in fastboot back to the bootloader : `fastboot reboot
+  bootloader`
+
+* to get into recovery, boot into it using `fastboot boot
+  hybris-recovery.img `. Booting into recovery takes some time. Screen
+  will show first unlocked bootloader warning, then will go blank, and
+  later will boot. Should be up in a minute.
+
+* When in recovery, `dmesg` on PC should show availibility of new
+  ethernet device. Configure the device as in `ifconfig enp0s29f7u5
+  10.42.66.65 netmask 255.255.255.0` .
+
+* To login into recovery, use `telnet 10.42.66.66`
