@@ -327,8 +327,10 @@ and by Mer Hybris at branch
 [hybris-sony-aosp-9.0.0_r37_20190620](https://github.com/mer-hybris/android_kernel_sony_msm/tree/hybris-sony-aosp-9.0.0_r37_20190620). To
 compare our current kernel with others, use the links below:
 
-* [Sony](https://github.com/sailfishos-sony-tama/android_kernel_sony_msm/compare/hybris-sony-aosp-9.0.0-4.9-tama-sony...sonyxperiadev:aosp/LE.UM.2.3.2.r1.4)
-* [Mer Hybris](https://github.com/sailfishos-sony-tama/android_kernel_sony_msm/compare/hybris-sony-aosp-9.0.0-4.9-tama-sony...mer-hybris:hybris-sony-aosp-9.0.0_r37_20190620)
+* Commits missing from [Sony](https://github.com/sailfishos-sony-tama/android_kernel_sony_msm/compare/hybris-sony-aosp-9.0.0-4.9-tama-sony...sonyxperiadev:aosp/LE.UM.2.3.2.r1.4)
+* Commits missing from [Mer Hybris](https://github.com/sailfishos-sony-tama/android_kernel_sony_msm/compare/hybris-sony-aosp-9.0.0-4.9-tama-sony...mer-hybris:hybris-sony-aosp-9.0.0_r37_20190620)
+* Extra commits that we have when compared to [Sony](https://github.com/sonyxperiadev/kernel/compare/aosp/LE.UM.2.3.2.r1.4...sailfishos-sony-tama:hybris-sony-aosp-9.0.0-4.9-tama-sony)
+* Extra commits that we have when compared to [Mer Hybris](https://github.com/mer-hybris/android_kernel_sony_msm/compare/hybris-sony-aosp-9.0.0_r37_20190620...sailfishos-sony-tama:hybris-sony-aosp-9.0.0-4.9-tama-sony)
 
 For the updates, in HABUILD_SDK
 ```
