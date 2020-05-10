@@ -322,8 +322,13 @@ If you are getting errors during the mic image build due to unsatisfied dependen
 # Kernel or hybris HAL update
 
 While we are on kernel 4.9, we follow kernel updates by Sony at branch
-[LE.UM.2.3.2.r1.4](https://github.com/sonyxperiadev/kernel/tree/aosp/LE.UM.2.3.2.r1.4) and
-by Mer Hybris at branch [hybris-sony-aosp-9.0.0_r37_20190620](https://github.com/mer-hybris/android_kernel_sony_msm/tree/hybris-sony-aosp-9.0.0_r37_20190620).
+[LE.UM.2.3.2.r1.4](https://github.com/sonyxperiadev/kernel/tree/aosp/LE.UM.2.3.2.r1.4)
+and by Mer Hybris at branch
+[hybris-sony-aosp-9.0.0_r37_20190620](https://github.com/mer-hybris/android_kernel_sony_msm/tree/hybris-sony-aosp-9.0.0_r37_20190620). To
+compare our current kernel with others, use the links below:
+
+* [Sony](https://github.com/sailfishos-sony-tama/android_kernel_sony_msm/compare/hybris-sony-aosp-9.0.0-4.9-tama-sony...sonyxperiadev:aosp/LE.UM.2.3.2.r1.4)
+* [Mer Hybris](https://github.com/sailfishos-sony-tama/android_kernel_sony_msm/compare/hybris-sony-aosp-9.0.0-4.9-tama-sony...mer-hybris:hybris-sony-aosp-9.0.0_r37_20190620)
 
 For the updates, in HABUILD_SDK
 ```
