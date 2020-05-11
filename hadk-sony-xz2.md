@@ -390,3 +390,28 @@ issues. So, to enter recovery or boot:
   10.42.66.65 netmask 255.255.255.0` .
 
 * To login into recovery, use `telnet 10.42.66.66`
+
+
+# Building on CI
+
+When using Gitlab CI, we can set the type of the build (devel or
+testing) through CI variables. Build images are pushed to
+https://thaodan.de/public/sailfishos/community/images/sony/tama .
+
+
+# Update notes: 3.3.0.16
+
+* dhd (submodule of
+  https://github.com/sailfishos-sony-tama/droid-hal-sony-tama-pie) was
+  taken not from master but from `filesystem` branch to get access to
+  https://github.com/mer-hybris/droid-hal-device/commit/d75a605795895988a0543385ba4aca6bf50c0db7
+  . Without it, I was getting an error during kernel image
+  installation (cpio: open failed - File exists). Hopefully, changes
+  will be merged and we can switch back to master
+
+* https://github.com/sailfishos-sony-tama/droid-hal-configs is
+  composed to use meta packages. Thus, until
+  https://github.com/mer-hybris/droid-hal-configs/pull/175 is merged,
+  it has to be used instead of upstream. So, we currently use
+  sfos-3.3.0.16 branch as a submodule in
+  https://github.com/sailfishos-sony-tama/droid-config-sony-tama-pie.
