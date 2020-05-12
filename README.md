@@ -40,7 +40,8 @@ OTA updates are supported. Currently supported OTA updates are to the following 
 
 OTA updates are supported via command line, as described below.
 - Backup of Sailfish OS user files to a sdcard or to another device is strongly encouraged before updating Sailfish OS.
-- You can be on any Sailfish OS version you have installed before.
+- Updates are tested by making updates between consecutive versions of Sailfish. Before skipping versions,
+  check at [TJC](https://together.jolla.com) whether it is recommended.
 - Enable ability to change to root in Settings/Developer tools:
   - Enable 'Developer tools'
   - Set the password
