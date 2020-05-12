@@ -398,6 +398,10 @@ When using Gitlab CI, we can set the type of the build (devel or
 testing) through CI variables. Build images are pushed to
 https://thaodan.de/public/sailfishos/community/images/sony/tama .
 
+During SFOS update, variables REPO, TAMA_RELEASE, REPO_RELEASE have to
+be changed. Variable REPO is used during a build, it can be filled
+using values in other REPO_ vars.
+
 
 # Update notes: 3.3.0.16
 
