@@ -88,6 +88,46 @@ To allow tracker to index files on SD Card, run
 gsettings set org.freedesktop.Tracker.Miner.Files index-recursive-directories "['&DESKTOP', '&DOCUMENTS', '&DOWNLOAD', '&MUSIC', '&PICTURES', '&VIDEOS',  '/run/media/nemo']"
 ```
 
+### Step counter
+
+Step counter is enabled and requires user space programs. Currently,
+the best available interaction is through
+(stpcntrd)[https://github.com/kimmoli/stpcntrd] which registers DBus
+session interface. You can use "Visual D-Bus" app to navigate to
+`com.kimmoli.stpcntrd` and through that app call the methods. To
+install the daemon, use
+```
+pkcon install stpcntrd
+```
+The daemon is included in Xperia Tama repositories.
+
+### Pickup gesture
+
+Pickup gesture switches on the screen when you pickup the phone and
+allows you to avoid pressing a power button. It may require relatively
+faster movement, try with the different movement patterns if it does
+not work. Note that sometimes the gesture is not registered, try to
+switch on / off the screen to re-arm the sensor. In addition, there is
+some delay between pickup and switching on the screen, but that seems
+to be originating mostly from the sensor or sensor-sensorfwd
+interaction.
+
+Pickup gesture requires development branch of
+(sensorfwd)[https://git.sailfishos.org/rinigus/sensorfw/tree/pickup]
+and (pickupd)[https://github.com/sailfishos-sony-tama/pickupd]. The
+both are available in Xperia Tama repositories.
+
+To enable pickup gesture, you need to just install `pickupd`:
+```
+pkcon install pickupd
+```
+To disable, uninstall the daemon. 
+
+### Pressure
+
+Pressure sensor is configured. To my knowledge, the only application
+interfacing it is Messwerk from
+https://build.merproject.org/project/show/home:mal:apps .
 
 ## Current state
 
@@ -113,7 +153,9 @@ Working hardware:
 * Keys (Vol +/-, camera, power)
 * Power management
 * USB Charging, Network, MTP
+* Wireless Charging
 * Sensors: light, proximity, gyroscope, acceloremeter
+* Sensors: magnetometer, compass, step counter, pickup
 * Vibrator
 * SD card
 * NFC
