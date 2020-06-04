@@ -259,6 +259,29 @@ rpm/dhd/helpers/build_packages.sh --mw=https://github.com/mer-hybris/pulseaudio-
 
 ```
 
+# Fingerprint support
+
+Support is based on https://github.com/piggz/sailfish-fpd-community
+
+In HABUILD_SDK
+
+```
+HABUILD_SDK $
+git clone https://github.com/piggz/sailfish-fpd-community.git hybris/mw/sailfish-fpd-community
+source build/envsetup.sh
+export USE_CCACHE=1
+lunch aosp_$DEVICE-user (or appropriate name)
+make libbiometry_fp_api_32
+hybris/mw/sailfish-fpd-community/rpm/copy-hal.sh
+```
+
+In PLATFORM_SDK
+```
+cd $ANDROID_ROOT
+rpm/dhd/helpers/build_packages.sh --build=hybris/mw/sailfish-fpd-community --spec=rpm/droid-biometry-fp.spec --do-not-install
+```
+
+
 # Boot packages
 
 In PLATFORM_SDK
