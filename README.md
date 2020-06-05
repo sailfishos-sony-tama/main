@@ -70,65 +70,6 @@ sync
 ```
 - Reboot
 
-## Tips
-
-### H.265 decoding
-
-H.265 hardware accelerated decoding should work. To enable it when coming from older versions, run 
-
-```
-rm ~/.cache/gstreamer-1.0/registry.*
-```
-
-### Tracker and SD Cards
-
-To allow tracker to index files on SD Card, run
-
-```
-gsettings set org.freedesktop.Tracker.Miner.Files index-recursive-directories "['&DESKTOP', '&DOCUMENTS', '&DOWNLOAD', '&MUSIC', '&PICTURES', '&VIDEOS',  '/run/media/nemo']"
-```
-
-### Step counter
-
-Step counter is enabled and requires user space programs. Currently,
-the best available interaction is through
-(stpcntrd)[https://github.com/kimmoli/stpcntrd] which registers DBus
-session interface. You can use "Visual D-Bus" app to navigate to
-`com.kimmoli.stpcntrd` and through that app call the methods. To
-install the daemon, use
-```
-pkcon install stpcntrd
-```
-The daemon is included in Xperia Tama repositories.
-
-### Pickup gesture
-
-Pickup gesture switches on the screen when you pickup the phone and
-allows you to avoid pressing a power button. It may require relatively
-faster movement, try with the different movement patterns if it does
-not work. Note that sometimes the gesture is not registered, try to
-switch on / off the screen to re-arm the sensor. In addition, there is
-some delay between pickup and switching on the screen, but that seems
-to be originating mostly from the sensor or sensor-sensorfwd
-interaction.
-
-Pickup gesture requires development branch of
-(sensorfwd)[https://git.sailfishos.org/rinigus/sensorfw/tree/pickup]
-and (pickupd)[https://github.com/sailfishos-sony-tama/pickupd]. The
-both are available in Xperia Tama repositories.
-
-To enable pickup gesture, you need to just install `pickupd`:
-```
-pkcon install pickupd
-```
-To disable, uninstall the daemon. 
-
-### Pressure
-
-Pressure sensor is configured. To my knowledge, the only application
-interfacing it is Messwerk from
-https://build.merproject.org/project/show/home:mal:apps .
-
 ## Current state
 
 Port is based on AOSP9 / Linux kernel 4.9.
@@ -154,6 +95,7 @@ Working hardware:
 * Power management
 * USB Charging, Network, MTP
 * Wireless Charging
+* Fingerprint
 * Sensors: light, proximity, gyroscope, acceloremeter
 * Sensors: magnetometer, compass, step counter, pickup
 * Vibrator
@@ -168,13 +110,109 @@ be aware of them.
 
 Flashing guide is at [flashing.md](flashing.md).
 
-## Predictive text support
+## Tips
+
+### Predictive text support
 
 For predictive text support, install Presage-based predictive keyboards. These keyboards are available 
 at OpenRepos, under [sailfish_keyboard applications](https://openrepos.net/user/12231/programs). After enabling OpenRepos,
 you will need to enable that repository and install the keyboard layout(s) on your device. All the dependencies will be pulled 
 during installation. For example, for English, install 
 [English US Keyboard layout](https://openrepos.net/content/sailfishkeyboard/english-us-keyboard-layout-presage-based-text-prediction). 
+
+### Fingerprint support
+
+Fingerprint is supported through community effort
+[sailfish-fpd-community](https://github.com/piggz/sailfish-fpd-community). For
+installation, run in terminal
+
+```
+devel-su zypper ref
+devel-su zypper up
+devel-su zypper in sailfish-fpd-community-test sailfish-fpd-community sailfish-devicelock-fpd
+```
+
+The last command will ask for your help on how to proceed:
+```
+Problem: sailfish-devicelock-fpd-1.0.8-1.5.6.jolla.armv7hl conflicts with jolla-devicelock-plugin-encsfa provided by jolla-devicelock-plugin-encsfa-0.2.37-1.9.6.jolla.armv7hl
+ Solution 1: Following actions will be done:
+  deinstallation of jolla-devicelock-plugin-encsfa-0.2.37-1.9.6.jolla.armv7hl
+  deinstallation of jolla-devicelock-daemon-encsfa-0.2.37-1.9.6.jolla.armv7hl
+ Solution 2: do not install sailfish-devicelock-fpd-1.0.8-1.5.6.jolla.armv7hl
+
+Choose from above solutions by number or cancel [1/2/c] (c):
+```
+
+Choose to uninstall `jolla-devicelock-plugin-encsfa` as it is replaced
+by `sailfish-devicelock-fpd`. After that, reboot.
+
+Fingerprints can be used for authentication if you enable in Settings,
+under "Device lock", use of security code.
+
+When adding fingerprints, it is recommended to use separate
+application installed above: "Fingerprints". If you add fingerprints
+under Sailfish Settings, it may lead to device reboot
+([issue](https://github.com/piggz/sailfish-fpd-community/issues/10)). In
+the dedicated application, such issue was not encountered.
+
+
+### H.265 decoding
+
+H.265 hardware accelerated decoding should work. To enable it when
+coming from older versions, run
+
+```
+rm ~/.cache/gstreamer-1.0/registry.*
+```
+
+### Tracker and SD Cards
+
+To allow tracker to index files on SD Card, run
+
+```
+gsettings set org.freedesktop.Tracker.Miner.Files index-recursive-directories "['&DESKTOP', '&DOCUMENTS', '&DOWNLOAD', '&MUSIC', '&PICTURES', '&VIDEOS',  '/run/media/nemo']"
+```
+
+### Step counter
+
+Step counter is enabled and requires user space programs. Currently,
+the best available interaction is through
+[stpcntrd](https://github.com/kimmoli/stpcntrd) which registers DBus
+session interface. You can use "Visual D-Bus" app to navigate to
+`com.kimmoli.stpcntrd` and through that app call the methods. To
+install the daemon, use
+```
+pkcon install stpcntrd
+```
+The daemon is included in Xperia Tama repositories.
+
+### Pickup gesture
+
+Pickup gesture switches on the screen when you pickup the phone and
+allows you to avoid pressing a power button. It may require relatively
+faster movement, try with the different movement patterns if it does
+not work. Note that sometimes the gesture is not registered, try to
+switch on / off the screen to re-arm the sensor. In addition, there is
+some delay between pickup and switching on the screen, but that seems
+to be originating mostly from the sensor or sensor-sensorfwd
+interaction.
+
+Pickup gesture requires development branch of
+[sensorfwd](https://git.sailfishos.org/rinigus/sensorfw/tree/pickup)
+and [pickupd](https://github.com/sailfishos-sony-tama/pickupd). The
+both are available in Xperia Tama repositories.
+
+To enable pickup gesture, you need to just install `pickupd`:
+```
+pkcon install pickupd
+```
+To disable, uninstall the daemon. 
+
+### Pressure
+
+Pressure sensor is configured. To my knowledge, the only application
+interfacing it is Messwerk from
+https://build.merproject.org/project/show/home:mal:apps .
 
 ## Development
 
