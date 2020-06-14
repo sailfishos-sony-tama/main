@@ -144,7 +144,15 @@ Choose from above solutions by number or cancel [1/2/c] (c):
 ```
 
 Choose to uninstall `jolla-devicelock-plugin-encsfa` as it is replaced
-by `sailfish-devicelock-fpd`. After that, reboot.
+by `sailfish-devicelock-fpd`.
+
+On XZ3, please also install
+```
+devel-su zypper in droid-fake-crypt
+```
+This is needed on XZ3 only, do not install on XZ2 or XZ2c.
+
+After installation of the fingerprint packages, reboot.
 
 Fingerprints can be used for authentication if you enable in Settings,
 under "Device lock", use of security code.
