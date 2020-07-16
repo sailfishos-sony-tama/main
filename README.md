@@ -222,6 +222,16 @@ Pressure sensor is configured. To my knowledge, the only application
 interfacing it is Messwerk from
 https://build.merproject.org/project/show/home:mal:apps .
 
+### Launcher icons appear to small
+
+A workaround around is to install [launcher-combined-patch](https://coderus.openrepos.net/pm2/project/launcher-combined) with [patchmanager](https://openrepos.net/content/coderus/patchmanager-30) and increase the icon size.
+
+First install either patchmanager by hand or via [Storeman](https://openrepos.net/content/osetr/storeman).
+
+Then install the patch by opening the settings app -> patchmanger -> pull-menu -> web-catalogue.
+
+After this go a page back, select launcher-combined and enable change icon size. 
+
 ## Development
 
 Port is developed under https://github.com/sailfishos-sony-tama with the local and OBS builds supported. For setting
