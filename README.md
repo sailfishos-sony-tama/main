@@ -222,7 +222,7 @@ Pressure sensor is configured. To my knowledge, the only application
 interfacing it is Messwerk from
 https://build.merproject.org/project/show/home:mal:apps .
 
-### Launcher icons appear to small
+### Launcher icons appear too small
 
 A workaround around is to install [launcher-combined-patch](https://coderus.openrepos.net/pm2/project/launcher-combined) with [patchmanager](https://openrepos.net/content/coderus/patchmanager-30) and increase the icon size.
 
@@ -230,7 +230,12 @@ First install either patchmanager by hand or via [Storeman](https://openrepos.ne
 
 Then install the patch by opening the settings app -> patchmanger -> pull-menu -> web-catalogue.
 
-After this go a page back, select launcher-combined and enable change icon size. 
+After this go a page back, select launcher-combined and enable change icon size.
+
+### Backup and recovery
+
+The port supports backup and recovery when device is booted from recovery boot image. This is for advanced users and is available from
+Sailfish 3.4.x release. See [instructions](backup-recovery.md) for details.
 
 ## Development
 
