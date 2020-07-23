@@ -14,9 +14,8 @@ Notable differences are
 
 Device has to be unlockable. Check that before buying or be ready to return it if its impossible.
 
-Update device to the last Android 9 version before unlocking. Do not update to Android 10 if offered, unless 
-you are ready to downgrade if needed. At the time of writing, only Android 9 is available via updates of the 
-stock. Check that all works before flashing Sailfish. If something doesn't work, it will be possible to claim 
+Update device to the last Android version before unlocking. You can update to Android 10 if offered and flash Sailfish 
+over it directly. Check that all works before flashing Sailfish. If something doesn't work, it will be possible to claim 
 the warranty on device.
 
 If all is fine, check the consequences of bootloader unlocking as described by Sony and on relevant XDA forums.
