@@ -25,7 +25,7 @@ The rest of these instructions assumes that you have setup PC and can login into
 
 Now you should get a shell prompt in your telnet session. Until stated, the rest are commands in that session.
 
-3. Create folders for mounting your SD card filesystem:
+3. Create folder for mounting your SD card filesystem:
 
 ```
 mkdir /sdcard
@@ -56,7 +56,7 @@ mkdir -p $BCKP
 ```
 
 8. Backup the data. While FSArchiver can keep several filesystems in a single archive, here filesystems are stored separately. Backup
-is performed using two threads (-j2), lower compression level (-z2), verbose, and allowing to do it without ACL support (-a).
+is performed using two threads (-j2), lower compression level (-z2), and verbose output.
 
 ```
 fsarchiver savefs $BCKP/rootfs.fsa /dev/sailfish/root -v -j2 -z2 -a
@@ -90,8 +90,52 @@ Sailfish OS. Do not login into the Store, just proceed until you get into user U
 
 3. In recovery mode, select "Shell without mounting anything"
 
-Now you should get a shell prompt in your telnet session. Until stated, the rest are commands in that session.
+4. Create folder for mounting your SD card filesystem:
 
-...
+```
+mkdir /sdcard
+```
 
-_This section is left unfinished until someone will need to restore the filesystems and will document it here._
+5. Mount SD card. Notice that the command below is using Sony Tama disk names. Those could be different on other devices. 
+If you use these instructions for other devices, **check which partition corresponds to SD card**.
+```
+mount /dev/mmcblk0p1 /sdcard
+```
+
+6. Activate LVM and check that info is correct
+
+```
+lvm vgchange -a y
+lvm lvdisplay
+ls -lh /dev/sailfish
+```
+
+7. List available backups and set environment variable with the backup folder name:
+```
+ls -l /sdcard/backup/
+export BCKP=/sdcard/backup/sfos-3.3.0.16-2020.07.18
+```
+
+8. As FSArchiver requires full e2fsutils and does not work with BusyBox mke2fs (missing options),
+we have to reconfigure the environment accordingly:
+```
+mv /bin/mke2fs /bin/mke2fs.old
+ln -s /sbin/mkfs.ext4 /bin/mke2fs
+```
+
+9. Resore the data. While FSArchiver can keep several filesystems in a single archive, here filesystems are stored separately.
+Adjust the options if needed.
+```
+fsarchiver restfs $BCKP/rootfs.fsa id=0,dest=/dev/sailfish/root -v
+fsarchiver restfs $BCKP/homefs.fsa id=0,dest=/dev/sailfish/home -v
+```
+
+10. Unmount backup filesystem and deactivate LVM
+```
+umount /sdcard
+lvm vgchange -a n
+```
+
+11. Exit shell by pressing Ctrl-D
+
+12. Reboot phone when asked for it by recovery tool.
