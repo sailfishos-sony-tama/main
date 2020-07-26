@@ -59,8 +59,8 @@ mkdir -p $BCKP
 is performed using two threads (-j2), lower compression level (-z2), and verbose output.
 
 ```
-fsarchiver savefs $BCKP/rootfs.fsa /dev/sailfish/root -v -j2 -z2 -a
-fsarchiver savefs $BCKP/homefs.fsa /dev/sailfish/home -v -j2 -z2 -a
+fsarchiver savefs $BCKP/rootfs.fsa /dev/sailfish/root -v -j2 -z2
+fsarchiver savefs $BCKP/homefs.fsa /dev/sailfish/home -v -j2 -z2
 ```
 
 9. Check the archives:
