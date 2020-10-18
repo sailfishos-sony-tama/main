@@ -21,7 +21,7 @@ Now run:
 droid_src_dir= # point it to your droid-src directory
 ./generate_dhs_patches.sh -m vendor \
     -r "$PWD/repo_update.sh" \
-    -d $dhs_src_dir/patches
+    -d $droid_src_dir/patches
 ```
 
 After that commit your changes and you are done.
