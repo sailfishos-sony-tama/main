@@ -61,14 +61,13 @@ repo sync -j8 --fetch-submodules
 mv rpm droid-src
 ```
 
-For patches, we use a mix of Sony's repo_update and hybris patches. This allows to simplify changes
-in Android's base by keeping Sony's patches in sync with Android tree and apply all patches developed
-for Hybris.
-
+For patches, we use droid-src and hybris patches.
+To generate the patches needed for droid-src we use `generate_dhs_patches`,
+to collect the patches from Sony on top of AOSP.
+This allows to simplify changes.
 ```
 ln -s droid-src/patches .
 droid-src/apply-patches.sh --mb
-SKIP_SYNC=TRUE droid-src/repo_update/repo_update.sh
 mv dhd-rpm rpm
 ./setup-sources.sh --mb
 ```
@@ -425,6 +424,13 @@ During SFOS update, variables REPO, TAMA_RELEASE, REPO_RELEASE have to
 be changed. Variable REPO is used during a build, it can be filled
 using values in other REPO_ vars.
 
+
+# Updates notes: unreleased
+
+* We now use `generate_dhs_patches` instead of using sonys repo_update script.
+
+* Vendor repositories are set to p-mr1 to don't changes incompatible
+  with Android pie.
 
 # Update notes: 3.3.0.16
 
