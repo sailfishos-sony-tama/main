@@ -11,7 +11,7 @@ matching to droid-hal e.g. in our case android-9.0.0-r46.
 After that you need to delete the patches that were previously saved.
 For that you need to look that you don't delete the patches made by us or Jolla.
 
-## Generating the
+## Generating the patches
 
 After the cleanup is done its now time to generate the new patches.
 For this you need to grab [generate_dhs_patches](https://github.com/mer-hybris/droid-hal-source/pull/7) and put it into the root of your android sources.
