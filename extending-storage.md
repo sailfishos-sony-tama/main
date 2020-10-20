@@ -14,11 +14,11 @@ system_a to LVM and use it for HOME partition. Similar could be done for ROOT pa
 be split between partitions.
 
 1. Reformat system_a into PV:
-```
+```Shell
 pvcreate /dev/disk/by-partlabel/system_a
 ```
 It should show up as below
-```
+```Shell
 # pvdisplay
 
   --- Physical volume ---
@@ -46,12 +46,12 @@ It should show up as below
 ```
 
 2. Extend `sailfish` volume group by new storage:
-```
+```Shell
 vgextend sailfish /dev/disk/by-partlabel/system_a
 ```
 
 `pvdisplay` and `vgdisplay` should now show that new PV is allocatable and is a part of sailfish VG, VG has free PE:
-```
+```Shell
 # pvdisplay
 
 ...
@@ -77,12 +77,12 @@ vgextend sailfish /dev/disk/by-partlabel/system_a
 ```
 
 3. Choose the partition that you want to extend and do so. Below, all is added to home
-```
+```Shell
 lvextend -l +100%FREE /dev/sailfish/home
 ```
 
 4. Resize corresponding filesystem
-```
+```Shell
 resize2fs /dev/sailfish/home
 ```
 

@@ -5,7 +5,7 @@ platform and, when needed, XZ2 device (akari) of this platform.
 
 ## .hadk.env
 
-```
+```Shell
 export VENDOR="sony"
 export DEVICE="h8216"
 export HABUILD_DEVICE=akari
@@ -18,7 +18,7 @@ export PORT_ARCH="armv7hl"
 
 ## Setting up sources
 
-```
+```Shell
 HABUILD_SDK $
 
 sudo apt-get install libssl-dev
@@ -39,7 +39,7 @@ mv rpm dhd-rpm
 In contrast to official instructions, we use generic Sony AOSP repo and associate it with the device
 via local manifest:
 
-```
+```Shell
 repo init -u git://github.com/sailfishos-sony-tama/android.git -b sony-aosp-pie -m tagged-manifest.xml
 mkdir $ANDROID_ROOT/.repo/local_manifests
 ```
@@ -56,7 +56,7 @@ Add the following content to $ANDROID_ROOT/.repo/local_manifests/$DEVICE.xml
 
 Continue with syncing repo and build
 
-```
+```Shell
 repo sync -j8 --fetch-submodules
 mv rpm droid-src
 ```
@@ -65,7 +65,7 @@ For patches, we use droid-src and hybris patches.
 To generate the patches needed for droid-src we use `generate_dhs_patches`,
 to collect the patches from Sony on top of AOSP.
 This allows to simplify changes.
-```
+```Shell
 ln -s droid-src/patches .
 droid-src/apply-patches.sh --mb
 mv dhd-rpm rpm
@@ -76,7 +76,7 @@ mv dhd-rpm rpm
 
 Start the build. As two targets are missed, we make them separately before main build
 
-```
+```Shell
 cd $ANDROID_ROOT
 source build/envsetup.sh
 export USE_CCACHE=1
@@ -98,7 +98,7 @@ This can be done in parallel to the previous or the next sections. On your Linux
 Follow Sony's instructions for AOSP9 builds to set up sources. Note that the same branch as used
 for tagged manifest in hybris AOSP has to be used:
 
-```
+```Shell
 mkdir -p $ANDROID_ROOT-syspart
 cd $ANDROID_ROOT-syspart
 BRANCH=android-9.0.0_r46
@@ -121,7 +121,7 @@ Add sfos.xml with the following content
 
 Continue sync and apply required patches:
 
-```
+```Shell
 cd ../..
 repo sync -j32
 ./repo_update.sh
@@ -148,7 +148,7 @@ cd ../../../../
 
 Build images (reduce `-j` as it is heavy on RAM if needed)
 
-```
+```Shell
 source build/envsetup.sh
 export USE_CCACHE=1
 lunch aosp_$DEVICE-user
@@ -165,7 +165,7 @@ Go through chapter 6 of the HADK document.
 
 In PLATFORM_SDK
 
-```
+```Shell
 cd $ANDROID_ROOT
 sudo zypper ref
 rpm/dhd/helpers/build_packages.sh --droid-hal
@@ -181,7 +181,7 @@ rpm/dhd/helpers/build_packages.sh --mw # select "all" option when asked
 # syspart
 
 After systemimage vendorimage have finished, in HABUILD_SDK
-```
+```Shell
 cd $ANDROID_ROOT-syspart
 sudo mkdir -p $ANDROID_ROOT-mnt
 export PATH=$ANDROID_ROOT-syspart/out/host/linux-x86/bin:$PATH
@@ -215,7 +215,7 @@ rm /tmp/vendor.img.raw
 
 In HABUILD_SDK
 
-```
+```Shell
 HABUILD_SDK $
 
 cd $ANDROID_ROOT
@@ -230,7 +230,7 @@ make -j$(nproc --all) $(external/droidmedia/detect_build_targets.sh $PORT_ARCH $
 
 In PLATFORM_SDK
 
-```
+```Shell
 cd $ANDROID_ROOT
 DROIDMEDIA_VERSION=$(git --git-dir external/droidmedia/.git describe --tags | sed -r "s/\-/\+/g")
 rpm/dhd/helpers/pack_source_droidmedia-localbuild.sh $DROIDMEDIA_VERSION
@@ -264,7 +264,7 @@ Support is based on https://github.com/piggz/sailfish-fpd-community
 
 In HABUILD_SDK
 
-```
+```Shell
 HABUILD_SDK $
 git clone https://github.com/piggz/sailfish-fpd-community.git hybris/mw/sailfish-fpd-community
 source build/envsetup.sh
@@ -275,7 +275,7 @@ hybris/mw/sailfish-fpd-community/rpm/copy-hal.sh
 ```
 
 In PLATFORM_SDK
-```
+```Shell
 cd $ANDROID_ROOT
 rpm/dhd/helpers/build_packages.sh --build=hybris/mw/sailfish-fpd-community --spec=rpm/droid-biometry-fp.spec --do-not-install
 ```
@@ -285,7 +285,7 @@ rpm/dhd/helpers/build_packages.sh --build=hybris/mw/sailfish-fpd-community --spe
 
 In PLATFORM_SDK
 
-```
+```Shell
 cd $ANDROID_ROOT
 rpm/dhd/helpers/build_bootimg_packages.sh
 sb2 -t $VENDOR-$DEVICE-$PORT_ARCH -m sdk-install -R zypper in --force-resolution droid-hal-$HABUILD_DEVICE-kernel-modules
@@ -305,7 +305,7 @@ git clone --recursive https://github.com/sailfishos-sony-tama/droid-hal-version-
 
 In PLATFORM_SDK, start as in Chapter 8
 
-```
+```Shell
 cd $ANDROID_ROOT
 # "rpm/dhd/helpers/build_packages.sh --configs" does not build jolla-configuration-*, but we need it.
 # We cannot use just build jolla-configuration-$DEVICE.spec because that would cause the previously built
@@ -355,7 +355,7 @@ compare our current kernel with others, use the links below:
 * Extra commits that we have when compared to [Mer Hybris](https://github.com/mer-hybris/android_kernel_sony_msm/compare/hybris-sony-aosp-9.0.0_r37_20190620...sailfishos-sony-tama:hybris-sony-aosp-9.0.0-4.9-tama-sony)
 
 For the updates, in HABUILD_SDK
-```
+```Shell
 cd $ANDROID_ROOT
 source build/envsetup.sh
 export USE_CCACHE=1
@@ -367,7 +367,7 @@ avbtool add_hash_footer --image out/target/product/$HABUILD_DEVICE/dtbo.img --pa
 ```
 
 In PLATFORM_SDK,
-```
+```Shell
 cd $ANDROID_ROOT
 rpm/dhd/helpers/build_packages.sh --droid-hal
 sb2 -t $VENDOR-$DEVICE-$PORT_ARCH -m sdk-install -R zypper in --force-resolution droid-hal-$HABUILD_DEVICE-kernel-modules

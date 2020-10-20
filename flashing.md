@@ -60,7 +60,7 @@ the same for Tama devices as for Xperia 10.
 
 Ensure that your device is set to boot from slot "A". Use `fastboot getvar current-slot` to verify that. If it is
 not, set it to boot from slot A by
-```
+```Shell
 fastboot --set-active=a
 fastboot reboot-bootloader
 ```
@@ -72,7 +72,7 @@ corresponding [issue](https://github.com/sailfishos-sony-tama/main/issues/36).
 
 When flashing the first time and unless you used `flash.sh` on Linux,
 please flash also vbmeta.img (adjust for your PC OS):
-```
+```Shell
 fastboot --disable-verity --disable-verification flash vbmeta vbmeta.img
 ```
 This command is included into Linux flash script `flash.sh` already and executed as a part of flashing script.
