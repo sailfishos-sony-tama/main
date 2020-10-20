@@ -40,7 +40,8 @@ In contrast to official instructions, we use generic Sony AOSP repo and associat
 via local manifest:
 
 ```Shell
-repo init -u git://github.com/sailfishos-sony-tama/android.git -b sony-aosp-pie -m tagged-manifest.xml
+repo init -u git://github.com/sailfishos-sony-tama/android.git -b sony-aosp-pie -m tagged-manifest.xml \
+    --platform=linux
 mkdir $ANDROID_ROOT/.repo/local_manifests
 ```
 
@@ -102,7 +103,8 @@ for tagged manifest in hybris AOSP has to be used:
 mkdir -p $ANDROID_ROOT-syspart
 cd $ANDROID_ROOT-syspart
 BRANCH=android-9.0.0_r46
-repo init -u https://android.googlesource.com/platform/manifest -b $BRANCH
+repo init -u https://android.googlesource.com/platform/manifest -b $BRANCH \
+    --platform=linux
 cd .repo
 git clone https://github.com/sonyxperiadev/local_manifests
 cd local_manifests
