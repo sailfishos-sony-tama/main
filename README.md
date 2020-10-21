@@ -77,8 +77,7 @@ Port is based on AOSP9 / Linux kernel 4.9.
 Software stack state:
 
 * Jolla Store access
-* Kernel OTA update works
-* OTA update for full OS not tested
+* Kernel and OS OTA updates
 
 Working hardware:
 
