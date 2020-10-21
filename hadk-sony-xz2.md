@@ -62,10 +62,9 @@ repo sync -j8 --fetch-submodules
 mv rpm droid-src
 ```
 
-For patches, we use droid-src and hybris patches.
+For patches, we use droid-src and hybris patches that are applied together.
 To generate the patches needed for droid-src we use `generate_dhs_patches`,
-to collect the patches from Sony on top of AOSP.
-This allows to simplify changes.
+as described in [separate document](droid-src.md). To apply:
 ```Shell
 ln -s droid-src/patches .
 droid-src/apply-patches.sh --mb
