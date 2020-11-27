@@ -3,7 +3,7 @@
 We use `generate_dhs_patches` to collect all changes made by Sony in their
 repo_update script save them as patch files.
 
-## Preperation
+## Preparation
 
 First you need to have a *plain* AOSP tree initialized with the version
 matching to droid-hal e.g. in our case android-9.0.0-r46.
