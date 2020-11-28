@@ -435,9 +435,9 @@ using values in other REPO_ vars.
   
 # Update notes: 3.4.0.24
 
-* As another implementation of meta packages was merged upstream and not https://github.com/mer-hybris/droid-hal-configs/pull/175, 
-  we will keep our implementation until larger changes, such as Android base swap. So, local branch from
-  https://github.com/sailfishos-sony-tama/droid-hal-configs is used.
+* As upstream has new meta packages configuration, the configuration used by Tama is combination of 
+  the one developed for it and the official one. New PR was submitted, https://github.com/mer-hybris/droid-hal-configs/pull/203. 
+  For now, local branch from https://github.com/sailfishos-sony-tama/droid-hal-configs is used.
 
 # Update notes: 3.3.0.16
 
