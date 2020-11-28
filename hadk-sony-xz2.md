@@ -432,6 +432,12 @@ using values in other REPO_ vars.
 
 * Vendor repositories are set to p-mr1 to don't changes incompatible
   with Android pie.
+  
+# Update notes: 3.4.0.24
+
+* As another implementation of meta packages was merged upstream and not https://github.com/mer-hybris/droid-hal-configs/pull/175, 
+  we will keep our implementation until larger changes, such as Android base swap. So, local branch from
+  https://github.com/sailfishos-sony-tama/droid-hal-configs is used.
 
 # Update notes: 3.3.0.16
 
