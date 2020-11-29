@@ -356,16 +356,17 @@ Make sure that when you run `mic` command, it will end up without errors. Otherw
 
 # Kernel or hybris HAL update
 
-While we are on kernel 4.9, we follow kernel updates by Sony at branch
+While we are on kernel 4.9, we follow kernel updates by Mer Hybris mainly. Kernel 4.9 
+is in Sony branch
 [LE.UM.2.3.2.r1.4](https://github.com/sonyxperiadev/kernel/tree/aosp/LE.UM.2.3.2.r1.4)
-and by Mer Hybris at branch
+and Mer Hybris branch
 [hybris-sony-aosp-9.0.0_r37_20190620](https://github.com/mer-hybris/android_kernel_sony_msm/tree/hybris-sony-aosp-9.0.0_r37_20190620). To
 compare our current kernel with others, use the links below:
 
-* Commits missing from [Sony](https://github.com/sailfishos-sony-tama/android_kernel_sony_msm/compare/hybris-sony-aosp-9.0.0-4.9-tama-sony...sonyxperiadev:aosp/LE.UM.2.3.2.r1.4)
-* Commits missing from [Mer Hybris](https://github.com/sailfishos-sony-tama/android_kernel_sony_msm/compare/hybris-sony-aosp-9.0.0-4.9-tama-sony...mer-hybris:hybris-sony-aosp-9.0.0_r37_20190620)
-* Extra commits that we have when compared to [Sony](https://github.com/sonyxperiadev/kernel/compare/aosp/LE.UM.2.3.2.r1.4...sailfishos-sony-tama:hybris-sony-aosp-9.0.0-4.9-tama-sony)
-* Extra commits that we have when compared to [Mer Hybris](https://github.com/mer-hybris/android_kernel_sony_msm/compare/hybris-sony-aosp-9.0.0_r37_20190620...sailfishos-sony-tama:hybris-sony-aosp-9.0.0-4.9-tama-sony)
+* Commits missing from [Sony](https://github.com/sailfishos-sony-tama/android_kernel_sony_msm/compare/hybris-9.0-4.9...sonyxperiadev:aosp/LE.UM.2.3.2.r1.4)
+* Commits missing from [Mer Hybris](https://github.com/sailfishos-sony-tama/android_kernel_sony_msm/compare/hybris-9.0-4.9...mer-hybris:hybris-sony-aosp-9.0.0_r37_20190620)
+* Extra commits that we have when compared to [Sony](https://github.com/sonyxperiadev/kernel/compare/aosp/LE.UM.2.3.2.r1.4...sailfishos-sony-tama:hhybris-9.0-4.9)
+* Extra commits that we have when compared to [Mer Hybris](https://github.com/mer-hybris/android_kernel_sony_msm/compare/hybris-sony-aosp-9.0.0_r37_20190620...sailfishos-sony-tama:hybris-9.0-4.9)
 
 For the updates, in HABUILD_SDK
 ```Shell
@@ -450,6 +451,10 @@ using values in other REPO_ vars.
 * As upstream has new meta packages configuration, the configuration used by Tama is combination of 
   the one developed for it and the official one. New PR was submitted, https://github.com/mer-hybris/droid-hal-configs/pull/203. 
   For now, local branch from https://github.com/sailfishos-sony-tama/droid-hal-configs is used.
+  
+* Switching over to kernel following mer-hybris Sony kernel version. As that kernel is
+  updated, there is no reason to start merging changes from two sources (Sony and Mer), but
+  it is sufficient to follow Mer which is following Sony updates by itself.
 
 # Update notes: 3.3.0.16
 
