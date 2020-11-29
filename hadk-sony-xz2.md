@@ -342,6 +342,18 @@ SailfishOS/Mer packages are often updated, this README is not.
 
 If you are getting errors during the mic image build due to unsatisfied dependencies, try updating the RELEASE environment variable to the latest released version of SailfishOS.
 
+# Updates
+
+To update between versions, you would need to update SDK. For that, remove currently installed components (`sdk-assistant list`
+will give the list) and use [update-sdk.sh](scripts/update-sdk.sh) for getting the new versions (modify the script accordingly).
+
+If whole SDK is updated, don't forget to install the missing packages:
+```
+sudo zypper in kmod pigz atruncate android-tools
+```
+
+Make sure that when you run `mic` command, it will end up without errors. Otherwise, LVM 
+
 # Kernel or hybris HAL update
 
 While we are on kernel 4.9, we follow kernel updates by Sony at branch
