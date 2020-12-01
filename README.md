@@ -63,7 +63,7 @@ ssu lr | grep openrepos
 devel-su zypper clean -a
 devel-su zypper ref -f
 
-version --dup
+devel-su version --dup
 # if above fails, try again
 # version --dup
 sync
