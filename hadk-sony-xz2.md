@@ -439,13 +439,6 @@ be changed. Variable REPO is used during a build, it can be filled
 using values in other REPO_ vars.
 
 
-# Updates notes: unreleased
-
-* We now use `generate_dhs_patches` instead of using sonys repo_update script.
-
-* Vendor repositories are set to p-mr1 to don't changes incompatible
-  with Android pie.
-  
 # Update notes: 3.4.0.24
 
 * As upstream has new meta packages configuration, the configuration used by Tama is combination of 
@@ -455,6 +448,11 @@ using values in other REPO_ vars.
 * Switching over to kernel following mer-hybris Sony kernel version. As that kernel is
   updated, there is no reason to start merging changes from two sources (Sony and Mer), but
   it is sufficient to follow Mer which is following Sony updates by itself.
+
+* We now use `generate_dhs_patches` instead of using sonys repo_update script.
+
+* Vendor repositories are set to p-mr1 to don't changes incompatible
+  with Android pie.
 
 # Update notes: 3.3.0.16
 
