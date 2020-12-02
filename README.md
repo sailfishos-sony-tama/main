@@ -25,12 +25,12 @@ Port issues are all reported within this repository: https://github.com/sailfish
 
 The following devices are supported:
 
-* Xperia XZ2 single sim variant (H8216)
-* Xperia XZ2 dual sim variant (H8266)
-* Xperia XZ2 Compact single sim variant (H8314)
-* Xperia XZ2 Compact dual sim variant (H8324)
-* Xperia XZ3 single sim variant (H8416)
-* Xperia XZ3 dual sim variant (H9436)
+* Xperia XZ2 single sim variant (h8216)
+* Xperia XZ2 dual sim variant (h8266)
+* Xperia XZ2 Compact single sim variant (h8314)
+* Xperia XZ2 Compact dual sim variant (h8324)
+* Xperia XZ3 single sim variant (h8416)
+* Xperia XZ3 dual sim variant (h9436)
 
 ## Over-the-Air updates (OTA)
 
@@ -48,8 +48,12 @@ OTA updates are supported via command line, as described below.
   - Set the password
   - Allow 'Remote connection' if you wish to update via ssh
 - Open shell with normal nemo user preferrably via ssh
+- Make sure that you have `jolla-configuration-DEVCODE` installed. This has to be done before update.
 - Updating Sailfish OS via commandline:
 ```bash
+# Replace DEVCODE below with your device code (see above). For XZ2 single sim - h8216
+devel-su zypper in jolla-configuration-DEVCODE
+
 # Replace with the release you are updating to
 ssu release 3.3.0.16
 
