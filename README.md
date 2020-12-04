@@ -52,6 +52,8 @@ OTA updates are supported via command line, as described below.
 - Make sure that you have `jolla-configuration-DEVCODE` installed. This has to be done before update.
 - Updating Sailfish OS via commandline:
 ```bash
+# Start with refresh of current SFOS repo
+devel-su zypper ref 
 # Replace DEVCODE below with your device code (see above). For XZ2 single sim - h8216
 devel-su zypper in jolla-configuration-DEVCODE
 
