@@ -439,6 +439,15 @@ be changed. Variable REPO is used during a build, it can be filled
 using values in other REPO_ vars.
 
 
+# Building images locally
+
+Starting with 3.4.0.24, images are built using [create-images](scripts/create-images.sh)
+script. It requires device-specific `.hadk.pre-DEVNAME` and generic `.hadk.post` environment
+initialization files. To generate images for all devices, run `create-images.sh` after 
+adjusting RELEASE variable in the script. Images will be generated under 
+`$ANDROID_ROOT/releases/$RELEASE`.
+
+
 # Update notes: 3.4.0.24
 
 * As upstream has new meta packages configuration, the configuration used by Tama is combination of 
