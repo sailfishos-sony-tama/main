@@ -447,6 +447,11 @@ initialization files. To generate images for all devices, run `create-images.sh`
 adjusting RELEASE variable in the script. Images will be generated under 
 `$ANDROID_ROOT/releases/$RELEASE`.
 
+Images can be uploaded using [release-image-uploader](scripts/release-image-uploader.sh)
+script. You would need to have [github-release](https://github.com/github-release/github-release)
+installed and security token enabled (see instructions at github-release). Also, adjust
+repository and user name in the script.
+
 
 # Update notes: 3.4.0.24
 
