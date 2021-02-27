@@ -301,7 +301,10 @@ sudo zypper in lvm2 atruncate pigz
 sudo zypper in android-tools
 cd $ANDROID_ROOT
 # no need to process patterns
-sudo mic create loop --arch=$PORT_ARCH --tokenmap=DEVICE:$DEVICE,ARCH:$PORT_ARCH,RELEASE:$RELEASE,EXTRA_NAME:$EXTRA_NAME,DEVICEMODEL:$DEVICE --record-pkgs=name,url     --outdir=sfe-$DEVICE-$RELEASE$EXTRA_NAME ./usr/share/kickstarts/Jolla-@RELEASE@-$DEVICE-@ARCH@.ks
+sudo mic create loop --arch=$PORT_ARCH \
+  --tokenmap=DEVICE:$DEVICE,ARCH:$PORT_ARCH,RELEASE:$RELEASE,EXTRA_NAME:$EXTRA_NAME,DEVICEMODEL:$DEVICE \
+  --record-pkgs=name,url     --outdir=sfe-$DEVICE-$RELEASE$EXTRA_NAME \
+  ./usr/share/kickstarts/Jolla-@RELEASE@-$DEVICE-@ARCH@.ks
 ```
 
 **Troubleshooting missing package dependencies**
