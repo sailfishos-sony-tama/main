@@ -178,10 +178,10 @@ rmdir $ANDROID_ROOT-tmp || true
 
 # droidmedia
 
-In HABUILD_SDK
+In HOST
 
 ```Shell
-HABUILD_SDK $
+HOST $
 
 cd $ANDROID_ROOT
 git clone https://github.com/sailfishos/droidmedia external/droidmedia
@@ -255,7 +255,6 @@ In PLATFORM_SDK
 ```Shell
 cd $ANDROID_ROOT
 rpm/dhd/helpers/build_bootimg_packages.sh
-sb2 -t $VENDOR-$DEVICE-$PORT_ARCH -m sdk-install -R zypper in --force-resolution droid-hal-$HABUILD_DEVICE-kernel-modules
 git clone -b hybris-10 --recursive https://github.com/sailfishos-sony-tama/droid-hal-img-boot-sony-$FAMILY-pie hybris/mw/droid-hal-img-boot-sony-$FAMILY-pie
 rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos-sony-tama/droid-hal-img-boot-sony-$FAMILY-pie --do-not-install --spec=rpm/droid-hal-$HABUILD_DEVICE-img-boot.spec
 git clone -b hybris-10 --recursive https://github.com/sailfishos-sony-tama/droid-hal-img-dtbo-sony-$FAMILY-pie hybris/mw/droid-hal-img-dtbo-sony-$FAMILY-pie
@@ -288,25 +287,21 @@ KS has to be pulled from corresponding RPM:
 ```
 rpm2cpio droid-local-repo/h8324/droid-configs/droid-config-*-ssu-kickstarts-*.rpm | cpio -idmv
 ```
-If needed to edit, do it manually. Keeping older approach for reference and mic command
+If needed to edit, do it manually to set correct repositories. For local build, set
 ```
-HA_REPO="repo --name=adaptation-community-common-$DEVICE-@RELEASE@"
-HA_DEV="repo --name=adaptation-community-$DEVICE-@RELEASE@"
-KS="Jolla-@RELEASE@-$DEVICE-@ARCH@.ks"
-sed \
-"/$HA_REPO/i$HA_DEV --baseurl=file:\/\/$ANDROID_ROOT\/droid-local-repo\/$DEVICE" \
-$ANDROID_ROOT/hybris/droid-configs/installroot/usr/share/kickstarts/$KS \
-> $KS
-RELEASE=3.2.1.20
+repo --name=adaptation-community-common-@DEVICE@-@RELEASE@ --baseurl=file:///home/rinigus/hadk/droid-local-repo/@DEVICE@
+```
+in KS under `usr/share/kickstarts`.
+
+Run mic command
+```
+RELEASE=4.0.1.48
 EXTRA_NAME=-my1
 sudo zypper in lvm2 atruncate pigz
 sudo zypper in android-tools
 cd $ANDROID_ROOT
 # no need to process patterns
-sudo mic create loop --arch=$PORT_ARCH \
-    --tokenmap=ARCH:$PORT_ARCH,RELEASE:$RELEASE,EXTRA_NAME:$EXTRA_NAME,DEVICEMODEL:$DEVICE \
-    --record-pkgs=name,url     --outdir=sfe-$DEVICE-$RELEASE$EXTRA_NAME \
-    $KS
+sudo mic create loop --arch=$PORT_ARCH --tokenmap=DEVICE:$DEVICE,ARCH:$PORT_ARCH,RELEASE:$RELEASE,EXTRA_NAME:$EXTRA_NAME,DEVICEMODEL:$DEVICE --record-pkgs=name,url     --outdir=sfe-$DEVICE-$RELEASE$EXTRA_NAME ./usr/share/kickstarts/Jolla-@RELEASE@-$DEVICE-@ARCH@.ks
 ```
 
 **Troubleshooting missing package dependencies**
@@ -316,6 +311,8 @@ SailfishOS/Mer packages are often updated, this README is not.
 If you are getting errors during the mic image build due to unsatisfied dependencies, try updating the RELEASE environment variable to the latest released version of SailfishOS.
 
 # Updates
+
+NB! Revise taking into account hybris-hal and droidmedia separate builds. Belo, old text
 
 To update between versions, you would need to update SDK. For that, remove currently installed components (`sdk-assistant list`
 will give the list) and use [update-sdk.sh](scripts/update-sdk.sh) for getting the new versions (modify the script accordingly).
