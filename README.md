@@ -1,4 +1,6 @@
-# Sailfish OS port to Sony Xperia Tama devices
+# Sailfish OS port to Sony Xperia Tama devices, AOSP 10 based
+
+**Work in progress, nothing works. Text below is not up to date.**
 
 Please read this document fully before planning or starting to use this port.
 
@@ -8,14 +10,16 @@ This is a community port, meaning that there is no official support and extensio
 * There is no MS exchange support
 * There is no Jolla Store predictive text support. Use Presage-based keyboards instead (see below)
 
-The port is based on official port for Xperia 10. As a result, it has similar tools available for flashing
-and the device userdata is partitioned using LVM.
+The port is based on official port for Xperia 10II (seine). As a
+result, it has similar tools available for flashing and the device
+userdata is partitioned using LVM.
 
-As it requires unlocking bootloader on Sony Xperia, you will loose DRM keys and associated functionality. See
-AOSP9 threads at XDA for your device for details. In particular, camera functionality will be considerably worse
-than on stock Android by Sony, but should be similar to AOSP9.
+As it requires unlocking bootloader on Sony Xperia, you will loose DRM
+keys and associated functionality. See AOSP10 threads at XDA for your
+device for details regarding hardware support.
 
-While the care has been taken during porting, please see [LICENSE](LICENSE) for legal details.
+While the care has been taken during porting, please see
+[LICENSE](LICENSE) for legal details.
 
 ## Issues 
 
@@ -35,9 +39,7 @@ The following devices are supported:
 ## Over-the-Air updates (OTA)
 
 OTA updates are supported. Currently supported OTA updates are to the following releases:
-- 3.4.0.24
-- 3.3.0.16
-- 3.2.1.20
+- no release on this base yet
 
 OTA updates are supported via command line, as described below.
 - Backup of Sailfish OS user files to a sdcard or to another device is strongly encouraged before updating Sailfish OS.
@@ -79,7 +81,7 @@ sync
 
 ## Current state
 
-Port is based on AOSP9 / Linux kernel 4.9.
+Port is based on AOSP10 / Linux kernel 4.14 / aarch64.
 
 Software stack state:
 
