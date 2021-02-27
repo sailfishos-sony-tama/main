@@ -83,11 +83,12 @@ Start the build, in HOST:
 
 ```Shell
 cd $ANDROID_ROOT
+# wipe out folder before building again
+rm -rf out
+
 source build/envsetup.sh
 export USE_CCACHE=1
 lunch aosp_$DEVICE-user
-# wipe out folder before building again
-rm -rf out
 cd kernel/sony/msm-4.14/common-kernel
 ./build-kernels-clang.sh -d $HABUILD_DEVICE -O $ANDROID_ROOT/out/target/product/$HABUILD_DEVICE/obj/kernel
 # FIXME after this is merged: https://github.com/sonyxperiadev/kernel-sony-msm-4.14-common/pull/14
