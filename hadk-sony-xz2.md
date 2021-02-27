@@ -143,11 +143,6 @@ sudo zypper ref
 rpm/dhd/helpers/build_packages.sh --droid-hal
 git clone --recursive -b hybris-10 https://github.com/sailfishos-sony-tama/droid-config-sony-$FAMILY-pie hybris/droid-configs 
 rpm/dhd/helpers/build_packages.sh --configs
-cd hybris/mw/libhybris
-git checkout master
-cd -
-rpm/dhd/helpers/build_packages.sh --mw=https://github.com/mer-hybris/sailfish-connman-plugin-suspend.git
-rpm/dhd/helpers/build_packages.sh --mw # select "all" option when asked
 ```
 
 # syspart
@@ -165,12 +160,13 @@ sudo mount $ANDROID_ROOT-tmp/vendor.img.raw $ANDROID_ROOT-mnt-vendor/vendor
 
 cd $ANDROID_ROOT/hybris/mw
 D=droid-system-$VENDOR-pie-template
-git clone -b hybris-10 --recursive https://github.com/mer-hybris/$D
+git clone -b hybris-10 --recursive https://github.com/sailfishos-sony-tama/$D
 cd $D
 sudo droid-system-device/helpers/copy_tree.sh $ANDROID_ROOT-mnt-system/system $ANDROID_ROOT-mnt-vendor/vendor rpm/droid-system-$HABUILD_DEVICE.spec
-# Please do not commit the binaries nor push them to a public repo,
-# because the license has not been determined,
-# thus they have to be built manually
+# Note from official instructions, not sure if valid:
+#    Please do not commit the binaries nor push them to a public repo,
+#    because the license has not been determined,
+#    thus they have to be built manually
 sudo chown -R $USER .
 sudo umount $ANDROID_ROOT-mnt-vendor/vendor
 sudo umount $ANDROID_ROOT-mnt-system
@@ -209,12 +205,6 @@ sed -ie "s/@PORT_ARCH@/$PORT_ARCH/" hybris/mw/droidmedia-localbuild/rpm/droidmed
 sed -ie "s/@DEVICE@/$HABUILD_DEVICE/" hybris/mw/droidmedia-localbuild/rpm/droidmedia.spec
 mv hybris/mw/droidmedia-$DROIDMEDIA_VERSION.tgz hybris/mw/droidmedia-localbuild
 rpm/dhd/helpers/build_packages.sh --build=hybris/mw/droidmedia-localbuild
-
-
-rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos/gst-droid.git
-rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos/gmp-droid.git
-rpm/dhd/helpers/build_packages.sh --mw=https://github.com/mer-hybris/audiosystem-passthrough
-rpm/dhd/helpers/build_packages.sh --mw=https://github.com/mer-hybris/pulseaudio-modules-droid-hidl.git
 ```
 
 # Build packages
@@ -223,8 +213,13 @@ In PLATFORM_SDK
 
 ```Shell
 cd $ANDROID_ROOT
+cd hybris/mw/libhybris
+git checkout master
+cd -
 rpm/dhd/helpers/build_packages.sh --mw=https://github.com/mer-hybris/sailfish-connman-plugin-suspend.git
 rpm/dhd/helpers/build_packages.sh --mw # select "all" option when asked
+rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos/gst-droid.git
+rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos/gmp-droid.git
 ```
 
 # Fingerprint support
@@ -267,7 +262,6 @@ cp out/target/product/$HABUILD_DEVICE/dtbo.img hybris/mw/droid-hal-img-dtbo-sony
 rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos-sony-tama/droid-hal-img-dtbo-sony-$FAMILY-pie --do-not-install --spec=rpm/droid-hal-$HABUILD_DEVICE-img-dtbo.spec
 
 rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos-sony-tama/droid-system-sony-pie-template --do-not-install --spec=rpm/droid-system-$HABUILD_DEVICE.spec --spec=rpm/droid-system-$HABUILD_DEVICE-$DEVICE.spec
-rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos-sony-tama/droid-vendor-sony-pie-template --do-not-install --spec=rpm/droid-system-vendor-$HABUILD_DEVICE.spec --spec=rpm/droid-system-vendor-$HABUILD_DEVICE-$DEVICE.spec
 
 git clone --recursive https://github.com/sailfishos-sony-tama/droid-hal-version-sony-$FAMILY hybris/droid-hal-version-$DEVICE
 ```
