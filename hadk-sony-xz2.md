@@ -77,14 +77,16 @@ droid-src/apply-patches.sh --mb
 ./setup-sources.sh --mb
 ```
 
-# Build hybris-hal
+# Build hybris-hal and droidmedia
 
 Start the build, in HOST:
 
 ```Shell
 cd $ANDROID_ROOT
-# wipe out folder before building again
-rm -rf out
+
+# pull external sources
+git clone https://github.com/sailfishos/droidmedia external/droidmedia
+git clone https://github.com/sailfishos-sony-tama/miniaudiopolicy.git hybris/mw/miniaudiopolicy
 
 source build/envsetup.sh
 export USE_CCACHE=1
@@ -94,7 +96,7 @@ cd kernel/sony/msm-4.14/common-kernel
 # FIXME after this is merged: https://github.com/sonyxperiadev/kernel-sony-msm-4.14-common/pull/14
 cp dtbo-$HABUILD_DEVICE.img $ANDROID_ROOT/out/target/product/$HABUILD_DEVICE/dtbo.img
 cd -
-make -j$(nproc --all) hybris-hal
+make -j$(nproc --all) hybris-hal droidmedia miniaudiopolicyservice
 ```
 
 
@@ -176,26 +178,17 @@ sudo rm -rf $ANDROID_ROOT-mnt-{system,vendor}
 rmdir $ANDROID_ROOT-tmp || true
 ```
 
-# droidmedia
+# droidmedia and miniaudiopolicyservice
 
-In HOST
-
-```Shell
-HOST $
-
-cd $ANDROID_ROOT
-git clone https://github.com/sailfishos/droidmedia external/droidmedia
-
-source build/envsetup.sh
-export USE_CCACHE=1
-lunch aosp_$DEVICE-user
-make -j$(nproc --all) droidmedia
-```
+Android bits were built together with hybris-hal above. Rebuild them
+if needed.
 
 In PLATFORM_SDK
 
 ```Shell
 cd $ANDROID_ROOT
+
+# droidmedia
 DROIDMEDIA_VERSION=$(git --git-dir external/droidmedia/.git describe --tags | sed -r "s/\-/\+/g")
 rpm/dhd/helpers/pack_source_droidmedia-localbuild.sh $DROIDMEDIA_VERSION
 mkdir -p hybris/mw/droidmedia-localbuild/rpm
@@ -206,6 +199,10 @@ sed -ie "s/@PORT_ARCH@/$PORT_ARCH/" hybris/mw/droidmedia-localbuild/rpm/droidmed
 sed -ie "s/@DEVICE@/$HABUILD_DEVICE/" hybris/mw/droidmedia-localbuild/rpm/droidmedia.spec
 mv hybris/mw/droidmedia-$DROIDMEDIA_VERSION.tgz hybris/mw/droidmedia-localbuild
 rpm/dhd/helpers/build_packages.sh --build=hybris/mw/droidmedia-localbuild
+
+# miniaudiopolicy
+hybris/mw/miniaudiopolicy/rpm/copy-hal.sh
+rpm/dhd/helpers/build_packages.sh --build=hybris/mw/miniaudiopolicy --do-not-install
 ```
 
 # Build packages
@@ -225,8 +222,6 @@ rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos/gmp-droid.g
 
 # Fingerprint support
 
-NOT YET, AOSP10/aarch64?
-
 Support is based on https://github.com/piggz/sailfish-fpd-community
 
 In HABUILD_SDK
@@ -245,6 +240,7 @@ In PLATFORM_SDK
 ```Shell
 cd $ANDROID_ROOT
 rpm/dhd/helpers/build_packages.sh --build=hybris/mw/sailfish-fpd-community --spec=rpm/droid-biometry-fp.spec --do-not-install
+rpm/dhd/helpers/build_packages.sh --mw=https://github.com/piggz/sailfish-fpd-community-test.git --do-not-install
 ```
 
 
