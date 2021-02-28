@@ -97,18 +97,12 @@ Working hardware:
 * Bluetooth
 * GPS
 * WLAN (connect and hotspot)
-* Camera (as in AOSP9)
-* GSM (SMS, voice, data)
+* Camera (as in AOSP10)
 * Keys (Vol +/-, camera, power)
-* Power management
-* USB Charging, Network, MTP
-* Wireless Charging
 * Fingerprint
 * Sensors: light, proximity, gyroscope, acceloremeter
-* Sensors: magnetometer, compass, step counter, pickup
 * Vibrator
 * SD card
-* NFC
 
 ## Flashing
 
