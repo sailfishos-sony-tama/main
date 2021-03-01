@@ -243,6 +243,15 @@ rpm/dhd/helpers/build_packages.sh --build=hybris/mw/sailfish-fpd-community --spe
 rpm/dhd/helpers/build_packages.sh --mw=https://github.com/piggz/sailfish-fpd-community-test.git --do-not-install
 ```
 
+# Other Tama specific packages
+
+In HABUILD_SDK
+
+```Shell
+HABUILD_SDK $
+rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos-sony-tama/nemo-qml-plugin-systemsettings.git --do-not-install
+```
+
 
 # Boot packages
 
