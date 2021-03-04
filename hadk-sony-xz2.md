@@ -81,7 +81,7 @@ droid-src/apply-patches.sh --mb
 ./setup-sources.sh --mb
 ```
 
-# Build hybris-hal and droidmedia
+# Build hybris-hal
 
 Start the build, in HOST:
 
@@ -100,7 +100,9 @@ cd kernel/sony/msm-4.14/common-kernel
 # FIXME after this is merged: https://github.com/sonyxperiadev/kernel-sony-msm-4.14-common/pull/14
 cp dtbo-$HABUILD_DEVICE.img $ANDROID_ROOT/out/target/product/$HABUILD_DEVICE/dtbo.img
 cd -
-make -j$(nproc --all) hybris-hal droidmedia miniaudiopolicyservice
+
+# build hybris-hal only and package it to avoid mixing with other services
+make -j$(nproc --all) hybris-hal
 ```
 
 
