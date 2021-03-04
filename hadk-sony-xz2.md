@@ -186,6 +186,8 @@ rmdir $ANDROID_ROOT-tmp || true
 
 # droidmedia and miniaudiopolicyservice
 
+This should be done after HAL is packaged.
+
 Android bits are needed as well. In HOST:
 
 ```
