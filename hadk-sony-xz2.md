@@ -71,6 +71,10 @@ In the HOST:
 
 ```Shell
 cd $ANDROID_ROOT
+
+## if have to reset pulled sources
+# repo sync -l
+
 git clone --recurse-submodules https://github.com/mer-hybris/droid-src-sony droid-src
 ln -s droid-src/patches
 droid-src/apply-patches.sh --mb
@@ -250,6 +254,24 @@ In HABUILD_SDK
 ```Shell
 HABUILD_SDK $
 rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos-sony-tama/nemo-qml-plugin-systemsettings.git --do-not-install
+rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos-sony-tama/pkg-fsarchiver.git --do-not-install
+rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos-sony-tama/pickupd.git --do-not-install
+
+git clone -b pickup https://github.com/sailfishos-sony-tama/sensorfw.git hybris/mw/sensorfw
+rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos-sony-tama/sensorfw.git --do-not-install
+rpm/dhd/helpers/build_packages.sh --mw= --do-not-install
+rpm/dhd/helpers/build_packages.sh --mw= --do-not-install
+
+# updates suggested for cellular data
+rpm/dhd/helpers/build_packages.sh --mw=https://git.sailfishos.org/mer-core/ohm.git --do-not-install
+rpm/dhd/helpers/build_packages.sh --mw=https://git.sailfishos.org/mer-core/libdres-ohm.git --do-not-install
+rpm/dhd/helpers/build_packages.sh --mw=https://git.sailfishos.org/mer-core/ohm-plugins-misc.git --do-not-install
+
+## used in seine for net?
+#rpm/dhd/helpers/build_packages.sh --mw=https://github.com/mer-hybris/dummy_netd.git --do-not-install
+
+# updates from seine
+rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos/yamuisplash.git --do-not-install
 ```
 
 
