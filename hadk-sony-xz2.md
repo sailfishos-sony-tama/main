@@ -259,8 +259,6 @@ rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos-sony-tama/p
 
 git clone -b pickup https://github.com/sailfishos-sony-tama/sensorfw.git hybris/mw/sensorfw
 rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos-sony-tama/sensorfw.git --do-not-install
-rpm/dhd/helpers/build_packages.sh --mw= --do-not-install
-rpm/dhd/helpers/build_packages.sh --mw= --do-not-install
 
 # updates suggested for cellular data
 rpm/dhd/helpers/build_packages.sh --mw=https://git.sailfishos.org/mer-core/ohm.git --do-not-install
