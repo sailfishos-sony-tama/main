@@ -257,8 +257,9 @@ rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos-sony-tama/n
 rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos-sony-tama/pkg-fsarchiver.git --do-not-install
 rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos-sony-tama/pickupd.git --do-not-install
 
-git clone -b pickup https://github.com/sailfishos-sony-tama/sensorfw.git hybris/mw/sensorfw
-rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos-sony-tama/sensorfw.git --do-not-install
+## has to be fixed
+#git clone -b pickup https://github.com/sailfishos-sony-tama/sensorfw.git hybris/mw/sensorfw
+#rpm/dhd/helpers/build_packages.sh --build=hybris/mw/sensorfw --do-not-install
 
 # updates suggested for cellular data
 rpm/dhd/helpers/build_packages.sh --mw=https://git.sailfishos.org/mer-core/ohm.git --do-not-install
@@ -279,9 +280,12 @@ In PLATFORM_SDK
 
 ```Shell
 cd $ANDROID_ROOT
+
 rpm/dhd/helpers/build_bootimg_packages.sh
+
 git clone -b hybris-10 --recursive https://github.com/sailfishos-sony-tama/droid-hal-img-boot-sony-$FAMILY-pie hybris/mw/droid-hal-img-boot-sony-$FAMILY-pie
 rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos-sony-tama/droid-hal-img-boot-sony-$FAMILY-pie --do-not-install --spec=rpm/droid-hal-$HABUILD_DEVICE-img-boot.spec
+
 git clone -b hybris-10 --recursive https://github.com/sailfishos-sony-tama/droid-hal-img-dtbo-sony-$FAMILY-pie hybris/mw/droid-hal-img-dtbo-sony-$FAMILY-pie
 cp out/target/product/$HABUILD_DEVICE/dtbo.img hybris/mw/droid-hal-img-dtbo-sony-tama-pie/dtbo-$HABUILD_DEVICE.img
 rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos-sony-tama/droid-hal-img-dtbo-sony-$FAMILY-pie --do-not-install --spec=rpm/droid-hal-$HABUILD_DEVICE-img-dtbo.spec
