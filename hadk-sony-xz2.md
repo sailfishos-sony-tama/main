@@ -88,9 +88,9 @@ Start the build, in HOST:
 ```Shell
 cd $ANDROID_ROOT
 
-# pull external sources
-git clone https://github.com/sailfishos/droidmedia external/droidmedia
-git clone https://github.com/sailfishos-sony-tama/miniaudiopolicy.git hybris/mw/miniaudiopolicy
+# remove out to rebuild without additional android bits
+# pulled by some services below (miniaudiopolicyservice)
+rm -rf out
 
 source build/envsetup.sh
 export USE_CCACHE=1
@@ -184,8 +184,22 @@ rmdir $ANDROID_ROOT-tmp || true
 
 # droidmedia and miniaudiopolicyservice
 
-Android bits were built together with hybris-hal above. Rebuild them
-if needed.
+Android bits are needed as well. In HOST:
+
+```
+cd $ANDROID_ROOT
+
+# pull external sources
+git clone https://github.com/sailfishos/droidmedia external/droidmedia
+git clone https://github.com/sailfishos-sony-tama/miniaudiopolicy.git hybris/mw/miniaudiopolicy
+
+source build/envsetup.sh
+export USE_CCACHE=1
+lunch aosp_$DEVICE-user
+
+make -j$(nproc --all) droidmedia miniaudiopolicyservice
+```
+
 
 In PLATFORM_SDK
 
