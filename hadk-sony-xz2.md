@@ -148,7 +148,12 @@ In PLATFORM_SDK
 
 ```Shell
 cd $ANDROID_ROOT
+
+# check that packages are installed and env is OK
 sudo zypper ref
+sudo zypper in kmod pigz atruncate android-tools
+sdk-foreach-su -ly ssu re
+
 rpm/dhd/helpers/build_packages.sh --droid-hal
 git clone --recursive -b hybris-10 https://github.com/sailfishos-sony-tama/droid-config-sony-$FAMILY-pie hybris/droid-configs 
 rpm/dhd/helpers/build_packages.sh --configs
@@ -242,6 +247,13 @@ rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos/gst-droid.g
 rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos/gmp-droid.git
 ```
 
+If getting error with bluez5:
+```
+sb2 -t $VENDOR-$DEVICE-$PORT_ARCH -R -msdk-install zypper in bluez5
+```
+and choose to change the provider.
+
+
 # Fingerprint support
 
 Support is based on https://github.com/piggz/sailfish-fpd-community
@@ -261,7 +273,7 @@ hybris/mw/sailfish-fpd-community/rpm/copy-hal.sh
 In PLATFORM_SDK
 ```Shell
 cd $ANDROID_ROOT
-rpm/dhd/helpers/build_packages.sh --build=hybris/mw/sailfish-fpd-community --spec=rpm/droid-biometry-fp.spec --do-not-install
+rpm/dhd/helpers/build_packages.sh --build=hybris/mw/sailfish-fpd-community --spec=rpm/droid-biometry-fp.spec --spec=rpm/sailfish-fpd-community.spec --do-not-install
 rpm/dhd/helpers/build_packages.sh --mw=https://github.com/piggz/sailfish-fpd-community-test.git --do-not-install
 ```
 
@@ -280,15 +292,15 @@ rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos-sony-tama/p
 #rpm/dhd/helpers/build_packages.sh --build=hybris/mw/sensorfw --do-not-install
 
 # updates suggested for cellular data
-rpm/dhd/helpers/build_packages.sh --mw=https://git.sailfishos.org/mer-core/ohm.git --do-not-install
-rpm/dhd/helpers/build_packages.sh --mw=https://git.sailfishos.org/mer-core/libdres-ohm.git --do-not-install
-rpm/dhd/helpers/build_packages.sh --mw=https://git.sailfishos.org/mer-core/ohm-plugins-misc.git --do-not-install
+rpm/dhd/helpers/build_packages.sh --mw=https://git.sailfishos.org/mer-core/ohm.git
+rpm/dhd/helpers/build_packages.sh --mw=https://git.sailfishos.org/mer-core/libdres-ohm.git
+rpm/dhd/helpers/build_packages.sh --mw=https://git.sailfishos.org/mer-core/ohm-plugins-misc.git
 
 ## used in seine for net?
 #rpm/dhd/helpers/build_packages.sh --mw=https://github.com/mer-hybris/dummy_netd.git --do-not-install
 
-# updates from seine
-rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos/yamuisplash.git --do-not-install
+## updates from seine
+#rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos/yamuisplash.git --do-not-install
 ```
 
 
