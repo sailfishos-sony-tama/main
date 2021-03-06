@@ -356,8 +356,9 @@ Make sure that when you run `mic` command, it will end up without errors. Otherw
 
 # Kernel or hybris HAL update
 
-While we are on kernel 4.9, we follow kernel updates by Mer Hybris mainly. Kernel 4.9 
-is in Sony branch
+While we are on kernel 4.9, we follow kernel updates by Mer Hybris mainly. In our kernel repo, 
+we are in [hybris-9.0-4.9](https://github.com/sailfishos-sony-tama/android_kernel_sony_msm/tree/hybris-9.0-4.9) branch.
+Kernel 4.9 is in Sony branch
 [LE.UM.2.3.2.r1.4](https://github.com/sonyxperiadev/kernel/tree/aosp/LE.UM.2.3.2.r1.4)
 and Mer Hybris branch
 [hybris-sony-aosp-9.0.0_r37_20190620](https://github.com/mer-hybris/android_kernel_sony_msm/tree/hybris-sony-aosp-9.0.0_r37_20190620). To
