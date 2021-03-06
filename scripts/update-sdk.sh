@@ -2,7 +2,7 @@
 
 set -e
 
-SFOS=3.4.0.24
+SFOS=4.0.1.48
 
 sdk-assistant create -y SailfishOS-$SFOS http://releases.sailfishos.org/sdk/targets/Sailfish_OS-$SFOS-Sailfish_SDK_Tooling-i486.tar.7z
 for device in h8216 h8266 h8314 h8324 h8416 h9436
@@ -12,4 +12,5 @@ do
 done
 
 sdk-assistant list
-
+echo
+sdk-foreach-su -ly ssu re
