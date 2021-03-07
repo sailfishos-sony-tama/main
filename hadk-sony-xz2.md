@@ -291,13 +291,13 @@ rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos-sony-tama/p
 #git clone -b pickup https://github.com/sailfishos-sony-tama/sensorfw.git hybris/mw/sensorfw
 #rpm/dhd/helpers/build_packages.sh --build=hybris/mw/sensorfw --do-not-install
 
-# updates suggested for cellular data
+# updates for voice calls
 rpm/dhd/helpers/build_packages.sh --mw=https://git.sailfishos.org/mer-core/ohm.git
 rpm/dhd/helpers/build_packages.sh --mw=https://git.sailfishos.org/mer-core/libdres-ohm.git
 rpm/dhd/helpers/build_packages.sh --mw=https://git.sailfishos.org/mer-core/ohm-plugins-misc.git
 
-## used in seine for net?
-#rpm/dhd/helpers/build_packages.sh --mw=https://github.com/mer-hybris/dummy_netd.git --do-not-install
+# required for cellular data
+rpm/dhd/helpers/build_packages.sh --mw=https://github.com/mer-hybris/dummy_netd.git --do-not-install
 
 ## updates from seine
 #rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos/yamuisplash.git --do-not-install
