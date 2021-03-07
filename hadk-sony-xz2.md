@@ -314,7 +314,7 @@ cd $ANDROID_ROOT
 # (this is an implementation choice in build_packages.sh and util.sh)
 # In order to ensure both --configs rpms and jolla-configuration-* rpm are available, we need to build
 # them using a single command.
-rpm/dhd/helpers/build_packages.sh -b hybris/droid-configs --do-not-install --spec=rpm/droid-config-$DEVICE.spec --spec=rpm/jolla-configuration-$DEVICE.spec
+rpm/dhd/helpers/build_packages.sh -b hybris/droid-configs --do-not-install --spec=rpm/droid-config-$DEVICE.spec --spec=rpm/patterns-sailfish-device-configuration-$DEVICE.spec
 
 rpm/dhd/helpers/build_packages.sh --version
 HA_REPO="repo --name=adaptation-community-common-$DEVICE-@RELEASE@"
