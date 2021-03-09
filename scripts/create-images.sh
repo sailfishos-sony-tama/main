@@ -2,25 +2,79 @@
 
 set -e
 
-RELEASE=3.4.0.24
+# defaults
+VERSION=testing
+DEVICES="h8216 h8266 h8314 h8324 h8416 h9436"
+ISMIC="no"
+RELEASE=""
+
+while :; do
+    case $1 in
+	--mic)
+	    ISMIC=yes
+	    ;;
+
+	--release)
+	    RELEASE=$2
+	    shift
+	    ;;
+
+	--version)
+	    VERSION=$2
+	    shift
+	    ;;
+
+	--device)
+	    DEVICES=$2
+	    shift
+	    ;;
+
+	*)
+	    break
+    esac
+    shift
+done
+
 EXTRA_NAME=
 
-if [ "$#" -ne 1 ]; then
+source ~/.hadk.env
+
+# check if all is specified
+[ -z "$RELEASE" ] && (echo "Release has to be specified with --release option" && exit -1)
+    
+case $VERSION in
+    testing)
+	URL=http://repo.merproject.org/obs/nemo:/testing:/hw:/sony:/tama/sailfishos_$RELEASE/$PORT_ARCH/
+	;;
+    devel)
+	URL=http://repo.merproject.org/obs/nemo:/devel:/hw:/sony:/tama/sailfish_latest_$PORT_ARCH/$PORT_ARCH/
+	;;
+    *)
+	echo "Version (devel or testing) is not specified using --testing option"
+	exit -2
+	;;
+esac
+
+
+if [ "$ISMIC" == "no" ]; then
     scriptdir=`dirname "$(readlink -f "$0")"`
     RELEASE_DIR=$ANDROID_ROOT/releases/$RELEASE
     mkdir -p $RELEASE_DIR
     cd $RELEASE_DIR
 
-    for device in h8216 h8266 h8314 h8324 h8416 h9436
+    for device in $DEVICES
     do
 	rm Jolla-@RELEASE@-$device-@ARCH@.ks || echo No old KS file, continuing
-	"$scriptdir/get_ks.sh" http://repo.merproject.org/obs/nemo:/testing:/hw:/sony:/tama/sailfishos_3.4.0.24/armv7hl/ $device
-	sudo $PLATFORM_SDK_ROOT/sdks/sfossdk/mer-sdk-chroot "$scriptdir/create-images.sh" $device
+	"$scriptdir/get_ks.sh" $URL $device
+	sudo $PLATFORM_SDK_ROOT/sdks/sfossdk/mer-sdk-chroot \
+	     "$scriptdir/create-images.sh" \
+	     --mic \
+	     --release $RELEASE --version $VERSION --device $device
     done
     exit
 fi
 
-device=$1
+device=$DEVICES
 echo 
 echo Building for $RELEASE $device
 
