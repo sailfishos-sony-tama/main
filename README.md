@@ -249,6 +249,12 @@ In some cases, proximity sensor seems to get stuck in closed state. This results
 
 As a drawback, every time you switch on your phone screen, there will be a slight delay on powering it on. Right now, this setting is not enabled by default and it is up to the users to decide what is preferred.
 
+For testing, you could run 
+```
+mcetool --set-ps-on-demand=enabled
+```
+after installing mce-tool with `devel-su zypper in mce-tools`.
+
 Corresponding issues, see for discussion and background:
 - https://github.com/sailfishos-sony-tama/main/issues/129
 - https://github.com/sailfishos-sony-tama/main/issues/47
