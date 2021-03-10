@@ -238,6 +238,21 @@ Then install the patch by opening the settings app -> patchmanger -> pull-menu -
 
 After this go a page back, select launcher-combined and enable change icon size.
 
+### Screen stays off when receiving a call
+
+In some cases, proximity sensor seems to get stuck in closed state. This results in screen not switched on when you receive a phone call while your phone is on a table, for example. As a workaround, you can instruct SFOS to switch proximity sensor on only when it is needed. For that, add a file
+
+/etc/mce/60-proximity-sensor.conf with
+```
+/system/osso/dsm/proximity/on_demand=true
+```
+
+As a drawback, every time you switch on your phone screen, there will be a slight delay on powering it on. Right now, this setting is not enabled by default and it is up to the users to decide what is preferred.
+
+Corresponding issues, see for discussion and background:
+- https://github.com/sailfishos-sony-tama/main/issues/129
+- https://github.com/sailfishos-sony-tama/main/issues/47
+
 ### Extending storage
 
 It is possible to use system partitions that are not used in Sailfish for storage. This is for advanced users and
