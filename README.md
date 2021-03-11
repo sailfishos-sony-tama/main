@@ -35,6 +35,7 @@ The following devices are supported:
 ## Over-the-Air updates (OTA)
 
 OTA updates are supported. Currently supported OTA updates are to the following releases:
+- 4.0.1.48
 - 3.4.0.24
 - 3.3.0.16
 - 3.2.1.20
@@ -58,7 +59,7 @@ devel-su zypper ref
 devel-su zypper in jolla-configuration-DEVCODE
 
 # Replace with the release you are updating to
-ssu release 3.4.0.24
+ssu release 4.0.1.48
 
 ssu lr
 # Check the output that you have repos adaptation-community and adaptation-community-common
