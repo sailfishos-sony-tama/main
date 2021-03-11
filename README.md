@@ -91,6 +91,8 @@ Working hardware:
 
 * Display
 * Touch, multitouch
+* Calls
+* Cellular network
 * LED
 * Audio
 * Bluetooth
