@@ -136,6 +136,8 @@ lunch aosp_$DEVICE-user
 make -j$(nproc --all) systemimage vendorimage vbmetaimage
 ```
 
+NB! See below on tmp fix to mixer settings.
+
 
 # Setup SB2
 
@@ -161,7 +163,7 @@ rpm/dhd/helpers/build_packages.sh --configs
 
 # syspart
 
-After systemimage vendorimage have finished, in HABUILD_SDK
+After systemimage vendorimage have finished, in HOST
 ```Shell
 mkdir -p $ANDROID_ROOT-tmp
 sudo mkdir -p $ANDROID_ROOT-mnt-system
@@ -188,6 +190,10 @@ rm $ANDROID_ROOT-tmp/{system,vendor}.img.raw
 sudo rm -rf $ANDROID_ROOT-mnt-{system,vendor}
 rmdir $ANDROID_ROOT-tmp || true
 ```
+
+If mount fails, try to use `losetup` to setup loop device and mount
+from there.
+
 
 # droidmedia and miniaudiopolicyservice
 
@@ -372,9 +378,27 @@ SailfishOS/Mer packages are often updated, this README is not.
 
 If you are getting errors during the mic image build due to unsatisfied dependencies, try updating the RELEASE environment variable to the latest released version of SailfishOS.
 
+# Port notes
+
+## mixer_paths.xml
+
+Mixer settings are the same for all Tama devices and are obtained by reverting
+
+- apollo: https://github.com/sonyxperiadev/device-sony-apollo/commit/ee4982625e2720669eb3e513f9cb4f02618b8df9
+- akari: https://github.com/sonyxperiadev/device-sony-akari/commit/d12f2f4453fd296e33c60462ede4bed76ad8eb15
+- akatsuki: https://github.com/sonyxperiadev/device-sony-akatsuki/commit/1313e299cd5c60a54f274354866b2a6a2da8c241
+
+in the working tree. See issues
+
+- https://github.com/sailfishos-sony-tama/main/issues/125
+- https://github.com/sonyxperiadev/bug_tracker/issues/688
+
+Regenerate system and vendor when the better solution is available.
+
+
 # Updates
 
-NB! Revise taking into account hybris-hal and droidmedia separate builds. Belo, old text
+**NB! Below, old text:**
 
 To update between versions, you would need to update SDK. For that, remove currently installed components (`sdk-assistant list`
 will give the list) and use [update-sdk.sh](scripts/update-sdk.sh) for getting the new versions (modify the script accordingly).
@@ -460,17 +484,6 @@ issues. So, to enter recovery or boot:
 * To login into recovery, use `telnet 10.42.66.66`
 
 
-# Building on CI
-
-When using Gitlab CI, we can set the type of the build (devel or
-testing) through CI variables. Build images are pushed to
-https://thaodan.de/public/sailfishos/community/images/sony/tama .
-
-During SFOS update, variables REPO, TAMA_RELEASE, REPO_RELEASE have to
-be changed. Variable REPO is used during a build, it can be filled
-using values in other REPO_ vars.
-
-
 # Building images locally
 
 Starting with 3.4.0.24, images are built using [create-images](scripts/create-images.sh)
@@ -486,34 +499,3 @@ to public_repo). Also, adjust
 repository and user name in the script.
 
 
-# Update notes: 3.4.0.24
-
-* As upstream has new meta packages configuration, the configuration used by Tama is combination of 
-  the one developed for it and the official one. New PR was submitted, https://github.com/mer-hybris/droid-hal-configs/pull/203. 
-  For now, local branch from https://github.com/sailfishos-sony-tama/droid-hal-configs is used.
-  
-* Switching over to kernel following mer-hybris Sony kernel version. As that kernel is
-  updated, there is no reason to start merging changes from two sources (Sony and Mer), but
-  it is sufficient to follow Mer which is following Sony updates by itself.
-
-* We now use `generate_dhs_patches` instead of using sonys repo_update script.
-
-* Vendor repositories are set to p-mr1 to don't changes incompatible
-  with Android pie.
-
-# Update notes: 3.3.0.16
-
-* dhd (submodule of
-  https://github.com/sailfishos-sony-tama/droid-hal-sony-tama-pie) was
-  taken not from master but from `filesystem` branch to get access to
-  https://github.com/mer-hybris/droid-hal-device/commit/d75a605795895988a0543385ba4aca6bf50c0db7
-  . Without it, I was getting an error during kernel image
-  installation (cpio: open failed - File exists). Hopefully, changes
-  will be merged and we can switch back to master
-
-* https://github.com/sailfishos-sony-tama/droid-hal-configs is
-  composed to use meta packages. Thus, until
-  https://github.com/mer-hybris/droid-hal-configs/pull/175 is merged,
-  it has to be used instead of upstream. So, we currently use
-  sfos-3.3.0.16 branch as a submodule in
-  https://github.com/sailfishos-sony-tama/droid-config-sony-tama-pie.
