@@ -81,6 +81,18 @@ droid-src/apply-patches.sh --mb
 ./setup-sources.sh --mb
 ```
 
+
+There are some patches that fix AOSP issues specific for Tama. Those
+are distributed in this repository. To apply, clone this repository
+somewhere outside $ANDROID_ROOT and apply them. Below, it is assumed
+that this repository is available as `../main`:
+```
+cd $ANDROID_ROOT
+ln -s ../main/patches patches-aosp
+patches-aosp/apply-patches.sh --mb
+```
+
+
 # Build hybris-hal
 
 Start the build, in HOST:
@@ -124,6 +136,16 @@ repo init -u git://github.com/mer-hybris/android.git -b $HAVERSION -m tagged-man
 repo sync -jX --fetch-submodules -c
 ln -s rpm/patches .
 rpm/apply-patches.sh --mb
+```
+
+There are some patches that fix AOSP issues specific for Tama. Those
+are distributed in this repository. To apply, clone this repository
+somewhere outside $ANDROID_ROOT and apply them. Below, it is assumed
+that this repository is available as `../main`:
+```
+cd $ANDROID_ROOT
+ln -s ../main/patches patches-aosp
+patches-aosp/apply-patches.sh --mb
 ```
 
 Build images (reduce `-j` as it is heavy on RAM if needed)
@@ -382,7 +404,8 @@ If you are getting errors during the mic image build due to unsatisfied dependen
 
 ## mixer_paths.xml
 
-Mixer settings are the same for all Tama devices and are obtained by reverting
+Mixer settings are the same for all Tama devices and are obtained by
+reverting
 
 - apollo: https://github.com/sonyxperiadev/device-sony-apollo/commit/ee4982625e2720669eb3e513f9cb4f02618b8df9
 - akari: https://github.com/sonyxperiadev/device-sony-akari/commit/d12f2f4453fd296e33c60462ede4bed76ad8eb15
@@ -392,6 +415,9 @@ in the working tree. See issues
 
 - https://github.com/sailfishos-sony-tama/main/issues/125
 - https://github.com/sonyxperiadev/bug_tracker/issues/688
+
+Currently this reverting is done via patches distributed in this
+repository.
 
 Regenerate system and vendor when the better solution is available.
 
