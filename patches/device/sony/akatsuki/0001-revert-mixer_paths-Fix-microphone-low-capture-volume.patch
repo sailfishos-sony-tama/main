@@ -1,0 +1,110 @@
+From 62ff512ff4c663e8916a310a601e21f4e967bdb1 Mon Sep 17 00:00:00 2001
+From: Rinigus <rinigus.git@gmail.com>
+Date: Thu, 22 Apr 2021 22:09:32 +0300
+Subject: [PATCH] revert "mixer_paths: Fix microphone low capture volume"
+
+---
+ rootdir/vendor/etc/mixer_paths.xml | 30 +++++++++++++++---------------
+ 1 file changed, 15 insertions(+), 15 deletions(-)
+
+diff --git a/rootdir/vendor/etc/mixer_paths.xml b/rootdir/vendor/etc/mixer_paths.xml
+index dce2346..0ea5df2 100644
+--- a/rootdir/vendor/etc/mixer_paths.xml
++++ b/rootdir/vendor/etc/mixer_paths.xml
+@@ -344,8 +344,8 @@
+     <ctl name="DEC4 Volume" value="84" />
+     <ctl name="DEC5 Volume" value="84" />
+     <ctl name="DEC6 Volume" value="84" />
+-    <ctl name="DEC7 Volume" value="94" />
+-    <ctl name="DEC8 Volume" value="94" />
++    <ctl name="DEC7 Volume" value="84" />
++    <ctl name="DEC8 Volume" value="84" />
+ 
+     <!-- Compander controls -->
+     <ctl name="COMP1 Switch" value="1" />
+@@ -1607,7 +1607,7 @@
+     </path>
+ 
+     <path name="voicemmode1-call headphones">
+-        <path name="voicemmode1-call" />
++         <path name="voicemmode1-call" />
+     </path>
+ 
+     <path name="voicemmode1-call bt-sco">
+@@ -1797,12 +1797,12 @@
+ 
+     <!-- Gain offset target for dmic1 unit calibration -->
+     <path name="dmic1-adj-gain">
+-        <ctl name="DEC7 Volume" value="114" />
++        <ctl name="DEC7 Volume" value="94" />
+     </path>
+ 
+     <!-- Gain offset target for dmic2 unit calibration -->
+     <path name="dmic2-adj-gain">
+-        <ctl name="DEC8 Volume" value="104" />
++        <ctl name="DEC8 Volume" value="94" />
+     </path>
+ 
+     <!-- For Tavil, DMIC numbered from 0 to 5 -->
+@@ -2049,8 +2049,8 @@
+ 
+     <path name="stereo-mic">
+         <path name="stereo-mic-common" />
+-        <ctl name="DEC8 Volume" value="96" />
+-        <ctl name="DEC7 Volume" value="100" />
++        <ctl name="DEC8 Volume" value="86" />
++        <ctl name="DEC7 Volume" value="90" />
+     </path>
+ 
+     <path name="speaker-mono-mic-common">
+@@ -2060,7 +2060,7 @@
+ 
+     <path name="speaker-mono-mic">
+         <path name="speaker-mono-mic-common" />
+-        <ctl name="DEC7 Volume" value="102" />
++        <ctl name="DEC7 Volume" value="92" />
+     </path>
+ 
+     <path name="speaker-protected">
+@@ -2222,8 +2222,8 @@
+ 
+     <path name="headset-mic">
+         <path name="amic2" />
+-        <ctl name="DEC0 Volume" value="110" />
+-        <ctl name="ADC2 Volume" value="19" />
++        <ctl name="DEC0 Volume" value="84" />
++        <ctl name="ADC2 Volume" value="11" />
+     </path>
+ 
+     <path name="headset-mic-asr">
+@@ -2421,14 +2421,14 @@
+ 
+     <path name="voice-rec-mic">
+         <path name="camcorder-mic-common" />
+-        <ctl name="DEC8 Volume" value="96" />
+-        <ctl name="DEC7 Volume" value="100" />
++        <ctl name="DEC8 Volume" value="86" />
++        <ctl name="DEC7 Volume" value="90" />
+     </path>
+ 
+     <path name="camcorder-mic">
+         <path name="camcorder-mic-common" />
+-        <ctl name="DEC8 Volume" value="96" />
+-        <ctl name="DEC7 Volume" value="100" />
++        <ctl name="DEC8 Volume" value="86" />
++        <ctl name="DEC7 Volume" value="90" />
+     </path>
+ 
+     <path name="bt-sco-headset">
+@@ -2495,7 +2495,7 @@
+         <ctl name="ADC MUX7" value="AMIC" />
+         <ctl name="AMIC MUX7" value="ADC4" />
+         <!-- 67 % of 124 (range 0 - 124) Register: 0x221 -->
+-        <ctl name="DEC7 Volume" value="93" />
++        <ctl name="DEC7 Volume" value="83" />
+         <!-- 47 % of 19 (rounded) register: 0x169 -->
+         <ctl name="ADC4 Volume" value="6" />
+         <!-- SLIM TX8 records for right channel -->
+-- 
+2.26.3
+
