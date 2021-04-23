@@ -158,8 +158,6 @@ lunch aosp_$DEVICE-user
 make -j$(nproc --all) systemimage vendorimage vbmetaimage
 ```
 
-NB! See below on tmp fix to mixer settings.
-
 
 # Setup SB2
 
