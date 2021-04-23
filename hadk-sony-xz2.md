@@ -128,7 +128,7 @@ HOST $
 source ~/.hadk.env
 
 # on my system, there is additional config file that defines path with
-# libncurses.so.5 and few other expected bits absent on my PC
+# libncurses.so.5 and few other expected bits absent otherwise
 source ~/.hadk.android
 
 sudo mkdir -p $ANDROID_ROOT-syspart
@@ -197,11 +197,17 @@ sudo mount $ANDROID_ROOT-tmp/system.img.raw $ANDROID_ROOT-mnt-system
 sudo mkdir -p $ANDROID_ROOT-mnt-vendor/vendor
 simg2img $ANDROID_ROOT-syspart/out/target/product/$HABUILD_DEVICE/vendor.img $ANDROID_ROOT-tmp/vendor.img.raw
 sudo mount $ANDROID_ROOT-tmp/vendor.img.raw $ANDROID_ROOT-mnt-vendor/vendor
+# if fails:
+# sudo losetup /dev/loop1 $ANDROID_ROOT-tmp/vendor.img.raw
+# sudo mount /dev/loop1 $ANDROID_ROOT-mnt-vendor/vendor
 
+# if cloned already, use
+# cd $ANDROID_ROOT/hybris/mw/droid-system-sony-pie-template
 cd $ANDROID_ROOT/hybris/mw
 D=droid-system-$VENDOR-pie-template
 git clone -b hybris-10 --recursive https://github.com/sailfishos-sony-tama/$D
 cd $D
+
 sudo droid-system-device/helpers/copy_tree.sh $ANDROID_ROOT-mnt-system/system $ANDROID_ROOT-mnt-vendor/vendor rpm/droid-system-$HABUILD_DEVICE.spec
 # Note from official instructions, not sure if valid:
 #    Please do not commit the binaries nor push them to a public repo,
@@ -210,6 +216,11 @@ sudo droid-system-device/helpers/copy_tree.sh $ANDROID_ROOT-mnt-system/system $A
 sudo chown -R $USER .
 sudo umount $ANDROID_ROOT-mnt-vendor/vendor
 sudo umount $ANDROID_ROOT-mnt-system
+
+# if losetup was used above:
+# sudo losetup -d /dev/loop1
+# sudo losetup -a
+
 rm $ANDROID_ROOT-tmp/{system,vendor}.img.raw
 sudo rm -rf $ANDROID_ROOT-mnt-{system,vendor}
 rmdir $ANDROID_ROOT-tmp || true
