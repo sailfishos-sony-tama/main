@@ -322,6 +322,8 @@ rm RPMS/SailfishOS-4.0.1.48-aarch64/droid-hal-*-img-{boot,recovery}*
 ../tbuilder/tbuilder .
 ```
 
+when ready, proceed to building Root filesystem below.
+
 ## Building manually
 
 ### Packages
