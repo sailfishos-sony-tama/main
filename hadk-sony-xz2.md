@@ -273,7 +273,52 @@ hybris/mw/miniaudiopolicy/rpm/copy-hal.sh
 rpm/dhd/helpers/build_packages.sh --build=hybris/mw/miniaudiopolicy --do-not-install
 ```
 
+# System/Vendor and DTBO
+
+In PLATFORM_SDK
+```Shell
+
+git clone -b hybris-10 --recursive https://github.com/sailfishos-sony-tama/droid-hal-img-dtbo-sony-$FAMILY-pie hybris/mw/droid-hal-img-dtbo-sony-$FAMILY-pie
+cp out/target/product/$HABUILD_DEVICE/dtbo.img hybris/mw/droid-hal-img-dtbo-sony-tama-pie/dtbo-$HABUILD_DEVICE.img
+rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos-sony-tama/droid-hal-img-dtbo-sony-$FAMILY-pie --do-not-install --spec=rpm/droid-hal-$HABUILD_DEVICE-img-dtbo.spec
+
+rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos-sony-tama/droid-system-sony-pie-template --do-not-install --spec=rpm/droid-system-$HABUILD_DEVICE.spec --spec=rpm/droid-system-$HABUILD_DEVICE-$DEVICE.spec
+```
+
 # Build packages
+
+Packages can be built using TBuilder or manually.
+
+## Building using TBuilder
+
+Get TBuilder and it's project repository:
+
+In HOST
+```Shell
+cd ~
+git clone https://github.com/rinigus/tbuilder
+git clone --recursive https://github.com/sailfishos-sony-tama/tbuilder-project
+```
+
+In PLATFORM_SDK
+```Shell
+cd ~/tbuilder-project
+sdk-assistant list
+
+# choose target from the list above, such as SailfishOS-4.0.1.48-aarch64
+# and give as argument to ./update-droid-hal.sh
+./update-droid-hal.sh SailfishOS-4.0.1.48-aarch64
+```
+
+Run build in PLATFORM_SDK
+```Shell
+cd ~/tbuilder-project
+../tbuilder/tbuilder .
+```
+
+## Building manually
+
+### Packages
 
 In PLATFORM_SDK
 
@@ -295,7 +340,7 @@ sb2 -t $VENDOR-$DEVICE-$PORT_ARCH -R -msdk-install zypper in bluez5
 and choose to change the provider.
 
 
-# Fingerprint support
+### Fingerprint support
 
 Support is based on https://github.com/piggz/sailfish-fpd-community
 
@@ -318,7 +363,7 @@ rpm/dhd/helpers/build_packages.sh --build=hybris/mw/sailfish-fpd-community --spe
 rpm/dhd/helpers/build_packages.sh --mw=https://github.com/piggz/sailfish-fpd-community-test.git --do-not-install
 ```
 
-# Other Tama specific packages
+### Other Tama specific packages
 
 In HABUILD_SDK
 
@@ -345,7 +390,7 @@ rpm/dhd/helpers/build_packages.sh --mw=https://github.com/mer-hybris/dummy_netd.
 ```
 
 
-# Boot packages
+### Boot packages
 
 In PLATFORM_SDK
 
@@ -356,12 +401,6 @@ rpm/dhd/helpers/build_bootimg_packages.sh
 
 git clone -b hybris-10 --recursive https://github.com/sailfishos-sony-tama/droid-hal-img-boot-sony-$FAMILY-pie hybris/mw/droid-hal-img-boot-sony-$FAMILY-pie
 rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos-sony-tama/droid-hal-img-boot-sony-$FAMILY-pie --do-not-install --spec=rpm/droid-hal-$HABUILD_DEVICE-img-boot.spec
-
-git clone -b hybris-10 --recursive https://github.com/sailfishos-sony-tama/droid-hal-img-dtbo-sony-$FAMILY-pie hybris/mw/droid-hal-img-dtbo-sony-$FAMILY-pie
-cp out/target/product/$HABUILD_DEVICE/dtbo.img hybris/mw/droid-hal-img-dtbo-sony-tama-pie/dtbo-$HABUILD_DEVICE.img
-rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos-sony-tama/droid-hal-img-dtbo-sony-$FAMILY-pie --do-not-install --spec=rpm/droid-hal-$HABUILD_DEVICE-img-dtbo.spec
-
-rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos-sony-tama/droid-system-sony-pie-template --do-not-install --spec=rpm/droid-system-$HABUILD_DEVICE.spec --spec=rpm/droid-system-$HABUILD_DEVICE-$DEVICE.spec
 
 git clone --recursive https://github.com/sailfishos-sony-tama/droid-hal-version-sony-$FAMILY hybris/droid-hal-version-$DEVICE
 ```
