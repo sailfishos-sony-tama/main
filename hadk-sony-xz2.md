@@ -143,7 +143,7 @@ are distributed in this repository. To apply, clone this repository
 somewhere outside $ANDROID_ROOT and apply them. Below, it is assumed
 that this repository is available as `../main`:
 ```
-cd $ANDROID_ROOT
+cd $ANDROID_ROOT-syspart
 ln -s ../main/patches patches-aosp
 patches-aosp/apply-patches.sh --mb
 ```
