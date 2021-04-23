@@ -313,6 +313,12 @@ sdk-assistant list
 Run build in PLATFORM_SDK
 ```Shell
 cd ~/tbuilder-project
+# when updating, remove old boot and recovery images as otherwise
+# kernel module package will be replaced and builds of new boot image
+# package will fail
+rm RPMS/SailfishOS-4.0.1.48-aarch64/droid-hal-*-img-{boot,recovery}*
+
+# start build
 ../tbuilder/tbuilder .
 ```
 
@@ -406,6 +412,9 @@ git clone --recursive https://github.com/sailfishos-sony-tama/droid-hal-version-
 ```
 
 # Root filesystem
+
+After automatic or manual building of packages, proceed with
+generation of root filesystem.
 
 In PLATFORM_SDK, start as in Chapter 8
 
