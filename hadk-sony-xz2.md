@@ -61,8 +61,8 @@ In the HOST
 source ~/.hadk.env
 cd $ANDROID_ROOT
 repo init -u git://github.com/mer-hybris/android.git -b $HAVERSION -m tagged-localbuild.xml
-# Adjust X to bandwidth capabilities
-repo sync -jX --fetch-submodules
+# Adjust -j8 to bandwidth capabilities
+repo sync -j8 --fetch-submodules
 ```
 
 
@@ -132,8 +132,8 @@ sudo chown -R $USER $ANDROID_ROOT-syspart
 cd $ANDROID_ROOT-syspart
 # if you plan to contribute to syspart (/system partition), remove "--depth=1" and "-c" flags below
 repo init -u git://github.com/mer-hybris/android.git -b $HAVERSION -m tagged-manifest.xml --depth=1
-# Adjust X to bandwidth capabilities
-repo sync -jX --fetch-submodules -c
+# Adjust -j8 to bandwidth capabilities
+repo sync -j8 --fetch-submodules -c
 ln -s rpm/patches .
 rpm/apply-patches.sh --mb
 ```
