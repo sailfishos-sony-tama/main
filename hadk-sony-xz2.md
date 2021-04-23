@@ -437,8 +437,6 @@ Regenerate system and vendor when the better solution is available.
 
 # Updates
 
-**NB! Below, old text:**
-
 To update between versions, you would need to update SDK. For that, remove currently installed components (`sdk-assistant list`
 will give the list) and use [update-sdk.sh](scripts/update-sdk.sh) for getting the new versions (modify the script accordingly).
 
@@ -451,43 +449,29 @@ Make sure that when you run `mic` command, it will end up without errors. Otherw
 
 # Kernel or hybris HAL update
 
-While we are on kernel 4.9, we follow kernel updates by Mer Hybris mainly. Kernel 4.9 
+While we are on kernel 4.14, we follow kernel updates by Mer Hybris mainly. Kernel 4.14 
 is in Sony branch
-[LE.UM.2.3.2.r1.4](https://github.com/sonyxperiadev/kernel/tree/aosp/LE.UM.2.3.2.r1.4)
+[LA.UM.7.1.r1](https://github.com/sonyxperiadev/kernel/tree/aosp/LA.UM.7.1.r1)
 and Mer Hybris branch
-[hybris-sony-aosp-9.0.0_r37_20190620](https://github.com/mer-hybris/android_kernel_sony_msm/tree/hybris-sony-aosp-9.0.0_r37_20190620). To
+[hybris-sony-aosp/LA.UM.7.1.r1](https://github.com/mer-hybris/android_kernel_sony_msm/tree/hybris-sony-aosp/LA.UM.7.1.r1). To
 compare our current kernel with others, use the links below:
 
-* Commits missing from [Sony](https://github.com/sailfishos-sony-tama/android_kernel_sony_msm/compare/hybris-9.0-4.9...sonyxperiadev:aosp/LE.UM.2.3.2.r1.4)
-* Commits missing from [Mer Hybris](https://github.com/sailfishos-sony-tama/android_kernel_sony_msm/compare/hybris-9.0-4.9...mer-hybris:hybris-sony-aosp-9.0.0_r37_20190620)
-* Extra commits that we have when compared to [Sony](https://github.com/sonyxperiadev/kernel/compare/aosp/LE.UM.2.3.2.r1.4...sailfishos-sony-tama:hybris-9.0-4.9)
-* Extra commits that we have when compared to [Mer Hybris](https://github.com/mer-hybris/android_kernel_sony_msm/compare/hybris-sony-aosp-9.0.0_r37_20190620...sailfishos-sony-tama:hybris-9.0-4.9)
+* Commits missing from [Sony](https://github.com/sailfishos-sony-tama/android_kernel_sony_msm/compare/hybris-10.0-4.14...sonyxperiadev:aosp/LA.UM.7.1.r1)
+* Commits missing from [Mer Hybris](https://github.com/sailfishos-sony-tama/android_kernel_sony_msm/compare/hybris-10.0-4.14...mer-hybris:hybris-sony-aosp/LA.UM.7.1.r1)
+* Extra commits that we have when compared to [Sony](https://github.com/sonyxperiadev/kernel/compare/aosp/LA.UM.7.1.r1...sailfishos-sony-tama:hybris-10.0-4.14)
+* Extra commits that we have when compared to [Mer Hybris](https://github.com/mer-hybris/android_kernel_sony_msm/compare/hybris-sony-aosp/LA.UM.7.1.r1...sailfishos-sony-tama:hybris-10.0-4.14)
 
-For the updates, in HABUILD_SDK
-```Shell
-cd $ANDROID_ROOT
-source build/envsetup.sh
-export USE_CCACHE=1
-lunch aosp_$DEVICE-user
-make fec append2simg && make -j$(nproc --all) hybris-hal && make verity_key mkdtimg
-out/host/linux-x86/bin/mkdtimg create kernel/sony/msm-4.9/common-kernel/dtbo-$HABUILD_DEVICE.img `find out/target/product/$HABUILD_DEVICE  -name "*.dtbo"`
-cp kernel/sony/msm-4.9/common-kernel/dtbo-$HABUILD_DEVICE.img out/target/product/$HABUILD_DEVICE/dtbo.img
-avbtool add_hash_footer --image out/target/product/$HABUILD_DEVICE/dtbo.img --partition_size 8388608 --partition_name dtbo
-```
+For the updates, in HABUILD_SDK, see "Build hybris-hal" and "Build HAL
+and config packages" above. Note that config packages are built
+separately using TBuilder.
 
-In PLATFORM_SDK,
-```Shell
-cd $ANDROID_ROOT
-rpm/dhd/helpers/build_packages.sh --droid-hal
-sb2 -t $VENDOR-$DEVICE-$PORT_ARCH -m sdk-install -R zypper in --force-resolution droid-hal-$HABUILD_DEVICE-kernel-modules
-cp out/target/product/$HABUILD_DEVICE/dtbo.img hybris/mw/droid-hal-img-dtbo-sony-tama-pie/dtbo-$HABUILD_DEVICE.img
-rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos-sony-tama/droid-hal-img-dtbo-sony-$FAMILY-pie --do-not-install --spec=rpm/droid-hal-$HABUILD_DEVICE-img-dtbo.spec
-```
+This will create packages in `droid-hal-DEVICE` and
+`droid-hal-img-dtbo-sony-tama-pie` at `droid-local-repo`. Those can
+copied to TBuidler project using update script in the project
+repository.
 
-This will create packages in `droid-hal-DEVICE` and `droid-hal-img-dtbo-sony-tama-pie` at `droid-local-repo`.
-Copy these to `droid-hal-tama` of OBS.
-
-This has to be repeated for all representative devices: h8216, h8314, and h8416. When ready, push changes to OBS.
+This has to be repeated for all representative devices: h8216, h8314,
+and h8416.
 
 
 # Fastboot
