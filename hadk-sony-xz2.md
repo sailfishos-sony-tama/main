@@ -127,6 +127,10 @@ HOST $
 
 source ~/.hadk.env
 
+# on my system, there is additional config file that defines path with
+# libncurses.so.5 and few other expected bits absent on my PC
+source ~/.hadk.android
+
 sudo mkdir -p $ANDROID_ROOT-syspart
 sudo chown -R $USER $ANDROID_ROOT-syspart
 cd $ANDROID_ROOT-syspart
