@@ -277,7 +277,9 @@ In PLATFORM_SDK
 ```Shell
 
 git clone -b hybris-10 --recursive https://github.com/sailfishos-sony-tama/droid-hal-img-dtbo-sony-$FAMILY-pie hybris/mw/droid-hal-img-dtbo-sony-$FAMILY-pie
+
 cp out/target/product/$HABUILD_DEVICE/dtbo.img hybris/mw/droid-hal-img-dtbo-sony-tama-pie/dtbo-$HABUILD_DEVICE.img
+sb2 -t $VENDOR-$DEVICE-$PORT_ARCH -m sdk-install -R zypper in --force-resolution droid-hal-$HABUILD_DEVICE-kernel-modules
 rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos-sony-tama/droid-hal-img-dtbo-sony-$FAMILY-pie --do-not-install --spec=rpm/droid-hal-$HABUILD_DEVICE-img-dtbo.spec
 
 rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos-sony-tama/droid-system-sony-pie-template --do-not-install --spec=rpm/droid-system-$HABUILD_DEVICE.spec --spec=rpm/droid-system-$HABUILD_DEVICE-$DEVICE.spec
@@ -413,6 +415,7 @@ In PLATFORM_SDK
 cd $ANDROID_ROOT
 
 rpm/dhd/helpers/build_bootimg_packages.sh
+sb2 -t $VENDOR-$DEVICE-$PORT_ARCH -m sdk-install -R zypper in --force-resolution droid-hal-$HABUILD_DEVICE-kernel-modules
 
 git clone -b hybris-10 --recursive https://github.com/sailfishos-sony-tama/droid-hal-img-boot-sony-$FAMILY-pie hybris/mw/droid-hal-img-boot-sony-$FAMILY-pie
 rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos-sony-tama/droid-hal-img-boot-sony-$FAMILY-pie --do-not-install --spec=rpm/droid-hal-$HABUILD_DEVICE-img-boot.spec
