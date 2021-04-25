@@ -310,6 +310,16 @@ sdk-assistant list
 ./update-droid-hal.sh SailfishOS-4.0.1.48-aarch64
 ```
 
+As there is a bug with installation of `cpio` and `m4` (reported at
+[forum](https://forum.sailfishos.org/t/cpio-fails-to-install-in-sdk/5934)),
+those have to be installed manually. During install, choose to resolve
+and, when the error is reported, ignore it. In PLATFORM_SDK
+
+```Shell
+sb2 -t SailfishOS-4.0.1.48-aarch64 -R zypper in cpio
+sb2 -t SailfishOS-4.0.1.48-aarch64 -R zypper in libtool
+```
+
 Run build in PLATFORM_SDK
 ```Shell
 cd ~/tbuilder-project
