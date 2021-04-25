@@ -168,7 +168,7 @@ make -j$(nproc --all) systemimage vendorimage vbmetaimage
 Go through chapter 6 of the HADK document.
 
 
-# Build HAL and config packages
+# Build HAL packages
 
 In PLATFORM_SDK
 
@@ -181,8 +181,6 @@ sudo zypper in kmod pigz atruncate android-tools
 sdk-foreach-su -ly ssu re
 
 rpm/dhd/helpers/build_packages.sh --droid-hal
-git clone --recursive -b hybris-10 https://github.com/sailfishos-sony-tama/droid-config-sony-$FAMILY-pie hybris/droid-configs 
-rpm/dhd/helpers/build_packages.sh --configs
 ```
 
 # syspart
@@ -325,6 +323,15 @@ rm RPMS/SailfishOS-4.0.1.48-aarch64/droid-hal-*-img-{boot,recovery}*
 when ready, proceed to building Root filesystem below.
 
 ## Building manually
+
+### Configs
+
+```Shell
+cd $ANDROID_ROOT
+git clone --recursive -b hybris-10 https://github.com/sailfishos-sony-tama/droid-config-sony-$FAMILY-pie hybris/droid-configs 
+rpm/dhd/helpers/build_packages.sh --configs
+```
+
 
 ### Packages
 
