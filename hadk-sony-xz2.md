@@ -271,7 +271,31 @@ hybris/mw/miniaudiopolicy/rpm/copy-hal.sh
 rpm/dhd/helpers/build_packages.sh --build=hybris/mw/miniaudiopolicy --do-not-install
 ```
 
-# System/Vendor
+### Fingerprint support
+
+Support is based on https://github.com/piggz/sailfish-fpd-community
+
+In HABUILD_SDK
+
+```Shell
+HABUILD_SDK $
+git clone https://github.com/piggz/sailfish-fpd-community.git hybris/mw/sailfish-fpd-community
+source build/envsetup.sh
+export USE_CCACHE=1
+lunch aosp_$DEVICE-user (or appropriate name)
+make libbiometry_fp_api
+hybris/mw/sailfish-fpd-community/rpm/copy-hal.sh
+```
+
+In PLATFORM_SDK
+```Shell
+cd $ANDROID_ROOT
+rpm/dhd/helpers/build_packages.sh --build=hybris/mw/sailfish-fpd-community --spec=rpm/droid-biometry-fp.spec --do-not-install
+rpm/dhd/helpers/build_packages.sh --mw=https://github.com/piggz/sailfish-fpd-community-test.git --do-not-install
+```
+
+
+# System and Vendor
 
 In PLATFORM_SDK
 ```Shell
@@ -346,29 +370,6 @@ sb2 -t $VENDOR-$DEVICE-$PORT_ARCH -R -msdk-install zypper in bluez5
 ```
 and choose to change the provider.
 
-
-### Fingerprint support
-
-Support is based on https://github.com/piggz/sailfish-fpd-community
-
-In HABUILD_SDK
-
-```Shell
-HABUILD_SDK $
-git clone https://github.com/piggz/sailfish-fpd-community.git hybris/mw/sailfish-fpd-community
-source build/envsetup.sh
-export USE_CCACHE=1
-lunch aosp_$DEVICE-user (or appropriate name)
-make libbiometry_fp_api_32
-hybris/mw/sailfish-fpd-community/rpm/copy-hal.sh
-```
-
-In PLATFORM_SDK
-```Shell
-cd $ANDROID_ROOT
-rpm/dhd/helpers/build_packages.sh --build=hybris/mw/sailfish-fpd-community --spec=rpm/droid-biometry-fp.spec --spec=rpm/sailfish-fpd-community.spec --do-not-install
-rpm/dhd/helpers/build_packages.sh --mw=https://github.com/piggz/sailfish-fpd-community-test.git --do-not-install
-```
 
 ### Other Tama specific packages
 
