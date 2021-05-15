@@ -271,7 +271,7 @@ hybris/mw/miniaudiopolicy/rpm/copy-hal.sh
 rpm/dhd/helpers/build_packages.sh --build=hybris/mw/miniaudiopolicy --do-not-install
 ```
 
-## Fingerprint support
+# Fingerprint support
 
 Support is based on https://github.com/piggz/sailfish-fpd-community
 
