@@ -38,10 +38,9 @@ Files that will be needed for flashing:
 
 ### Software binaries
 
-For flashing, you will need software binaries (`SW_binaries_for_Xperia_Android_9.0_2.3.2_v9_tama.zip`). Get them from 
-https://developer.sony.com/file/download/software-binaries-for-aosp-pie-android-9-0-kernel-4-9-tama . Unzip the file, 
-it would contain `SW_binaries_for_Xperia_Android_9.0_2.3.2_v9_tama.img`, with sha256sum of image file equal to
-`43477947fa88a70030692684f36df033294cc6dcece9c610f2112c14099d9997`.
+For flashing, you will need software binaries (`SW_binaries_for_Xperia_Android_10.0.7.1_r1_v12a_tama.zip`). Get them from 
+https://developer.sony.com/file/download/software-binaries-for-aosp-android-10-0-kernel-4-14-tama . Unzip the file, 
+it would contain `SW_binaries_for_Xperia_Android_9.0_2.3.2_v9_tama.img`.
 
 ### vbmeta image
 

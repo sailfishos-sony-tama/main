@@ -1,7 +1,5 @@
 # Sailfish OS port to Sony Xperia Tama devices, AOSP 10 based
 
-**Work in progress, nothing works. Text below is not up to date.**
-
 Please read this document fully before planning or starting to use this port.
 
 This is a community port, meaning that there is no official support and extensions included in the paid version:
@@ -92,17 +90,25 @@ Working hardware:
 
 * Display
 * Touch, multitouch
+* Calls
+* Cellular network
 * LED
 * Audio
 * Bluetooth
 * GPS
 * WLAN (connect and hotspot)
 * Camera (as in AOSP10)
+* GSM (SMS, voice, data)
 * Keys (Vol +/-, camera, power)
+* Power management
+* USB Charging, Network, MTP
+* Wireless Charging
 * Fingerprint
 * Sensors: light, proximity, gyroscope, acceloremeter
+* Sensors: magnetometer, compass, step counter, pickup
 * Vibrator
 * SD card
+* NFC
 
 ## Flashing
 
@@ -125,42 +131,14 @@ during installation. For example, for English, install
 ### Fingerprint support
 
 Fingerprint is supported through community effort
-[sailfish-fpd-community](https://github.com/piggz/sailfish-fpd-community). For
-installation, run in terminal
-
-```
-devel-su zypper ref
-devel-su zypper up
-devel-su zypper in sailfish-fpd-community-test sailfish-fpd-community sailfish-devicelock-fpd
-```
-
-The last command will ask for your help on how to proceed:
-```
-Problem: sailfish-devicelock-fpd-1.0.8-1.5.6.jolla.armv7hl conflicts with jolla-devicelock-plugin-encsfa provided by jolla-devicelock-plugin-encsfa-0.2.37-1.9.6.jolla.armv7hl
- Solution 1: Following actions will be done:
-  deinstallation of jolla-devicelock-plugin-encsfa-0.2.37-1.9.6.jolla.armv7hl
-  deinstallation of jolla-devicelock-daemon-encsfa-0.2.37-1.9.6.jolla.armv7hl
- Solution 2: do not install sailfish-devicelock-fpd-1.0.8-1.5.6.jolla.armv7hl
-
-Choose from above solutions by number or cancel [1/2/c] (c):
-```
-
-Choose to uninstall `jolla-devicelock-plugin-encsfa` as it is replaced
-by `sailfish-devicelock-fpd`.
-
-On XZ3, please also install
-```
-devel-su zypper in droid-fake-crypt
-```
-This is needed on XZ3 only, do not install on XZ2 or XZ2c.
-
-After installation of the fingerprint packages, reboot.
+[sailfish-fpd-community](https://github.com/piggz/sailfish-fpd-community). It is
+incorporated into the images.
 
 Fingerprints can be used for authentication if you enable in Settings,
 under "Device lock", use of security code.
 
 When adding fingerprints, it is recommended to use separate
-application installed above: "Fingerprints". If you add fingerprints
+application: "Fingerprints". If you add fingerprints
 under Sailfish Settings, it may lead to device reboot
 ([issue](https://github.com/piggz/sailfish-fpd-community/issues/10)). In
 the dedicated application, such issue was not encountered.
