@@ -271,7 +271,7 @@ hybris/mw/miniaudiopolicy/rpm/copy-hal.sh
 rpm/dhd/helpers/build_packages.sh --build=hybris/mw/miniaudiopolicy --do-not-install
 ```
 
-### Fingerprint support
+## Fingerprint support
 
 Support is based on https://github.com/piggz/sailfish-fpd-community
 
@@ -302,7 +302,7 @@ In PLATFORM_SDK
 rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos-sony-tama/droid-system-sony-pie-template --do-not-install --spec=rpm/droid-system-$HABUILD_DEVICE.spec --spec=rpm/droid-system-$HABUILD_DEVICE-$DEVICE.spec
 ```
 
-# Build packages
+# Build packages and root system
 
 Packages can be built using TBuilder or manually.
 
@@ -336,7 +336,31 @@ When target is ready, run build in PLATFORM_SDK
 ../tbuilder/tbuilder .
 ```
 
-when ready, proceed to building Root filesystem below.
+when ready, publish the packages using `publish` script in TBuilder's project
+repository by running in HOST
+```Shell
+./publish.sh
+```
+
+See script for requirements (have to have min.io mc available as
+minmc as well as configured bucket).
+
+
+## Root system
+
+When using TBuilder and publishing the packages online, it is easy to
+create root filesystem using a script from this (Main) repository. In
+the folder with this HADK, run in your HOST
+```Shell
+scripts/create-images.sh --release 4.1.0.23 --device h8324
+```
+
+See [Building images
+locally](https://github.com/sailfishos-sony-tama/main/blob/hybris-10/hadk-sony-xz2.md#building-images-locally)
+for more info and how to build images for all supported devices.
+
+
+
 
 ## Building manually
 
@@ -344,7 +368,7 @@ when ready, proceed to building Root filesystem below.
 
 ```Shell
 cd $ANDROID_ROOT
-git clone --recursive -b hybris-10 https://github.com/sailfishos-sony-tama/droid-config-sony-$FAMILY-pie hybris/droid-configs 
+git clone --recursive -b hybris-10 https://github.com/sailfishos-sony-tama/droid-config-sony-$FAMILY-pie hybris/droid-configs
 rpm/dhd/helpers/build_packages.sh --configs
 ```
 
@@ -418,12 +442,7 @@ rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos-sony-tama/d
 git clone --recursive https://github.com/sailfishos-sony-tama/droid-hal-version-sony-$FAMILY hybris/droid-hal-version-$DEVICE
 ```
 
-# Root filesystem
-
-After automatic or manual building of packages, proceed with
-generation of root filesystem.
-
-In PLATFORM_SDK, start as in Chapter 8
+Prepare config and version packages:
 
 ```Shell
 cd $ANDROID_ROOT
@@ -437,6 +456,14 @@ rpm/dhd/helpers/build_packages.sh -b hybris/droid-configs --do-not-install --spe
 
 rpm/dhd/helpers/build_packages.sh --version
 ```
+
+
+### Root filesystem
+
+After manual building of packages, proceed with generation of root
+filesystem.
+
+In PLATFORM_SDK, start as in Chapter 8
 
 KS has to be pulled from corresponding RPM:
 ```
@@ -500,11 +527,11 @@ If whole SDK is updated, don't forget to install the missing packages:
 sudo zypper in kmod pigz atruncate android-tools
 ```
 
-Make sure that when you run `mic` command, it will end up without errors. Otherwise, LVM 
+Make sure that when you run `mic` command, it will end up without errors. Otherwise, LVM
 
 # Kernel or hybris HAL update
 
-While we are on kernel 4.14, we follow kernel updates by Mer Hybris mainly. Kernel 4.14 
+While we are on kernel 4.14, we follow kernel updates by Mer Hybris mainly. Kernel 4.14
 is in Sony branch
 [LA.UM.7.1.r1](https://github.com/sonyxperiadev/kernel/tree/aosp/LA.UM.7.1.r1)
 and Mer Hybris branch
@@ -566,8 +593,8 @@ issues. So, to enter recovery or boot:
 
 Starting with 3.4.0.24, images are built using [create-images](scripts/create-images.sh)
 script. It requires device-specific `.hadk.pre-DEVNAME` and generic `.hadk.post` environment
-initialization files. To generate images for all devices, run `create-images.sh` after 
-adjusting RELEASE variable in the script. Images will be generated under 
+initialization files. To generate images for all devices, run `create-images.sh` after
+adjusting RELEASE variable in the script. Images will be generated under
 `$ANDROID_ROOT/releases/$RELEASE`.
 
 Images can be uploaded using [release-image-uploader](scripts/release-image-uploader.sh)
@@ -575,5 +602,3 @@ script. You would need to have [github-release](https://github.com/github-releas
 installed and security token enabled (see instructions at github-release, security token needs access
 to public_repo). Also, adjust
 repository and user name in the script.
-
-
