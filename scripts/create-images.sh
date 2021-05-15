@@ -3,7 +3,6 @@
 set -e
 
 # defaults
-VERSION=testing
 DEVICES="h8216 h8266 h8314 h8324 h8416 h9436"
 ISMIC="no"
 RELEASE=""
@@ -16,11 +15,6 @@ while :; do
 
 	--release)
 	    RELEASE=$2
-	    shift
-	    ;;
-
-	--version)
-	    VERSION=$2
 	    shift
 	    ;;
 
@@ -41,20 +35,8 @@ source ~/.hadk.env
 
 # check if all is specified
 [ -z "$RELEASE" ] && (echo "Release has to be specified with --release option" && exit -1)
-    
-case $VERSION in
-    testing)
-	URL=http://repo.merproject.org/obs/nemo:/testing:/hw:/sony:/tama/sailfishos_$RELEASE/$PORT_ARCH/
-	;;
-    devel)
-	URL=http://repo.merproject.org/obs/nemo:/devel:/hw:/sony:/tama/sailfish_latest_$PORT_ARCH/$PORT_ARCH/
-	;;
-    *)
-	echo "Version (devel or testing) is not specified using --testing option"
-	exit -2
-	;;
-esac
 
+URL=https://sailfishos-sony-tama.s3-website.pl-waw.scw.cloud/SailfishOS-$RELEASE-$PORT_ARCH
 
 if [ "$ISMIC" == "no" ]; then
     scriptdir=`dirname "$(readlink -f "$0")"`
@@ -65,11 +47,11 @@ if [ "$ISMIC" == "no" ]; then
     for device in $DEVICES
     do
 	rm Jolla-@RELEASE@-$device-@ARCH@.ks || echo No old KS file, continuing
-	"$scriptdir/get_ks.sh" $URL $device
+	"$scriptdir/get_ks.sh" $URL $device index.html
 	sudo $PLATFORM_SDK_ROOT/sdks/sfossdk/mer-sdk-chroot \
 	     "$scriptdir/create-images.sh" \
 	     --mic \
-	     --release $RELEASE --version $VERSION --device $device
+	     --release $RELEASE --device $device
     done
     exit
 fi
