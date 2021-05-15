@@ -271,17 +271,34 @@ hybris/mw/miniaudiopolicy/rpm/copy-hal.sh
 rpm/dhd/helpers/build_packages.sh --build=hybris/mw/miniaudiopolicy --do-not-install
 ```
 
-# System/Vendor and DTBO
+### Fingerprint support
+
+Support is based on https://github.com/piggz/sailfish-fpd-community
+
+In HABUILD_SDK
+
+```Shell
+HABUILD_SDK $
+git clone https://github.com/piggz/sailfish-fpd-community.git hybris/mw/sailfish-fpd-community
+source build/envsetup.sh
+export USE_CCACHE=1
+lunch aosp_$DEVICE-user (or appropriate name)
+make libbiometry_fp_api
+hybris/mw/sailfish-fpd-community/rpm/copy-hal.sh
+```
 
 In PLATFORM_SDK
 ```Shell
+cd $ANDROID_ROOT
+rpm/dhd/helpers/build_packages.sh --build=hybris/mw/sailfish-fpd-community --spec=rpm/droid-biometry-fp.spec --do-not-install
+rpm/dhd/helpers/build_packages.sh --mw=https://github.com/piggz/sailfish-fpd-community-test.git --do-not-install
+```
 
-git clone -b hybris-10 --recursive https://github.com/sailfishos-sony-tama/droid-hal-img-dtbo-sony-$FAMILY-pie hybris/mw/droid-hal-img-dtbo-sony-$FAMILY-pie
 
-cp out/target/product/$HABUILD_DEVICE/dtbo.img hybris/mw/droid-hal-img-dtbo-sony-tama-pie/dtbo-$HABUILD_DEVICE.img
-sb2 -t $VENDOR-$DEVICE-$PORT_ARCH -m sdk-install -R zypper in --force-resolution droid-hal-$HABUILD_DEVICE-kernel-modules
-rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos-sony-tama/droid-hal-img-dtbo-sony-$FAMILY-pie --do-not-install --spec=rpm/droid-hal-$HABUILD_DEVICE-img-dtbo.spec
+# System and Vendor
 
+In PLATFORM_SDK
+```Shell
 rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos-sony-tama/droid-system-sony-pie-template --do-not-install --spec=rpm/droid-system-$HABUILD_DEVICE.spec --spec=rpm/droid-system-$HABUILD_DEVICE-$DEVICE.spec
 ```
 
@@ -354,29 +371,6 @@ sb2 -t $VENDOR-$DEVICE-$PORT_ARCH -R -msdk-install zypper in bluez5
 and choose to change the provider.
 
 
-### Fingerprint support
-
-Support is based on https://github.com/piggz/sailfish-fpd-community
-
-In HABUILD_SDK
-
-```Shell
-HABUILD_SDK $
-git clone https://github.com/piggz/sailfish-fpd-community.git hybris/mw/sailfish-fpd-community
-source build/envsetup.sh
-export USE_CCACHE=1
-lunch aosp_$DEVICE-user (or appropriate name)
-make libbiometry_fp_api_32
-hybris/mw/sailfish-fpd-community/rpm/copy-hal.sh
-```
-
-In PLATFORM_SDK
-```Shell
-cd $ANDROID_ROOT
-rpm/dhd/helpers/build_packages.sh --build=hybris/mw/sailfish-fpd-community --spec=rpm/droid-biometry-fp.spec --spec=rpm/sailfish-fpd-community.spec --do-not-install
-rpm/dhd/helpers/build_packages.sh --mw=https://github.com/piggz/sailfish-fpd-community-test.git --do-not-install
-```
-
 ### Other Tama specific packages
 
 In HABUILD_SDK
@@ -416,6 +410,10 @@ sb2 -t $VENDOR-$DEVICE-$PORT_ARCH -m sdk-install -R zypper in --force-resolution
 
 git clone -b hybris-10 --recursive https://github.com/sailfishos-sony-tama/droid-hal-img-boot-sony-$FAMILY-pie hybris/mw/droid-hal-img-boot-sony-$FAMILY-pie
 rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos-sony-tama/droid-hal-img-boot-sony-$FAMILY-pie --do-not-install --spec=rpm/droid-hal-$HABUILD_DEVICE-img-boot.spec
+
+git clone --recursive https://github.com/sailfishos-sony-tama/droid-hal-img-dtbo-sony-$FAMILY-pie hybris/mw/droid-hal-img-dtbo-sony-$FAMILY-pie
+cp out/target/product/$HABUILD_DEVICE/dtbo.img hybris/mw/droid-hal-img-dtbo-sony-tama-pie/dtbo-$HABUILD_DEVICE.img
+rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos-sony-tama/droid-hal-img-dtbo-sony-$FAMILY-pie --do-not-install --spec=rpm/droid-hal-$HABUILD_DEVICE-img-dtbo.spec
 
 git clone --recursive https://github.com/sailfishos-sony-tama/droid-hal-version-sony-$FAMILY hybris/droid-hal-version-$DEVICE
 ```
