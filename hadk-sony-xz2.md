@@ -291,6 +291,8 @@ In PLATFORM_SDK
 ```Shell
 cd $ANDROID_ROOT
 rpm/dhd/helpers/build_packages.sh --build=hybris/mw/sailfish-fpd-community --spec=rpm/droid-biometry-fp.spec --do-not-install
+
+# this is needed only if building packages manually
 rpm/dhd/helpers/build_packages.sh --mw=https://github.com/piggz/sailfish-fpd-community-test.git --do-not-install
 ```
 
