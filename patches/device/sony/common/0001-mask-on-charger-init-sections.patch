@@ -1,0 +1,39 @@
+From 63f43177b5d761be7d6173217af8c82cc46d9f2e Mon Sep 17 00:00:00 2001
+From: Rinigus <rinigus.git@gmail.com>
+Date: Wed, 23 Jun 2021 15:13:21 +0300
+Subject: [PATCH] mask on charger init sections
+
+---
+ rootdir/vendor/etc/init/hw/init.common.rc | 2 +-
+ rootdir/vendor/etc/init/init.usb.rc       | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/rootdir/vendor/etc/init/hw/init.common.rc b/rootdir/vendor/etc/init/hw/init.common.rc
+index 69133dd..a365d08 100644
+--- a/rootdir/vendor/etc/init/hw/init.common.rc
++++ b/rootdir/vendor/etc/init/hw/init.common.rc
+@@ -12,7 +12,7 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ 
+-on charger
++on chargermasked
+     start vendor.rmt_storage
+     start vendor.mlog_qmi_service
+     start vendor.irsc_util
+diff --git a/rootdir/vendor/etc/init/init.usb.rc b/rootdir/vendor/etc/init/init.usb.rc
+index bdf3931..172d624 100644
+--- a/rootdir/vendor/etc/init/init.usb.rc
++++ b/rootdir/vendor/etc/init/init.usb.rc
+@@ -12,7 +12,7 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ #
+-on charger
++on chargermasked
+     mount configfs none /config
+     mkdir /config/usb_gadget/g1 0770 shell shell
+     mkdir /config/usb_gadget/g1/strings/0x409 0770 shell shell
+-- 
+2.31.1
+

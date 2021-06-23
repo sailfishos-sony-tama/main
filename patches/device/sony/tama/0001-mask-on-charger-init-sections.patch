@@ -1,0 +1,25 @@
+From a8a62529a8477bf45ed56d4313e53a514e917f07 Mon Sep 17 00:00:00 2001
+From: Rinigus <rinigus.git@gmail.com>
+Date: Wed, 23 Jun 2021 15:16:53 +0300
+Subject: [PATCH] mask on charger init sections
+
+---
+ rootdir/vendor/etc/init/init.tama.pwr.rc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/rootdir/vendor/etc/init/init.tama.pwr.rc b/rootdir/vendor/etc/init/init.tama.pwr.rc
+index 6ddff8f..0b3baa3 100644
+--- a/rootdir/vendor/etc/init/init.tama.pwr.rc
++++ b/rootdir/vendor/etc/init/init.tama.pwr.rc
+@@ -12,7 +12,7 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ 
+-on charger
++on chargermasked
+     # Disable thermal
+     write /sys/module/msm_thermal/core_control/enabled 0
+ 
+-- 
+2.31.1
+
