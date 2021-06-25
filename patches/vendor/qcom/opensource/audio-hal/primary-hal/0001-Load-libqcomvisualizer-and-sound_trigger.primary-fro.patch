@@ -1,0 +1,51 @@
+From 7f35203aa83e9cb521db09030e754f144282b57e Mon Sep 17 00:00:00 2001
+From: Rinigus <rinigus.git@gmail.com>
+Date: Fri, 25 Jun 2021 16:11:07 +0300
+Subject: [PATCH] Load libqcomvisualizer and sound_trigger.primary from lib64
+ when appropriate
+
+---
+ hal/audio_extn/soundtrigger.c | 4 ++++
+ hal/audio_hw.h                | 6 ++++++
+ 2 files changed, 10 insertions(+)
+
+diff --git a/hal/audio_extn/soundtrigger.c b/hal/audio_extn/soundtrigger.c
+index a175b83..18b2b6a 100644
+--- a/hal/audio_extn/soundtrigger.c
++++ b/hal/audio_extn/soundtrigger.c
+@@ -221,7 +221,11 @@ static void get_library_path(char *lib_path)
+ static void get_library_path(char *lib_path)
+ {
+     snprintf(lib_path, MAX_LIBRARY_PATH,
++#ifdef __LP64__
++	     "/vendor/lib64/hw/sound_trigger.primary.%s.so",
++#else
+              "/vendor/lib/hw/sound_trigger.primary.%s.so",
++#endif
+              XSTR(SOUND_TRIGGER_PLATFORM_NAME));
+ }
+ #endif
+diff --git a/hal/audio_hw.h b/hal/audio_hw.h
+index 235c9f7..7f65fcf 100644
+--- a/hal/audio_hw.h
++++ b/hal/audio_hw.h
+@@ -63,10 +63,16 @@
+ #define ADM_LIBRARY_PATH "/usr/lib/libadm.so"
+ #endif
+ #else
++#if defined(__LP64__)
++#define VISUALIZER_LIBRARY_PATH "/vendor/lib64/soundfx/libqcomvisualizer.so"
++#define OFFLOAD_EFFECTS_BUNDLE_LIBRARY_PATH "/vendor/lib64/soundfx/libqcompostprocbundle.so"
++#define ADM_LIBRARY_PATH "/vendor/lib64/libadm.so"
++#else
+ #define VISUALIZER_LIBRARY_PATH "/vendor/lib/soundfx/libqcomvisualizer.so"
+ #define OFFLOAD_EFFECTS_BUNDLE_LIBRARY_PATH "/vendor/lib/soundfx/libqcompostprocbundle.so"
+ #define ADM_LIBRARY_PATH "/vendor/lib/libadm.so"
+ #endif
++#endif
+ 
+ /* Flags used to initialize acdb_settings variable that goes to ACDB library */
+ #define NONE_FLAG            0x00000000
+-- 
+2.31.1
+
