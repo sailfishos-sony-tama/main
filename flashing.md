@@ -40,12 +40,12 @@ Files that will be needed for flashing:
 
 For flashing, you will need software binaries (`SW_binaries_for_Xperia_Android_10.0.7.1_r1_v12a_tama.zip`). Get them from 
 https://developer.sony.com/file/download/software-binaries-for-aosp-android-10-0-kernel-4-14-tama . Unzip the file, 
-it would contain `SW_binaries_for_Xperia_Android_9.0_2.3.2_v9_tama.img`.
+it would contain `SW_binaries_for_Xperia_Android_10.0.7.1_r1_v12a_tama.img`.
 
 ### vbmeta image
 
-Get `vbmeta.zip` file from the first release assets at 
-https://github.com/sailfishos-sony-tama/main/releases/tag/3.2.0.12-alpha1 . Uncompress the file, it will contain
+Get `vbmeta.zip` file from 4.1.0.24 release assets at 
+https://github.com/sailfishos-sony-tama/main/releases/tag/4.1.0.24-beta . Uncompress the file, it will contain
 single `vbmeta.img`
 
 ### Sailfish release

@@ -8,20 +8,27 @@ This is a community port, meaning that there is no official support and extensio
 * There is no MS exchange support
 * There is no Jolla Store predictive text support. Use Presage-based keyboards instead (see below)
 
-The port is based on official port for Xperia 10II (seine). As a
-result, it has similar tools available for flashing and the device
-userdata is partitioned using LVM.
+The port is based on official port for Xperia 10II (seine) and earlier
+AOSP 9 based port for Xperia Tama. As a result, it has similar tools
+available for flashing and the device userdata is partitioned using
+LVM.
 
 As it requires unlocking bootloader on Sony Xperia, you will loose DRM
 keys and associated functionality. See AOSP10 threads at XDA for your
 device for details regarding hardware support.
+
+Documentation and development of the port is in `hybris-10` branch of
+the repositories.
 
 While the care has been taken during porting, please see
 [LICENSE](LICENSE) for legal details.
 
 ## Issues 
 
-Port issues are all reported within this repository: https://github.com/sailfishos-sony-tama/main/issues
+Port issues are all reported within this repository:
+https://github.com/sailfishos-sony-tama/main/issues . Specific
+AOSP10-base issues can be seen using a
+[filter](https://github.com/sailfishos-sony-tama/main/issues?q=is%3Aissue+label%3Ahybris-10+is%3Aopen).
 
 ## Supported devices
 
@@ -34,9 +41,15 @@ The following devices are supported:
 * Xperia XZ3 single sim variant (h8416)
 * Xperia XZ3 dual sim variant (h9436)
 
+## Transition from AOSP9-based Sailfish OS port
+
+To switch from AOSP9-based Sailfish port, see separate
+[documentation](switch-from-aosp9.md).
+
 ## Over-the-Air updates (OTA)
 
-OTA updates are supported. Currently supported OTA updates are to the following releases:
+OTA updates are supported. They were tested without public releases.
+Currently supported OTA updates are to the following releases:
 - no release on this base yet
 
 OTA updates are supported via command line, as described below.
@@ -110,6 +123,13 @@ Working hardware:
 * SD card
 * NFC
 
+Build is performed using [TBuilder](https://github.com/rinigus/tbuilder)
+and OTA repository is at
+http://sailfishos-sony-tama.s3-website.pl-waw.scw.cloud/ . This is in
+contrast to the earlier builds that were done at Sailfish OBS. At the
+moment of writing, Sailfish OBS is in transition and doesn't support
+building ports.
+
 ## Flashing
 
 Before flashing, please check the current [issues](https://github.com/sailfishos-sony-tama/main/issues) and 
@@ -142,16 +162,6 @@ application: "Fingerprints". If you add fingerprints
 under Sailfish Settings, it may lead to device reboot
 ([issue](https://github.com/piggz/sailfish-fpd-community/issues/10)). In
 the dedicated application, such issue was not encountered.
-
-
-### H.265 decoding
-
-H.265 hardware accelerated decoding should work. To enable it when
-coming from older versions, run
-
-```
-rm ~/.cache/gstreamer-1.0/registry.*
-```
 
 ### Tracker and SD Cards
 
@@ -224,5 +234,6 @@ Sailfish 3.4.0.24 release. See [instructions](backup-recovery.md) for details.
 
 ## Development
 
-Port is developed under https://github.com/sailfishos-sony-tama with the local and OBS builds supported. For setting
-up local build, see [HADK](hadk-sony-xz2.md).
+Port is developed under https://github.com/sailfishos-sony-tama, under
+`hybris-10` branches of repositories. For setting up a build, see
+[HADK](hadk-sony-xz2.md).
