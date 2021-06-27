@@ -79,3 +79,9 @@ This command is included into Linux flash script `flash.sh` already and executed
 ### Before booting into Sailfish
 
 Unplug USB cable, and power on device after the led will turn itself off.
+
+### Initial boot
+
+It has been reported that XZ3 was not responsive after a boot (issue
+[149](https://github.com/sailfishos-sony-tama/main/issues/149)). Switching
+screen off/on made it responsive and installation could continue.
