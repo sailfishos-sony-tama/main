@@ -44,9 +44,9 @@ it would contain `SW_binaries_for_Xperia_Android_10.0.7.1_r1_v12a_tama.img`.
 
 ### vbmeta image
 
-Get `vbmeta.zip` file from 4.1.0.24 release assets at 
-https://github.com/sailfishos-sony-tama/main/releases/tag/4.1.0.24-beta . Uncompress the file, it will contain
-single `vbmeta.img`
+Get `vbmeta.zip` file from 4.1.0.24 release assets at
+https://github.com/sailfishos-sony-tama/main/releases/download/4.1.0.24-aosp10-alpha1/vbmeta.zip
+. Uncompress the file, it will contain single `vbmeta.img`
 
 ### Sailfish release
 
