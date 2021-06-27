@@ -282,7 +282,7 @@ HABUILD_SDK $
 git clone https://github.com/piggz/sailfish-fpd-community.git hybris/mw/sailfish-fpd-community
 source build/envsetup.sh
 export USE_CCACHE=1
-lunch aosp_$DEVICE-user (or appropriate name)
+lunch aosp_$DEVICE-user
 make libbiometry_fp_api
 hybris/mw/sailfish-fpd-community/rpm/copy-hal.sh
 ```
@@ -294,6 +294,28 @@ rpm/dhd/helpers/build_packages.sh --build=hybris/mw/sailfish-fpd-community --spe
 
 # this is needed only if building packages manually
 rpm/dhd/helpers/build_packages.sh --mw=https://github.com/piggz/sailfish-fpd-community-test.git --do-not-install
+```
+
+For XZ3, we need to build fake crypt package. So, when building for
+akatsuki/h8416, in HABUILD_SDK
+
+```Shell
+cd $ANDROID_ROOT
+
+git clone https://github.com/erfanoabdi/fake_crypt.git external/fake_crypt
+
+source build/envsetup.sh
+export USE_CCACHE=1
+lunch aosp_$DEVICE-user
+make libbiometry_fp_api fake_crypt
+
+hybris/mw/sailfish-fpd-community/rpm/copy-hal.sh
+```
+
+In PLATFORM_SDK
+```Shell
+cd $ANDROID_ROOT
+rpm/dhd/helpers/build_packages.sh --build=hybris/mw/sailfish-fpd-community --spec=rpm/droid-fake-crypt.spec --do-not-install
 ```
 
 
