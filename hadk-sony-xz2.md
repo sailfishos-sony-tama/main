@@ -114,8 +114,8 @@ cd -
 # build hybris-hal only and package it to avoid mixing with other services
 make -j$(nproc --all) hybris-hal
 
-cd kernel/sony/msm-4.14/common-kernel
 # FIXME after this is merged: https://github.com/sonyxperiadev/kernel-sony-msm-4.14-common/pull/14
+cd kernel/sony/msm-4.14/common-kernel
 cp dtbo-$HABUILD_DEVICE.img $ANDROID_ROOT/out/target/product/$HABUILD_DEVICE/dtbo.img
 cd -
 ```
@@ -186,7 +186,7 @@ sdk-foreach-su -ly ssu re
 rpm/dhd/helpers/build_packages.sh --droid-hal
 ```
 
-For OBS builds, make
+For OBS builds:
 ```Shell
 
 git clone --recursive https://github.com/sailfishos-sony-tama/droid-hal-img-dtbo-sony-$FAMILY-pie hybris/mw/droid-hal-img-dtbo-sony-$FAMILY-pie
