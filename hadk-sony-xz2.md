@@ -109,12 +109,15 @@ export USE_CCACHE=1
 lunch aosp_$DEVICE-user
 cd kernel/sony/msm-4.14/common-kernel
 ./build-kernels-clang.sh -d $HABUILD_DEVICE -O $ANDROID_ROOT/out/target/product/$HABUILD_DEVICE/obj/kernel
-# FIXME after this is merged: https://github.com/sonyxperiadev/kernel-sony-msm-4.14-common/pull/14
-cp dtbo-$HABUILD_DEVICE.img $ANDROID_ROOT/out/target/product/$HABUILD_DEVICE/dtbo.img
 cd -
 
 # build hybris-hal only and package it to avoid mixing with other services
 make -j$(nproc --all) hybris-hal
+
+cd kernel/sony/msm-4.14/common-kernel
+# FIXME after this is merged: https://github.com/sonyxperiadev/kernel-sony-msm-4.14-common/pull/14
+cp dtbo-$HABUILD_DEVICE.img $ANDROID_ROOT/out/target/product/$HABUILD_DEVICE/dtbo.img
+cd -
 ```
 
 
@@ -183,6 +186,14 @@ sdk-foreach-su -ly ssu re
 rpm/dhd/helpers/build_packages.sh --droid-hal
 ```
 
+For OBS builds, make
+```Shell
+
+git clone --recursive https://github.com/sailfishos-sony-tama/droid-hal-img-dtbo-sony-$FAMILY-pie hybris/mw/droid-hal-img-dtbo-sony-$FAMILY-pie
+cp out/target/product/$HABUILD_DEVICE/dtbo.img hybris/mw/droid-hal-img-dtbo-sony-tama-pie/dtbo-$HABUILD_DEVICE.img
+rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos-sony-tama/droid-hal-img-dtbo-sony-$FAMILY-pie --do-not-install --spec=rpm/droid-hal-$HABUILD_DEVICE-img-dtbo.spec
+```
+
 # syspart
 
 After systemimage vendorimage have finished, in HOST
@@ -227,6 +238,12 @@ rmdir $ANDROID_ROOT-tmp || true
 If mount fails, try to use `losetup` to setup loop device and mount
 from there.
 
+# System and Vendor
+
+In PLATFORM_SDK
+```Shell
+rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos-sony-tama/droid-system-sony-pie-template --do-not-install --spec=rpm/droid-system-$HABUILD_DEVICE.spec --spec=rpm/droid-system-$HABUILD_DEVICE-$DEVICE.spec
+```
 
 # droidmedia and miniaudiopolicyservice
 
@@ -318,13 +335,6 @@ cd $ANDROID_ROOT
 rpm/dhd/helpers/build_packages.sh --build=hybris/mw/sailfish-fpd-community --spec=rpm/droid-fake-crypt.spec --do-not-install
 ```
 
-
-# System and Vendor
-
-In PLATFORM_SDK
-```Shell
-rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos-sony-tama/droid-system-sony-pie-template --do-not-install --spec=rpm/droid-system-$HABUILD_DEVICE.spec --spec=rpm/droid-system-$HABUILD_DEVICE-$DEVICE.spec
-```
 
 # Build packages and root system
 
