@@ -338,7 +338,13 @@ rpm/dhd/helpers/build_packages.sh --build=hybris/mw/sailfish-fpd-community --spe
 
 # Build packages and root system
 
-Packages can be built using TBuilder or manually.
+Packages can be built using OBS (current preference), TBuilder or
+manually.
+
+## Building using OBS
+
+See scripts in this repository to update HAL packages and system is
+needed. Other updates are done through OBS.
 
 ## Building using TBuilder
 
@@ -579,12 +585,12 @@ compare our current kernel with others, use the links below:
 
 For the updates, in HABUILD_SDK, see "Build hybris-hal" and "Build HAL
 and config packages" above. Note that config packages are built
-separately using TBuilder.
+separately using TBuilder or OBS.
 
 This will create packages in `droid-hal-DEVICE` and
 `droid-hal-img-dtbo-sony-tama-pie` at `droid-local-repo`. Those can
 copied to TBuidler project using update script in the project
-repository.
+repository. For OBS, scripts are in this repository.
 
 This has to be repeated for all representative devices: h8216, h8314,
 and h8416.

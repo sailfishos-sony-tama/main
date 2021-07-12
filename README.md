@@ -8,7 +8,8 @@ This is a community port, meaning that there is no official support and extensio
 * There is no MS exchange support
 * There is no Jolla Store predictive text support. Use Presage-based keyboards instead (see below)
 
-The port is based on official port for Xperia 10II (seine) and earlier
+It is the second port for Xperia Tama, this time on top of AOSP10. The
+port is based on official port for Xperia 10II (seine) and earlier
 AOSP 9 based port for Xperia Tama. As a result, it has similar tools
 available for flashing and the device userdata is partitioned using
 LVM.
@@ -49,8 +50,10 @@ To switch from AOSP9-based Sailfish port, see separate
 ## Over-the-Air updates (OTA)
 
 OTA updates are supported. They were tested without public releases.
+
 Currently supported OTA updates are to the following releases:
-- no release on this base yet
+
+- [4.1.0.24 Alpha to Beta](ota-from-alpha.md) See separate instructions for this update
 
 OTA updates are supported via command line, as described below.
 - Backup of Sailfish OS user files to a sdcard or to another device is strongly encouraged before updating Sailfish OS.
@@ -123,12 +126,7 @@ Working hardware:
 * SD card
 * NFC
 
-Build is performed using [TBuilder](https://github.com/rinigus/tbuilder)
-and OTA repository is at
-http://sailfishos-sony-tama.s3-website.pl-waw.scw.cloud/ . This is in
-contrast to the earlier builds that were done at Sailfish OBS. At the
-moment of writing, Sailfish OBS is in transition and doesn't support
-building ports.
+Build is distrbuted via OBS.
 
 ## Flashing
 
