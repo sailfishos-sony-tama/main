@@ -14,11 +14,11 @@ index = sys.argv[3] if len(sys.argv) > 3 else None
 
 index_url = url + '/' + index if index is not None else url
 
-r = requests.get(url)
+r = requests.get(index_url)
 soup = BeautifulSoup(r.text, 'html.parser')
 for link in soup.find_all('a'):
     l = link.get('href')
-    if l.find(prefix) > 0:
+    if l.find(prefix) >= 0:
         if url[-1] != '/': u = url + '/' + l
         else: u = url + l
         print('Downloading', u)

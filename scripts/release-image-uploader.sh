@@ -22,5 +22,7 @@ for d in sfe-*/Sailfish_OS-*.zip; do
                    -u sailfishos-sony-tama -a rinigus -r main \
                    -t $tag \
                    -f $d -n $fname
+   echo Sleep for 1 minute
+   sleep 60
 done
 
