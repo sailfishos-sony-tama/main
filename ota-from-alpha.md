@@ -19,9 +19,9 @@ zypper up
 ```
 
 Check that you have repositories defined correctly:
-```Shell
-[root@XperiaXZ2 defaultuser]# ssu lr
-Enabled repositories (global): 
+```
+ssu lr
+ Enabled repositories (global): 
  - adaptation-community-common      ... http://repo.merproject.org/obs/nemo:/testing:/hw:/common/sailfishos_4.1.0.24_aarch64/
  - adaptation-community-tama-system ... http://repo.merproject.org/obs/nemo:/testing:/hw:/sony:/tama:/aosp10:/system/aosp10/
  - adaptation0                      ... http://repo.merproject.org/obs/nemo:/testing:/hw:/sony:/tama:/aosp10/sailfishos_4.1.0.24_aarch64/
