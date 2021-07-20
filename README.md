@@ -124,7 +124,6 @@ Working hardware:
 * Sensors: magnetometer, compass, step counter, pickup
 * Vibrator
 * SD card
-* NFC
 
 Build is distrbuted via OBS.
 
