@@ -16,7 +16,7 @@ Device has to be unlockable. Check that before buying or be ready to return it i
 
 Update device to the last Android version before unlocking. You can update to Android 10 if offered and flash Sailfish 
 over it directly. Check that all works before flashing Sailfish. If something doesn't work, it will be possible to claim 
-the warranty on device.
+the warranty on device. Keep everything activated (WLAN, Bluetooth, automatic rotation, etc) before proceeding.
 
 If all is fine, check the consequences of bootloader unlocking as described by Sony and on relevant XDA forums.
 Please note that unlocking makes some irreversible changes in device. If you agree with it, proceed with unlocking 
