@@ -224,6 +224,16 @@ After this go a page back, select launcher-combined and enable change icon size.
 It is possible to use system partitions that are not used in Sailfish for storage. This is for advanced users and
 corresponding [instructions](extending-storage.md) are given separately.
 
+### Use of cryptsetup in recovery
+
+It is possible to use `cryptsetup`, but only after making chroot into `/rootfs`:
+
+```
+# in recovery
+chroot /rootfs
+cryptsetup ...
+```
+
 ### Backup and recovery
 
 The port supports backup and recovery when device is booted from recovery boot image. This is for advanced users and is available from

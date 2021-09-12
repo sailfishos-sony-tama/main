@@ -3,8 +3,9 @@
 This port provides the backup and recovery to SDCard using [FSArchiver](https://www.fsarchiver.org/). While other ports have TWRP for making 
 snapshot of the installed system, TWRP does not support LVM which is used in Tama and official devices.
 
-General approach is to backup root and home partitions. The other partitions can be restored by flashing corresponding Sailfish release
-before recovering the backup.
+General approach is to backup root and home partitions. The other partitions can be restored by flashing corresponding Sailfish release before recovering the backup.
+
+With the encrypted storage, open it with `cryptsetup` first. For that, you have to chroot into rootfs, as described in the main README. Exit the chroot, shell, and then proceed as described below while changing device name with the home partition accordingly.
 
 ## Requirements
 
