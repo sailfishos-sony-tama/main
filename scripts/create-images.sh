@@ -44,10 +44,10 @@ source ~/.hadk.env
 
 case $VERSION in
     testing)
-	URL=http://repo.merproject.org/obs/nemo:/testing:/hw:/sony:/tama:/aosp10/sailfishos_${RELEASE}_${PORT_ARCH}/$PORT_ARCH/
+	URL=https://repo.sailfishos.org/obs/nemo:/testing:/hw:/sony:/tama:/aosp10/sailfishos_${RELEASE}_${PORT_ARCH}/$PORT_ARCH/
 	;;
     devel)
-	URL=http://repo.merproject.org/obs/nemo:/devel:/hw:/sony:/tama:/aosp10/sailfish_latest_$PORT_ARCH/$PORT_ARCH/
+	URL=https://repo.sailfishos.org/obs/nemo:/devel:/hw:/sony:/tama:/aosp10/sailfish_latest_$PORT_ARCH/$PORT_ARCH/
 	;;
     *)
 	echo "Version (devel or testing) is not specified using --testing option"
