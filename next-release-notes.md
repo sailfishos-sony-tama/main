@@ -29,6 +29,8 @@ Images are attached to this release. For `vbmeta.img`, use the same image as in 
 - Drop creation of log snapshots on boot and storing them in
   `/root`. If you need persistent logs, enable them using journal
   settings.
+  
+- Kernel updated
 
 - ZGovernor adjusts GPU only (released as OTA already after 4.1.0.24
   AOSP10 beta).
