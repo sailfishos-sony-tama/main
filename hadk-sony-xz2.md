@@ -240,9 +240,13 @@ from there.
 
 # System and Vendor
 
+Set the version in
+- hybris/mw/droid-system-sony-pie-template/droid-system-common-device.inc
+- hybris/mw/droid-system-sony-pie-template/droid-system-device/droid-system.inc
+
 In PLATFORM_SDK
 ```Shell
-rpm/dhd/helpers/build_packages.sh --mw=https://github.com/sailfishos-sony-tama/droid-system-sony-pie-template --do-not-install --spec=rpm/droid-system-$HABUILD_DEVICE.spec --spec=rpm/droid-system-$HABUILD_DEVICE-$DEVICE.spec
+rpm/dhd/helpers/build_packages.sh --build=hybris/mw/droid-system-sony-pie-template --do-not-install --spec=rpm/droid-system-$HABUILD_DEVICE.spec --spec=rpm/droid-system-$HABUILD_DEVICE-$DEVICE.spec
 ```
 
 # droidmedia and miniaudiopolicyservice
