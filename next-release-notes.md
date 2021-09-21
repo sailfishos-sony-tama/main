@@ -6,7 +6,7 @@ Use this file to prepare notes for the next release.
 
 ## Update via OTA
 
-Due to the changes introduced to support encryption of personal data, OTA is not possible from the earlier releases. You have to reflash the device.
+Due to the changes introduced to support encryption of personal data, it is recommended to reflash the device. If OTA is performed, storage will be configured as a non-encrypted one. Note that as the storage is reconfigured in this case, it is important to have **full backup** of all data that you want to keep. It is possible that OTA may misconfigure the system and you would have to reflash it.
 
 ## Images
 
@@ -31,6 +31,8 @@ Images are attached to this release. For `vbmeta.img`, use the same image as in 
   settings.
   
 - Kernel updated
+
+- Update of AOSP10 base to the snapshot of Jul 28 2021
 
 - ZGovernor adjusts GPU only (released as OTA already after 4.1.0.24
   AOSP10 beta).
