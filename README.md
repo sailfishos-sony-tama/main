@@ -219,6 +219,14 @@ Then install the patch by opening the settings app -> patchmanger -> pull-menu -
 
 After this go a page back, select launcher-combined and enable change icon size.
 
+### Resetting storage
+
+From 4.2.0.21, it is possible to encrypt the storage. If you wish to
+switch between encrypted and non-encrypted storage, see instructions
+at [Community edition of Sailfish Encryption](https://github.com/sailfishos-open/sailfish-device-encryption-community#reset-configuration).
+Note that this will result in loss of the data stored currently on
+device - make sure to have a backup.
+
 ### Extending storage
 
 It is possible to use system partitions that are not used in Sailfish for storage. This is for advanced users and
