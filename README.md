@@ -53,6 +53,7 @@ OTA updates are supported. They were tested without public releases.
 
 Currently supported OTA updates are to the following releases:
 
+- 4.2.0.21
 - [4.1.0.24 Alpha to Beta](ota-from-alpha.md) See separate instructions for this update
 
 OTA updates are supported via command line, as described below.
@@ -74,7 +75,7 @@ devel-su zypper ref
 devel-su zypper in jolla-configuration-DEVCODE
 
 # Replace with the release you are updating to
-ssu release 3.4.0.24
+ssu release 4.2.0.21
 
 ssu lr
 # Check the output that you have repos adaptation-community and adaptation-community-common
@@ -101,6 +102,7 @@ Software stack state:
 
 * Jolla Store access
 * Kernel and OS OTA updates
+* Storage encryption
 
 Working hardware:
 
