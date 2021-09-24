@@ -72,7 +72,7 @@ OTA updates are supported via command line, as described below.
 # Start with refresh of current SFOS repo
 devel-su zypper ref 
 # Replace DEVCODE below with your device code (see above). For XZ2 single sim - h8216
-devel-su zypper in jolla-configuration-DEVCODE
+devel-su zypper in patterns-sailfish-device-configuration-DEVCODE
 
 # Replace with the release you are updating to
 ssu release 4.2.0.21
