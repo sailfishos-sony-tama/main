@@ -141,11 +141,19 @@ Flashing guide is at [flashing.md](flashing.md).
 
 ### Predictive text support
 
-For predictive text support, install Presage-based predictive keyboards. These keyboards are available 
-at OpenRepos, under [sailfish_keyboard applications](https://openrepos.net/user/12231/programs). After enabling OpenRepos,
-you will need to enable that repository and install the keyboard layout(s) on your device. All the dependencies will be pulled 
-during installation. For example, for English, install 
-[English US Keyboard layout](https://openrepos.net/content/sailfishkeyboard/english-us-keyboard-layout-presage-based-text-prediction). 
+For predictive text support, install Presage-based predictive
+keyboards. These keyboards are available at [Chum
+repositories](https://github.com/sailfishos-chum/main). After enabling
+Chum, install the keyboard layout(s) on your device. For example, for
+English:
+```
+devel-su zypper in keyboard-presage-en_US
+```
+
+List of available keyboards:
+```
+zypper se keyboard-presage-
+```
 
 ### Fingerprint support
 
