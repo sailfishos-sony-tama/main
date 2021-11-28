@@ -2,7 +2,7 @@
 
 set -e
 
-diff -q -x community-adaptation-testing -x community-adaptation-devel ../nemo:devel:hw:sony:tama ./ || (echo Difference in dirs, cannot continue && exit 1)
+diff -q -x community-adaptation-testing -x community-adaptation-devel ../nemo:devel:hw:sony:tama:aosp10 ./ || (echo Difference in dirs, cannot continue && exit 1)
 
 root=`pwd`
 
@@ -13,7 +13,7 @@ for d in *; do
     fi
     echo Updating $d
     cd $d
-    rsync -av --delete --exclude .osc/ ../../nemo:devel:hw:sony:tama/$d/ ./
+    rsync -av --delete --exclude .osc/ ../../nemo:devel:hw:sony:tama:aosp10/$d/ ./
     cd $root
 done
 

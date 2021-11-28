@@ -2,7 +2,7 @@
 
 set -e
 
-SFOS=4.1.0.24
+SFOS=4.3.0.12
 
 sdk-assistant create -y SailfishOS-$SFOS http://releases.sailfishos.org/sdk/targets/Sailfish_OS-$SFOS-Sailfish_SDK_Tooling-i486.tar.7z
 curl -O http://releases.sailfishos.org/sdk/targets/Sailfish_OS-$SFOS-Sailfish_SDK_Target-$PORT_ARCH.tar.7z

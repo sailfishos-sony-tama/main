@@ -4,7 +4,12 @@ import lxml.etree as ET
 from datetime import datetime
 
 base = sys.argv[1]
-for T in ['config', 'hal-version', 'droid-hal-*-img-boot']:
+if len(sys.argv) > 2 and sys.argv[2]=="--config-only":
+    S = ['config', 'hal-version']
+else:
+    S = ['config', 'hal-version', 'droid-hal-*-img-boot']
+
+for T in S:
     for f in glob.glob(base + ('/*%s*/_service' % T)):
         tree = ET.parse(f)
         root = tree.getroot()
