@@ -66,11 +66,12 @@ OTA updates are supported via command line, as described below.
   - Set the password
   - Allow 'Remote connection' if you wish to update via ssh
 - Open shell with normal nemo user preferrably via ssh
-- Make sure that you have `jolla-configuration-DEVCODE` installed. This has to be done before update.
 - Updating Sailfish OS via commandline:
 ```bash
 # Start with refresh of current SFOS repo
 devel-su zypper ref 
+# Update all packages for current SFOS release
+devel-su zypper up
 # Replace DEVCODE below with your device code (see above). For XZ2 single sim - h8216
 devel-su zypper in patterns-sailfish-device-configuration-DEVCODE
 
