@@ -44,7 +44,7 @@ source ~/.hadk.env
 
 case $VERSION in
     testing)
-	URL=https://repo.sailfishos.org/obs/nemo:/testing:/hw:/sony:/tama:/aosp10/sailfishos_${RELEASE}_${PORT_ARCH}/$PORT_ARCH/
+	URL=https://repo.sailfishos.org/obs/nemo:/testing:/hw:/sony:/tama:/aosp10:/${RELEASE}/sailfishos_${RELEASE}_${PORT_ARCH}/$PORT_ARCH/
 	;;
     devel)
 	URL=https://repo.sailfishos.org/obs/nemo:/devel:/hw:/sony:/tama:/aosp10/sailfish_latest_$PORT_ARCH/$PORT_ARCH/
