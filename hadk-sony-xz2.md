@@ -286,10 +286,6 @@ sed -ie "s/@PORT_ARCH@/$PORT_ARCH/" hybris/mw/droidmedia-localbuild/rpm/droidmed
 sed -ie "s/@DEVICE@/$HABUILD_DEVICE/" hybris/mw/droidmedia-localbuild/rpm/droidmedia.spec
 mv hybris/mw/droidmedia-$DROIDMEDIA_VERSION.tgz hybris/mw/droidmedia-localbuild
 rpm/dhd/helpers/build_packages.sh --build=hybris/mw/droidmedia-localbuild
-
-# miniaudiopolicy
-hybris/mw/miniaudiopolicy/rpm/copy-hal.sh
-rpm/dhd/helpers/build_packages.sh --build=hybris/mw/miniaudiopolicy --do-not-install
 ```
 
 # Fingerprint support
