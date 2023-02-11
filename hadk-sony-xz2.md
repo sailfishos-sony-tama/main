@@ -249,7 +249,7 @@ In PLATFORM_SDK
 rpm/dhd/helpers/build_packages.sh --build=hybris/mw/droid-system-sony-pie-template --do-not-install --spec=rpm/droid-system-$HABUILD_DEVICE.spec --spec=rpm/droid-system-$HABUILD_DEVICE-$DEVICE.spec
 ```
 
-# droidmedia and miniaudiopolicyservice
+# droidmedia
 
 This should be done after HAL is packaged.
 
@@ -266,7 +266,7 @@ source build/envsetup.sh
 export USE_CCACHE=1
 lunch aosp_$DEVICE-user
 
-make -j$(nproc --all) droidmedia miniaudiopolicyservice
+make -j$(nproc --all) droidmedia
 ```
 
 
