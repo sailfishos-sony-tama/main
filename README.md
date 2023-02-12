@@ -4,7 +4,7 @@ Please read this document fully before planning or starting to use this port.
 
 This is a community port, meaning that there is no official support and extensions included in the paid version:
 
-* There is no Android app support
+* There is no Jolla provided Android app support. Android apps are supported through Waydroid (see below)
 * There is no MS exchange support
 * There is no Jolla Store predictive text support. Use Presage-based keyboards instead (see below)
 
