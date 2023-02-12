@@ -53,6 +53,7 @@ OTA updates are supported. They were tested without public releases.
 
 Currently supported OTA updates are to the following releases:
 
+- 4.5.0.16
 - 4.4.0.72
 - 4.4.0.58
 - 4.3.0.15
@@ -80,7 +81,7 @@ devel-su zypper up
 devel-su zypper in patterns-sailfish-device-configuration-DEVCODE
 
 # Replace with the release you are updating to
-ssu release 4.4.0.72
+ssu release 4.5.0.16
 
 ssu lr
 # Check the output that you have repos adaptation-community and adaptation-community-common
@@ -103,7 +104,7 @@ devel-su zypper in patterns-sailfish-device-configuration-DEVCODE
 # just in case
 sync
 ```
-- Reboot
+- Reboot. Note that on the first boot, it will reboot again automatically if the kernel is updated.
 
 ## Current state
 
