@@ -95,6 +95,12 @@ devel-su zypper ref -f
 devel-su version --dup
 # if above fails, try again
 # devel-su version --dup
+
+# Check before reboot that all packages were installed
+# Replace DEVCODE below with your device code (see above). For XZ2 single sim - h8216
+devel-su zypper in patterns-sailfish-device-configuration-DEVCODE
+
+# just in case
 sync
 ```
 - Reboot
@@ -174,6 +180,14 @@ application: "Fingerprints". If you add fingerprints
 under Sailfish Settings, it may lead to device reboot
 ([issue](https://github.com/piggz/sailfish-fpd-community/issues/10)). In
 the dedicated application, such issue was not encountered.
+
+### Android apps
+
+Running Android apps is supported via WayDroid. To use WayDroid, follow the guide in 
+[SFOS Waydroid packaging](https://github.com/sailfishos-open/waydroid/blob/main/README.md). 
+Note that starting from SFOS version 4.5 release of this port, Waydroid gbinder configuration 
+is included with the rest of device configurations. So, **do not install** 
+`waydroid-gbinder-config-hybris` package on your device.
 
 ### Tracker and SD Cards
 
