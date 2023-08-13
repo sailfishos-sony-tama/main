@@ -53,6 +53,7 @@ OTA updates are supported. They were tested without public releases.
 
 Currently supported OTA updates are to the following releases:
 
+- 4.5.0.21
 - 4.5.0.19
 - 4.5.0.18
 - 4.5.0.16
@@ -83,7 +84,7 @@ devel-su zypper up
 devel-su zypper in patterns-sailfish-device-configuration-DEVCODE
 
 # Replace with the release you are updating to
-ssu release 4.5.0.19
+ssu release 4.5.0.21
 
 ssu lr
 # Check the output that you have repos adaptation-community and adaptation-community-common
