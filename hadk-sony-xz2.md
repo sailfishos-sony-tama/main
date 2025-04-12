@@ -637,7 +637,7 @@ initialization files.
 
 To generate images for all devices, run in HOST:
 ```bash
-scripts/create-images.sh --version testing --release 4.6.0.13
+scripts/create-images.sh --version testing --release 5.0.0.61
 ```
 Images can be generated for different releases and versions (testing or devel). Images will be
 generated under `$ANDROID_ROOT/releases/$RELEASE`.

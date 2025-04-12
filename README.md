@@ -52,6 +52,7 @@ To switch from AOSP9-based Sailfish port, see separate
 OTA updates are supported. Currently supported OTA updates are to the
 following releases:
 
+- 5.0.0.61
 - 4.6.0.13
 - 4.5.0.24
 - 4.5.0.21

@@ -70,16 +70,16 @@ devel-su zypper up
 devel-su zypper in patterns-sailfish-device-configuration-DEVCODE
 
 # Replace with the release you are updating to
-ssu release 4.6.0.13
+ssu release 5.0.0.61
 
 ssu lr
 ```
 
-- At this stage, check that you have the port repos, as shown below (example for 4.6.0.13):
+- At this stage, check that you have the port repos, as shown below (example for 5.0.0.61):
 ```
-   - adaptation-common                ... https://releases.jolla.com/releases/4.6.0.13/jolla-hw/adaptation-common/aarch64/
+   - adaptation-common                ... https://releases.jolla.com/releases/5.0.0.61/jolla-hw/adaptation-common/aarch64/
    - adaptation-community-tama-system ... https://repo.sailfishos.org/obs/nemo:/testing:/hw:/sony:/tama:/aosp10:/system/aosp10/
-   - adaptation0                      ... https://repo.sailfishos.org/obs/nemo:/testing:/hw:/sony:/tama:/aosp10:/4.6.0.13/sailfishos_4.6.0.13_aarch64/
+   - adaptation0                      ... https://repo.sailfishos.org/obs/nemo:/testing:/hw:/sony:/tama:/aosp10:/5.0.0.61/sailfishos_5.0.0.61_aarch64/
 ```
 As in the preparation stage above, it is important to make sure that adaptation0 points to https://repo.sailfishos.org host
 and not Jolla's store. If your repos are missing adaptation0 or they point to Jolla's server, fix it by
