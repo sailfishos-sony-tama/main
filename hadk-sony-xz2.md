@@ -60,7 +60,13 @@ In the HOST
 ```Shell
 source ~/.hadk.env
 cd $ANDROID_ROOT
+
+# generic command
 repo init -u git://github.com/mer-hybris/android.git -b $HAVERSION -m tagged-localbuild.xml
+
+# with specific commit corresponding to released system/vendor
+repo init -u http://github.com/mer-hybris/android.git -b 5aa8df4a30371756bbd8e43424c030a84c1c2247 -m tagged-localbuild.xml
+
 # Adjust -j8 to bandwidth capabilities
 repo sync -j8 --fetch-submodules
 ```
@@ -75,6 +81,7 @@ cd $ANDROID_ROOT
 ## if have to reset pulled sources
 # repo sync -l
 
+# note that last time 6e25f097268b681f13c26b02ece7ceb2b96e48e5 was used
 git clone --recurse-submodules https://github.com/mer-hybris/droid-src-sony droid-src
 ln -s droid-src/patches
 droid-src/apply-patches.sh --mb
